@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'home/home.dart';
+import 'features/home/home.dart';
+import 'theme/style.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,10 +14,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      theme: appTheme,
       title: 'Expenses App',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
       home: const HomePage(),
     );
   }
