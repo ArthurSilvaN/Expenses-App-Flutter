@@ -16,7 +16,7 @@ class ElevatedButtonApp extends StatelessWidget {
       style: ElevatedButton.styleFrom(
         elevation: 5,
         padding: const EdgeInsets.all(16.0),
-        primary: Colors.green,
+        primary: Theme.of(context).colorScheme.primary,
         onPrimary: const Color.fromARGB(255, 225, 241, 233),
       ),
       child: Text(textButton),
