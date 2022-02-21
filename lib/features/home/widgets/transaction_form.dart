@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 import '../../../core/usecases/transacion_usecase.dart';
 
@@ -13,7 +14,8 @@ class TransactionForm extends StatefulWidget {
 
 class _TransactionFormState extends State<TransactionForm> {
   final _titleController = TextEditingController();
-  final _transactionController = TransactionUsecase();
+  late final _transactionController =
+      Provider.of<TransactionUsecase>(context, listen: false);
   final _valueController = TextEditingController();
   late DateTime _selectedDate = DateTime.now();
 
@@ -48,64 +50,69 @@ class _TransactionFormState extends State<TransactionForm> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 5,
-      child: Container(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-            TextField(
-              controller: _titleController,
-              onSubmitted: (_) => setState(_submitForm),
-              decoration: const InputDecoration(
-                labelText: 'Título',
+    return SizedBox(
+      height: MediaQuery.of(context).size.height * 0.4,
+      child: Card(
+        elevation: 5,
+        child: Container(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: [
+              TextField(
+                controller: _titleController,
+                onSubmitted: (_) => setState(_submitForm),
+                decoration: const InputDecoration(
+                  labelText: 'Título',
+                ),
               ),
-            ),
-            TextField(
-              controller: _valueController,
-              keyboardType:
-                  const TextInputType.numberWithOptions(decimal: true),
-              onSubmitted: (_) => setState(_submitForm),
-              decoration: const InputDecoration(
-                labelText: r'Valor (R$)',
+              TextField(
+                controller: _valueController,
+                keyboardType:
+                    const TextInputType.numberWithOptions(decimal: true),
+                onSubmitted: (_) => setState(_submitForm),
+                decoration: const InputDecoration(
+                  labelText: r'Valor (R$)',
+                ),
               ),
-            ),
-            SizedBox(
-              height: 70,
-              child: Row(
-                children: <Widget>[
-                  Text(
-                    _selectedDate == null
-                        ? 'Nenhuma data selecionada!'
-                        : 'Data Selecionada: ${DateFormat('dd/MM/y').format(_selectedDate)}',
-                  ),
-                  TextButton(
-                    onPressed: _showDatePicker,
-                    child: const Text(
-                      'Selecionar Data',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
+              SizedBox(
+                child: Row(
+                  children: <Widget>[
+                    Text(
+                      _selectedDate == null
+                          ? 'Nenhuma data selecionada!'
+                          : 'Data Selecionada: ${DateFormat('dd/MM/y').format(_selectedDate)}',
+                    ),
+                    TextButton(
+                      onPressed: _showDatePicker,
+                      child: const Text(
+                        'Selecionar Data',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                    ),
-                  )
-                ],
+                    )
+                  ],
+                ),
               ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: <Widget>[
-                ElevatedButton(
-                  onPressed: () => setState(_submitForm),
-                  child: Text(
-                    'Nova Transação',
-                    style: TextStyle(
-                      color: Theme.of(context).textTheme.button?.color,
-                    ),
-                  ),
-                )
-              ],
-            ),
-          ],
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: <Widget>[
+                    ElevatedButton(
+                      onPressed: () => setState(_submitForm),
+                      child: Text(
+                        'Nova Transação',
+                        style: TextStyle(
+                          color: Theme.of(context).textTheme.button?.color,
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
