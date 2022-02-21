@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
+import 'hex_color.dart';
+
 part 'button_theme.dart';
+part 'colors.dart';
 
 final appTheme = ThemeData(
   fontFamily: 'Quicksand',
@@ -16,6 +19,7 @@ final appTheme = ThemeData(
         ),
       ),
   appBarTheme: AppBarTheme(
+    backgroundColor: HexColor('#FF941A'),
     toolbarTextStyle: ThemeData.light()
         .textTheme
         .copyWith(
@@ -28,11 +32,12 @@ final appTheme = ThemeData(
     titleTextStyle: ThemeData.light()
         .textTheme
         .copyWith(
-          headline6: const TextStyle(fontFamily: 'OpenSans', fontSize: 20),
+          headline6: const TextStyle(
+              fontFamily: 'OpenSans', fontSize: 20, color: Colors.white),
         )
         .headline6,
   ),
-  colorScheme: ColorScheme.fromSwatch().copyWith(secondary: Colors.amber),
+  colorScheme: _colorScheme,
 );
 
 extension ExpensesAppTheme on ThemeData {
