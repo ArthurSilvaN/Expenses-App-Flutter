@@ -4,7 +4,6 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 
 import '../../../core/usecases/transacion_usecase.dart';
 import '../../../models/category_registry.dart';
-import '../../../models/transaction.dart';
 
 class CategoryChart extends StatefulWidget {
   const CategoryChart({Key? key}) : super(key: key);
@@ -35,8 +34,13 @@ class CategoryChartState extends State<CategoryChart> {
             ),
             series: [
               PieSeries<CategoryRegistry, String>(
-                dataSource: _transactionController.groupedCategory,
-                dataLabelSettings: const DataLabelSettings(isVisible: true),
+                dataSource: _transactionController.categorysRegistriesDefault
+                    .where((element) => element.value != 0)
+                    .toList(),
+                opacity: 0.8,
+                dataLabelSettings: const DataLabelSettings(
+                  isVisible: true,
+                ),
                 pointColorMapper: (data, _) => data.color,
                 sortingOrder: SortingOrder.ascending,
                 sortFieldValueMapper: (data, _) => data.name,

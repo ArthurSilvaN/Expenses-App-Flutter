@@ -1,9 +1,13 @@
-import 'dart:ui';
+import 'package:flutter/material.dart';
 
 class CategoryRegistry {
-  CategoryRegistry(this.color, this.name, this.value);
+  CategoryRegistry({
+    required this.color,
+    required this.name,
+    required this.value,
+  });
 
-  final Color color;
+  final MaterialColor color;
   final String name;
   late double value;
 }

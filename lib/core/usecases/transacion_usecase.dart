@@ -16,50 +16,40 @@ class TransactionUsecase extends ChangeNotifier {
   late PropertyValueNotifier<List<Transaction>?> transactionsListenable =
       PropertyValueNotifier(transactions);
 
-  List<Transaction> transactions = [
-    Transaction(
-      date: DateTime.now(),
-      id: '1',
-      title: 'teste1',
-      value: 55,
-      category: Category(
-        color: Colors.red,
-        name: 'Dividas',
-        icon: Icons.attach_money_rounded,
-        value: 55,
-      ),
-    ),
-    Transaction(
-      date: DateTime.now(),
-      id: '2',
-      title: 'teste2',
-      value: 105,
-      category: Category(
-        color: Colors.red,
-        name: 'Dividas',
-        icon: Icons.attach_money_rounded,
-        value: 105,
-      ),
-    ),
-  ];
+  List<Transaction> transactions = [];
 
   late final List<Category> categorysDefault = [
     Category(
       color: Colors.red,
       name: 'Dividas',
       icon: Icons.access_alarms,
-      value: 0,
     ),
     Category(
       color: Colors.green,
       name: 'Investimento',
-      icon: Icons.access_alarms,
-      value: 0,
+      icon: Icons.attach_money_rounded,
     ),
     Category(
       color: Colors.blue,
       name: 'Lazer',
       icon: Icons.access_alarms,
+    ),
+  ];
+
+  late final List<CategoryRegistry> categorysRegistriesDefault = [
+    CategoryRegistry(
+      color: Colors.red,
+      name: 'Dividas',
+      value: 0,
+    ),
+    CategoryRegistry(
+      color: Colors.green,
+      name: 'Investimento',
+      value: 0,
+    ),
+    CategoryRegistry(
+      color: Colors.blue,
+      name: 'Lazer',
       value: 0,
     ),
   ];
@@ -101,32 +91,6 @@ class TransactionUsecase extends ChangeNotifier {
     return transactionList;
   }
 
-  List<CategoryRegistry> get groupedCategory {
-    final categoryList = <CategoryRegistry>[];
-
-    recentTransactions.map(
-      (transaction) {
-        categoryList.map(
-          (registry) {
-            if (registry.name == transaction.category!.name) {
-              registry.value += transaction.category!.value;
-            } else {
-              categoryList.add(
-                CategoryRegistry(
-                  transaction.category!.color,
-                  transaction.category!.name,
-                  transaction.category!.value,
-                ),
-              );
-            }
-          },
-        );
-      },
-    );
-
-    return categoryList;
-  }
-
   void addTransaction(
     String title,
     double value,
@@ -134,13 +98,22 @@ class TransactionUsecase extends ChangeNotifier {
     Category? category,
   ) {
     final newTransaction = Transaction(
-        id: Random().nextDouble().toString(),
-        title: title,
-        value: value,
-        date: date,
-        category: category);
+      id: Random().nextDouble().toString(),
+      title: title,
+      value: value,
+      date: date,
+      category: category,
+    );
 
     transactions.add(newTransaction);
+
+    for (final e in categorysRegistriesDefault) {
+      {
+        if (e.name == category!.name) {
+          e.value += value;
+        }
+      }
+    }
 
     transactionsListenable.notifyListeners();
   }
