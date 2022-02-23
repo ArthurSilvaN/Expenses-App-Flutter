@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 import '../../../core/usecases/transacion_usecase.dart';
+import '../../../models/transaction_categorys.dart';
 
 class TransactionForm extends StatefulWidget {
   const TransactionForm({Key? key}) : super(key: key);
@@ -18,6 +19,7 @@ class _TransactionFormState extends State<TransactionForm> {
       Provider.of<TransactionUsecase>(context, listen: false);
   final _valueController = TextEditingController();
   late DateTime _selectedDate = DateTime.now();
+  late Category? _selectedCategory = _transactionController.categorysDefault[0];
 
   void _submitForm() {
     final title = _titleController.text;
@@ -27,7 +29,12 @@ class _TransactionFormState extends State<TransactionForm> {
       return;
     }
 
-    _transactionController.addTransaction(title, value, _selectedDate);
+    _transactionController.addTransaction(
+      title,
+      value,
+      _selectedDate,
+      _selectedCategory,
+    );
 
     Navigator.of(context).pop();
   }
@@ -92,6 +99,24 @@ class _TransactionFormState extends State<TransactionForm> {
                       ),
                     )
                   ],
+                ),
+              ),
+              Center(
+                child: DropdownButton(
+                  value: _selectedCategory,
+                  icon: Icon(_selectedCategory!.icon),
+                  items: _transactionController.categorysDefault
+                      .map<DropdownMenuItem<Category>>((value) {
+                    return DropdownMenuItem<Category>(
+                      value: value,
+                      child: Text(value.name),
+                    );
+                  }).toList(),
+                  onChanged: (Category? newValue) {
+                    setState(() {
+                      _selectedCategory = newValue;
+                    });
+                  },
                 ),
               ),
               Padding(

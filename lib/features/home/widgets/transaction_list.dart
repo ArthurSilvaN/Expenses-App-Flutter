@@ -62,12 +62,17 @@ class _TransactionListState extends State<TransactionList> {
                       onLongPress: () =>
                           _openDeleteTransactionModal(context, tr),
                       child: Card(
-                        elevation: 5,
+                        elevation: 7,
                         margin: const EdgeInsets.symmetric(
                           vertical: 8,
                           horizontal: 5,
                         ),
                         child: ListTile(
+                          leading: Icon(
+                            tr.category!.icon,
+                            color: tr.category!.color,
+                            size: 30,
+                          ),
                           title: Text(
                             tr.title,
                             style: Theme.of(context).textTheme.headline6,

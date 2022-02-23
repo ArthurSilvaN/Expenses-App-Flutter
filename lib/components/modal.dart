@@ -20,7 +20,6 @@ class ModalDeleteTransaction {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                const Divider(),
                 Text(
                   'Deletar a transação ${transaction.title} no valor de R\$${transaction.value}?',
                 ),
