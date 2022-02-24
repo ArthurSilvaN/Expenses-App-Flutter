@@ -29,35 +29,38 @@ class TransactionChartState extends State<TransactionChart> {
       valueListenable: _transactionController.transactionsListenable,
       builder: (_, __, ___) {
         return Center(
-          child: SfCartesianChart(
-            primaryXAxis: CategoryAxis(),
-            primaryYAxis: NumericAxis(
-              majorGridLines: const MajorGridLines(width: 0),
-              minorTickLines: const MinorTickLines(width: 0),
-            ),
-            title: ChartTitle(
-              text: 'Gastos da semana',
-            ),
-            series: [
-              ColumnSeries<TransactionRegistry, String>(
-                color: Theme.of(context).colorScheme.primary,
-                dataSource: _transactionController.groupedTransactions,
-                xValueMapper: (tr, _) => tr.date,
-                yValueMapper: (tr, _) => tr.value,
-                gradient: LinearGradient(
-                  colors: [
-                    Theme.of(context).colorScheme.primary,
-                    Colors.deepOrange[600]!,
-                  ],
-                ),
-                markerSettings: const MarkerSettings(isVisible: true),
-                dataLabelSettings: const DataLabelSettings(
-                  isVisible: true,
-                  showZeroValue: false,
-                ),
-                enableTooltip: true,
+          child: SizedBox(
+            width: MediaQuery.of(context).size.width * 0.8,
+            child: SfCartesianChart(
+              primaryXAxis: CategoryAxis(),
+              primaryYAxis: NumericAxis(
+                majorGridLines: const MajorGridLines(width: 0),
+                minorTickLines: const MinorTickLines(width: 0),
               ),
-            ],
+              title: ChartTitle(
+                text: 'Gastos da semana',
+              ),
+              series: [
+                ColumnSeries<TransactionRegistry, String>(
+                  color: Theme.of(context).colorScheme.primary,
+                  dataSource: _transactionController.groupedTransactions,
+                  xValueMapper: (tr, _) => tr.date,
+                  yValueMapper: (tr, _) => tr.value,
+                  gradient: LinearGradient(
+                    colors: [
+                      Theme.of(context).colorScheme.primary,
+                      Colors.deepOrange[600]!,
+                    ],
+                  ),
+                  markerSettings: const MarkerSettings(isVisible: true),
+                  dataLabelSettings: const DataLabelSettings(
+                    isVisible: true,
+                    showZeroValue: false,
+                  ),
+                  enableTooltip: true,
+                ),
+              ],
+            ),
           ),
         );
       },
