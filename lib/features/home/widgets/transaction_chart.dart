@@ -3,7 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
-import '../../../core/usecases/transacion_usecase.dart';
+import '../../../core/usecases/transaction_usecase.dart';
 import '../../../models/transaction_registry.dart';
 
 class TransactionChart extends StatefulWidget {

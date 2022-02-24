@@ -3,7 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
-import '../../../core/usecases/transacion_usecase.dart';
+import '../../../core/usecases/transaction_usecase.dart';
 import '../../../models/transaction_categorys.dart';
 
 class TransactionForm extends StatefulWidget {

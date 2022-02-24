@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'core/usecases/transacion_usecase.dart';
+import 'core/usecases/transaction_usecase.dart';
 import 'features/home/home.dart';
 import 'theme/style.dart';
 

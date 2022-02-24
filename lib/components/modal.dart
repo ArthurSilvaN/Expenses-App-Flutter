@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../core/usecases/transacion_usecase.dart';
+import '../core/usecases/transaction_usecase.dart';
 import '../models/transaction.dart';
 
 class ModalDeleteTransaction {

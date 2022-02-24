@@ -4,7 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 import '../../../components/modal.dart';
-import '../../../core/usecases/transacion_usecase.dart';
+import '../../../core/usecases/transaction_usecase.dart';
 import '../../../models/transaction.dart';
 
 class TransactionList extends StatefulWidget {
