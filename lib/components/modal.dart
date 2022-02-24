@@ -49,7 +49,7 @@ class ModalDeleteTransaction {
             Theme.of(context).colorScheme.primary,
           ),
         ),
-        child: const Text('dismissText'),
+        child: const Text('cancelar'),
         onPressed: () => Navigator.pop(context),
       ),
     );
@@ -60,7 +60,7 @@ class ModalDeleteTransaction {
         Provider.of<TransactionUsecase>(context, listen: false);
     return SizedBox(
       child: ElevatedButton(
-        child: const Text('confirmText'),
+        child: const Text('deletar'),
         onPressed: () => {
           transactionController.deleteTransaction(tr),
           Navigator.pop(context),
