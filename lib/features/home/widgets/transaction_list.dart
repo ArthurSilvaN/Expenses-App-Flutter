@@ -32,23 +32,23 @@ class _TransactionListState extends State<TransactionList> {
   Widget build(BuildContext context) {
     return SizedBox(
       height: MediaQuery.of(context).size.height * 0.5,
-      child: _transactionController.transactions.isEmpty
-          ? Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'Nenhuma Transação Cadastrada!',
-                    style: Theme.of(context).textTheme.headline6,
+      child: ValueListenableBuilder(
+        valueListenable: _transactionController.transactionsListenable,
+        builder: (_, __, ___) {
+          return _transactionController.transactions.isEmpty
+              ? Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Nenhuma Transação Cadastrada!',
+                        style: Theme.of(context).textTheme.headline6,
+                      ),
+                      const SizedBox(height: 20),
+                    ],
                   ),
-                  const SizedBox(height: 20),
-                ],
-              ),
-            )
-          : ValueListenableBuilder(
-              valueListenable: _transactionController.transactionsListenable,
-              builder: (_, __, ___) {
-                return ListView.builder(
+                )
+              : ListView.builder(
                   itemCount: _transactionController.transactions.length,
                   itemBuilder: (_, index) {
                     final tr = _transactionController.transactions[index];
@@ -62,6 +62,7 @@ class _TransactionListState extends State<TransactionList> {
                           horizontal: 5,
                         ),
                         child: ListTile(
+                          visualDensity: VisualDensity.compact,
                           leading: Icon(
                             tr.category!.icon,
                             color: tr.category!.color,
@@ -87,8 +88,8 @@ class _TransactionListState extends State<TransactionList> {
                     );
                   },
                 );
-              },
-            ),
+        },
+      ),
     );
   }
 }
