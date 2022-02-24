@@ -107,10 +107,10 @@ class TransactionUsecase extends ChangeNotifier {
 
     transactions.add(newTransaction);
 
-    for (final e in categorysRegistriesDefault) {
+    for (final categoryAdd in categorysRegistriesDefault) {
       {
-        if (e.name == category!.name) {
-          e.value += value;
+        if (categoryAdd.name == category!.name) {
+          categoryAdd.value += value;
         }
       }
     }
@@ -119,6 +119,15 @@ class TransactionUsecase extends ChangeNotifier {
   }
 
   void deleteTransaction(Transaction tr) {
+
+    for (final categoryAdd in categorysRegistriesDefault) {
+      {
+        if (categoryAdd.name == tr.category!.name) {
+          categoryAdd.value -= tr.value;
+        }
+      }
+    }
+
     transactions.remove(tr);
     transactionsListenable.notifyListeners();
     return;
