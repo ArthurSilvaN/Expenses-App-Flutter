@@ -1,3 +1,4 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
@@ -17,6 +18,7 @@ class HomePage extends StatefulWidget {
 
 class HomePageState extends State<HomePage> {
   late TransactionUsecase _transactionController;
+  CarouselController buttonCarouselController = CarouselController();
 
   @override
   void initState() {
@@ -65,10 +67,46 @@ class HomePageState extends State<HomePage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  const TransactionChart(),
-                  const CategoryChart(),
+                  if (_transactionController.transactions.isNotEmpty)
+                    Column(
+                      children: [
+                        CarouselSlider(
+                          items: const [
+                            Center(child: TransactionChart()),
+                            Center(child: CategoryChart()),
+                          ],
+                          options: CarouselOptions(
+                            height: 400,
+                            enlargeCenterPage: true,
+                            viewportFraction: 1,
+                          ),
+                          carouselController: buttonCarouselController,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            ElevatedButton(
+                              onPressed: () =>
+                                  buttonCarouselController.previousPage(
+                                      duration:
+                                          const Duration(milliseconds: 300),
+                                      curve: Curves.linear),
+                              child: const Text('←'),
+                            ),
+                            ElevatedButton(
+                              onPressed: () =>
+                                  buttonCarouselController.nextPage(
+                                      duration:
+                                          const Duration(milliseconds: 300),
+                                      curve: Curves.linear),
+                              child: const Text('→'),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8.0),
+                    padding: const EdgeInsets.only(top: 20.0, bottom: 8.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
