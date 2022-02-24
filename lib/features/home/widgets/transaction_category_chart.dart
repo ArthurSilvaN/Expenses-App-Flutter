@@ -29,17 +29,19 @@ class CategoryChartState extends State<CategoryChart> {
       builder: (_, __, ___) {
         return Center(
           child: SfCircularChart(
+            title: ChartTitle(text: 'Gráfico de Categorias'),
             legend: Legend(
               isVisible: true,
             ),
             series: [
-              PieSeries<CategoryRegistry, String>(
+              RadialBarSeries<CategoryRegistry, String>(
                 dataSource: _transactionController.categorysRegistriesDefault
                     .where((element) => element.value != 0)
                     .toList(),
                 opacity: 0.8,
                 dataLabelSettings: const DataLabelSettings(
                   isVisible: true,
+                  useSeriesColor: true,
                 ),
                 pointColorMapper: (data, _) => data.color,
                 sortingOrder: SortingOrder.ascending,
