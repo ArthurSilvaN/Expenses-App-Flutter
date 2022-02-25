@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 import '../../../core/usecases/transaction_usecase.dart';
+import '../../../core/util/locale_intl.dart';
 import '../../../models/category_registry.dart';
 
 class CategoryChart extends StatefulWidget {
@@ -29,7 +30,7 @@ class CategoryChartState extends State<CategoryChart> {
       builder: (_, __, ___) {
         return Center(
           child: SfCircularChart(
-            title: ChartTitle(text: 'Gráfico de Categorias'),
+            title: ChartTitle(text: context.locale().categoryChart),
             legend: Legend(
               isVisible: true,
             ),

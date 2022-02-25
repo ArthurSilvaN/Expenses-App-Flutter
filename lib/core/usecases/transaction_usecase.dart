@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+import '../../generated/l10n.dart';
 import '../../models/category_registry.dart';
 import '../../models/transaction.dart';
 import '../../models/transaction_categorys.dart';
@@ -21,17 +22,17 @@ class TransactionUsecase extends ChangeNotifier {
   late final List<Category> categorysDefault = [
     Category(
       color: Colors.red,
-      name: 'Dividas',
+      name: S.current.debts,
       icon: Icons.access_alarms,
     ),
     Category(
       color: Colors.green,
-      name: 'Investimento',
+      name: S.current.investment,
       icon: Icons.attach_money_rounded,
     ),
     Category(
       color: Colors.blue,
-      name: 'Lazer',
+      name: S.current.leisure,
       icon: Icons.access_alarms,
     ),
   ];
@@ -39,17 +40,17 @@ class TransactionUsecase extends ChangeNotifier {
   late final List<CategoryRegistry> categorysRegistriesDefault = [
     CategoryRegistry(
       color: Colors.red,
-      name: 'Dividas',
+      name: S.current.debts,
       value: 0,
     ),
     CategoryRegistry(
       color: Colors.green,
-      name: 'Investimento',
+      name: S.current.investment,
       value: 0,
     ),
     CategoryRegistry(
       color: Colors.blue,
-      name: 'Lazer',
+      name: S.current.leisure,
       value: 0,
     ),
   ];

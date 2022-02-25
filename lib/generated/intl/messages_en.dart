@@ -20,6 +20,41 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
+  static String m0(title, value) =>
+      "Delete transaction ${title} with the value off R\$${value}?";
+
+  static String m1(selectedDate) => "Selected Date: ${selectedDate}";
+
+  static String m2(transactionsLength) => " ${transactionsLength} transactions";
+
+  static String m3(value) => "${value}";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
-  static Map<String, Function> _notInlinedMessages(_) => <String, Function>{};
+  static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "add": MessageLookupByLibrary.simpleMessage("Add"),
+        "cancel": MessageLookupByLibrary.simpleMessage("cancel"),
+        "categoryChart": MessageLookupByLibrary.simpleMessage("Category Chart"),
+        "dateFormatAbrevMonth": MessageLookupByLibrary.simpleMessage("MMM d y"),
+        "debts": MessageLookupByLibrary.simpleMessage("Debts"),
+        "delete": MessageLookupByLibrary.simpleMessage("delete"),
+        "deleteTransaction": m0,
+        "expensesWeek": MessageLookupByLibrary.simpleMessage("Expenses Week"),
+        "investment": MessageLookupByLibrary.simpleMessage("Investment"),
+        "leisure": MessageLookupByLibrary.simpleMessage("Leisure"),
+        "myTransactions":
+            MessageLookupByLibrary.simpleMessage("My Transactions"),
+        "newTransaction":
+            MessageLookupByLibrary.simpleMessage("New Transaction"),
+        "noDate": MessageLookupByLibrary.simpleMessage("No Selected Date!"),
+        "noTransactions":
+            MessageLookupByLibrary.simpleMessage("No Registered Transaction!"),
+        "personalExpenses":
+            MessageLookupByLibrary.simpleMessage("Personal Expenses"),
+        "price": MessageLookupByLibrary.simpleMessage("Value \$"),
+        "selectDate": MessageLookupByLibrary.simpleMessage("Select Date"),
+        "selectedDate": m1,
+        "title": MessageLookupByLibrary.simpleMessage("Title"),
+        "transactionsLength": m2,
+        "valueTransaction": m3
+      };
 }

@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 import '../../../core/usecases/transaction_usecase.dart';
+import '../../../core/util/locale_intl.dart';
 import '../../../models/transaction_categorys.dart';
 
 class TransactionForm extends StatefulWidget {
@@ -68,8 +69,8 @@ class _TransactionFormState extends State<TransactionForm> {
               TextField(
                 controller: _titleController,
                 onSubmitted: (_) => setState(_submitForm),
-                decoration: const InputDecoration(
-                  labelText: 'Título',
+                decoration: InputDecoration(
+                  labelText: context.locale().title,
                 ),
               ),
               TextField(
@@ -77,8 +78,8 @@ class _TransactionFormState extends State<TransactionForm> {
                 keyboardType:
                     const TextInputType.numberWithOptions(decimal: true),
                 onSubmitted: (_) => setState(_submitForm),
-                decoration: const InputDecoration(
-                  labelText: r'Valor (R$)',
+                decoration: InputDecoration(
+                  labelText: context.locale().price,
                 ),
               ),
               SizedBox(
@@ -86,14 +87,16 @@ class _TransactionFormState extends State<TransactionForm> {
                   children: <Widget>[
                     Text(
                       _selectedDate == null
-                          ? 'Nenhuma data selecionada!'
-                          : 'Data Selecionada: ${DateFormat('dd/MM/y').format(_selectedDate)}',
+                          ? context.locale().noDate
+                          : context.locale().selectedDate(
+                                DateFormat('dd/MM/y').format(_selectedDate),
+                              ),
                     ),
                     TextButton(
                       onPressed: _showDatePicker,
-                      child: const Text(
-                        'Selecionar Data',
-                        style: TextStyle(
+                      child: Text(
+                        context.locale().selectDate,
+                        style: const TextStyle(
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -127,7 +130,7 @@ class _TransactionFormState extends State<TransactionForm> {
                     ElevatedButton(
                       onPressed: () => setState(_submitForm),
                       child: Text(
-                        'Nova Transação',
+                        context.locale().newTransaction,
                         style: TextStyle(
                           color: Theme.of(context).textTheme.button?.color,
                         ),

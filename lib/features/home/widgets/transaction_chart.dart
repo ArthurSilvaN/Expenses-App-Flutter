@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 import '../../../core/usecases/transaction_usecase.dart';
+import '../../../core/util/locale_intl.dart';
 import '../../../models/transaction_registry.dart';
 
 class TransactionChart extends StatefulWidget {
@@ -38,7 +39,7 @@ class TransactionChartState extends State<TransactionChart> {
                 minorTickLines: const MinorTickLines(width: 0),
               ),
               title: ChartTitle(
-                text: 'Gastos da semana',
+                text: context.locale().expensesWeek,
               ),
               series: [
                 ColumnSeries<TransactionRegistry, String>(

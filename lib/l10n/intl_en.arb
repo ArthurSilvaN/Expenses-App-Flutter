@@ -1,1 +1,54 @@
-{}
+{
+    "add": "Add",
+    "cancel": "cancel",
+    "categoryChart": "Category Chart",
+    "debts": "Debts",
+    "dateFormatAbrevMonth": "MMM d y",
+    "delete": "delete",
+    "deleteTransaction": "Delete transaction {title} with the value off R${value}?",
+    "@deleteTransaction": {
+        "placeholders": {
+            "title" : {
+                "type": "String"
+            },
+            "value": {
+                "type": "String"
+            }
+        }
+    },
+    "expensesWeek": "Expenses Week",
+    "investment": "Investment",
+    "leisure": "Leisure",
+    "myTransactions": "My Transactions",
+    "newTransaction": "New Transaction",
+    "noTransactions": "No Registered Transaction!",
+    "valueTransaction": "{value}",
+    "@valueTransaction": {
+        "placeholders": {
+            "value" : {
+                "type" : "String"
+            }
+        }
+    },
+    "noDate": "No Selected Date!",
+    "personalExpenses": "Personal Expenses",
+    "price": "Value $",
+    "selectedDate": "Selected Date: {selectedDate}",
+    "@selectedDate": {
+        "placeholders": {
+            "selectedDate" : {
+                "type": "String"
+            }
+        }
+    },
+    "transactionsLength":" {transactionsLength} transactions",
+    "@transactionsLength": {
+        "placeholders": {
+            "transactionsLength" : {
+                "type": "int"
+            }
+        }
+    },
+    "selectDate": "Select Date",
+    "title": "Title"
+}
