@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../core/usecases/transaction_usecase.dart';
+import '../core/util/locale_intl.dart';
 import '../models/transaction.dart';
 
 class ModalDeleteTransaction {
@@ -21,7 +22,10 @@ class ModalDeleteTransaction {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Text(
-                  'Deletar a transação ${transaction.title} no valor de R\$${transaction.value}?',
+                  context.locale().deleteTransaction(
+                        transaction.title,
+                        transaction.value.toStringAsFixed(2),
+                      ),
                 ),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -49,7 +53,9 @@ class ModalDeleteTransaction {
             Theme.of(context).colorScheme.primary,
           ),
         ),
-        child: const Text('cancelar'),
+        child: Text(
+          context.locale().cancel,
+        ),
         onPressed: () => Navigator.pop(context),
       ),
     );
@@ -60,7 +66,9 @@ class ModalDeleteTransaction {
         Provider.of<TransactionUsecase>(context, listen: false);
     return SizedBox(
       child: ElevatedButton(
-        child: const Text('deletar'),
+        child: Text(
+          context.locale().delete,
+        ),
         onPressed: () => {
           transactionController.deleteTransaction(tr),
           Navigator.pop(context),

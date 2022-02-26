@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 
+import '../../components/modal_center.dart';
+import '../../core/usecases/locale_usecase.dart';
 import '../../core/usecases/transaction_usecase.dart';
 import 'widgets/transaction_category_chart.dart';
 import 'widgets/transaction_chart.dart';
@@ -18,6 +20,7 @@ class HomePage extends StatefulWidget {
 
 class HomePageState extends State<HomePage> {
   late TransactionUsecase _transactionController;
+  late LocaleUseCase _localeController;
   CarouselController buttonCarouselController = CarouselController();
 
   @override
@@ -25,6 +28,8 @@ class HomePageState extends State<HomePage> {
     super.initState();
     _transactionController =
         Provider.of<TransactionUsecase>(context, listen: false);
+    _localeController = Provider.of<LocaleUseCase>(context, listen: false);
+    transactions = _transactionController.transactions;
   }
 
   void _openTransactionFormModal(BuildContext context) {
@@ -32,6 +37,41 @@ class HomePageState extends State<HomePage> {
       context: context,
       builder: (_) {
         return const TransactionForm();
+      },
+    );
+  }
+
+  void _openLocaleModal(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return SimpleDialog(
+          title: const Text('teste'),
+          children: [
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.1,
+              width: MediaQuery.of(context).size.height * 0.1,
+              child: Center(
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: _localeController.languagesLocale.length,
+                  itemBuilder: (_, index) {
+                    final language = _localeController.languagesLocale[index];
+                    return SimpleDialogItem(
+                      widget: Text(language.flag),
+                      color: language.color,
+                      text: language.languageName,
+                      onPressed: () {
+                        _localeController.setLocale(language.locale);
+                        Navigator.pop(context);
+                      },
+                    );
+                  },
+                ),
+              ),
+            )
+          ],
+        );
       },
     );
   }
@@ -51,11 +91,18 @@ class HomePageState extends State<HomePage> {
       appBar: AppBar(
         actions: [
           IconButton(
+            icon: const Icon(Icons.language),
+            onPressed: () => _openLocaleModal(context),
+          ),
+          const SizedBox(width: 25),
+          IconButton(
             icon: const Icon(Icons.add),
             onPressed: () => _openTransactionFormModal(context),
           ),
         ],
-        title: const Text('Despesas Pessoais'),
+        title: Text(
+          context.locale().personalExpenses,
+        ),
       ),
       body: ValueListenableBuilder(
         valueListenable: _transactionController.transactionsListenable,

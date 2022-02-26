@@ -20,6 +20,15 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
+  static String m0(title, value) =>
+      "Delete transaction ${title} with the value off R\$${value}?";
+
+  static String m1(selectedDate) => "Selected Date: ${selectedDate}";
+
+  static String m2(transactionsLength) => " ${transactionsLength} transactions";
+
+  static String m3(value) => "\$ ${value}";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{};
 }
