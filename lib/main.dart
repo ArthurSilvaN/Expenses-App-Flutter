@@ -11,8 +11,15 @@ import 'theme/style.dart';
 void main() {
   Provider.debugCheckInvalidValueType = null;
   runApp(
-    ChangeNotifierProvider(
-      create: (_) => LocaleUseCase(),
+    MultiProvider(
+      providers: [
+        Provider(
+          create: (context) => TransactionUsecase(),
+        ),
+        Provider(
+          create: (context) => LocaleUseCase(),
+        )
+      ],
       child: const MyApp(),
     ),
   );
@@ -23,31 +30,27 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    return MultiProvider(
-      providers: [
-        Provider(
-          create: (context) => TransactionUsecase(),
-        ),
-        Provider(
-          create: (context) => LocaleUseCase(),
-        )
-      ],
-      child: MaterialApp(
-        localizationsDelegates: const [
-          S.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        supportedLocales: S.delegate.supportedLocales,
-        scrollBehavior:
-            ScrollConfiguration.of(context).copyWith(scrollbars: false),
-        debugShowCheckedModeBanner: false,
-        theme: appTheme,
-        title: 'Expenses App',
-        home: const HomePage(),
-      ),
+    final locale = Provider.of<LocaleUseCase>(context, listen: false).locale;
+    return ValueListenableBuilder(
+      valueListenable: locale,
+      builder: (context, child, widget) {
+        return MaterialApp(
+          localizationsDelegates: const [
+            S.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          locale: locale.value,
+          supportedLocales: S.delegate.supportedLocales,
+          scrollBehavior:
+              ScrollConfiguration.of(context).copyWith(scrollbars: false),
+          debugShowCheckedModeBanner: false,
+          theme: appTheme,
+          title: 'Expenses App',
+          home: const HomePage(),
+        );
+      },
     );
   }
 }

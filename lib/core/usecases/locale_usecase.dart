@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 
 import '../../models/languages.dart';
+import '../util/property_value_notifier.dart';
 
 class LocaleUseCase extends ChangeNotifier {
-  late Locale? _locale;
+  late PropertyValueNotifier<Locale?> locale =
+      PropertyValueNotifier(const Locale('pt'));
 
-  Locale? get locale => _locale;
-
-  void setLocale(Locale locale) {
-    _locale = locale;
+  void setLocale(Locale localeValue) {
+    locale.value = localeValue;
     notifyListeners();
   }
 
-  void clearLocale(Locale locale) {
-    _locale = null;
+  void clearLocale() {
+    locale.value = null;
     notifyListeners();
   }
 

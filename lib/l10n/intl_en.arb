@@ -1,4 +1,5 @@
 {
+    "@@locale": "en",
     "add": "Add",
     "cancel": "cancel",
     "categoryChart": "Category Chart",
@@ -41,7 +42,7 @@
             }
         }
     },
-    "transactionsLength":" {transactionsLength} transactions",
+    "transactionsLength":"{transactionsLength} transactions",
     "@transactionsLength": {
         "placeholders": {
             "transactionsLength" : {
@@ -50,6 +51,7 @@
         }
     },
     "selectDate": "Select Date",
-    "title": "Title"
+    "title": "Title",
+    "test": "teste"
 }
-}
+

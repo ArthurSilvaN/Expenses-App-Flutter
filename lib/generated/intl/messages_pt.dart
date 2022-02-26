@@ -25,7 +25,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m1(selectedDate) => "Data Selecionada: ${selectedDate}";
 
-  static String m2(transactionsLength) => " \$${transactionsLength} transações";
+  static String m2(transactionsLength) => "${transactionsLength} transações";
 
   static String m3(value) => "R\$ ${value}";
 
@@ -47,8 +47,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Minhas Transações"),
         "newTransaction":
             MessageLookupByLibrary.simpleMessage("Nova Transação"),
-        "noDate":
-            MessageLookupByLibrary.simpleMessage("Nenhuma data selecionada!"),
+        "noDate": MessageLookupByLibrary.simpleMessage(
+            "Nenhuma data selecionada!!!!"),
         "noTransactions": MessageLookupByLibrary.simpleMessage(
             "Nenhuma Transação Cadastrada!"),
         "personalExpenses":
@@ -56,6 +56,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "price": MessageLookupByLibrary.simpleMessage("Valor (R\$)"),
         "selectDate": MessageLookupByLibrary.simpleMessage("Selecionar Data"),
         "selectedDate": m1,
+        "test": MessageLookupByLibrary.simpleMessage("teste"),
         "title": MessageLookupByLibrary.simpleMessage("Título"),
         "transactionsLength": m2,
         "valueTransaction": m3

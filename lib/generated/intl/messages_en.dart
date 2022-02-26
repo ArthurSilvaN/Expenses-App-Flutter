@@ -25,7 +25,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m1(selectedDate) => "Selected Date: ${selectedDate}";
 
-  static String m2(transactionsLength) => " ${transactionsLength} transactions";
+  static String m2(transactionsLength) => "${transactionsLength} transactions";
 
   static String m3(value) => "\$ ${value}";
 
@@ -53,6 +53,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "price": MessageLookupByLibrary.simpleMessage("Value \$"),
         "selectDate": MessageLookupByLibrary.simpleMessage("Select Date"),
         "selectedDate": m1,
+        "test": MessageLookupByLibrary.simpleMessage("teste"),
         "title": MessageLookupByLibrary.simpleMessage("Title"),
         "transactionsLength": m2,
         "valueTransaction": m3

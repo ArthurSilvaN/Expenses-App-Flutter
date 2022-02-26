@@ -230,10 +230,10 @@ class S {
     );
   }
 
-  /// ` {transactionsLength} transactions`
+  /// `{transactionsLength} transactions`
   String transactionsLength(int transactionsLength) {
     return Intl.message(
-      ' $transactionsLength transactions',
+      '$transactionsLength transactions',
       name: 'transactionsLength',
       desc: '',
       args: [transactionsLength],
@@ -255,6 +255,16 @@ class S {
     return Intl.message(
       'Title',
       name: 'title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `teste`
+  String get test {
+    return Intl.message(
+      'teste',
+      name: 'test',
       desc: '',
       args: [],
     );

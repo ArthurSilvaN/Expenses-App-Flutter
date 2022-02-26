@@ -1,4 +1,5 @@
 {
+    "@@locale": "pt",
     "add": "Adicionar",
     "cancel": "cancelar",
     "categoryChart": "Gráfico de Categorias",
@@ -13,11 +14,12 @@
     "newTransaction": "Nova Transação",
     "noTransactions": "Nenhuma Transação Cadastrada!",
     "valueTransaction": "R$ {value}",
-    "noDate": "Nenhuma data selecionada!",
+    "noDate": "Nenhuma data selecionada!!!!",
     "personalExpenses": "Despesas Pessoais",
     "price": "Valor (R$)",
     "selectedDate": "Data Selecionada: {selectedDate}",
-    "transactionsLength":" ${transactionsLength} transações",
+    "transactionsLength":"{transactionsLength} transações",
     "selectDate": "Selecionar Data",
-    "title": "Título"
+    "title": "Título",
+    "test": "teste"
 }
