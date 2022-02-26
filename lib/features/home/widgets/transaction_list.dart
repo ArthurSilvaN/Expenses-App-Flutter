@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 
 import '../../../components/modal.dart';
 import '../../../core/usecases/transaction_usecase.dart';
+import '../../../core/util/locale_intl.dart';
 import '../../../models/transaction.dart';
 
 class TransactionList extends StatefulWidget {
@@ -41,7 +42,7 @@ class _TransactionListState extends State<TransactionList> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        'Nenhuma Transação Cadastrada!',
+                        context.locale().noTransactions,
                         style: Theme.of(context).textTheme.headline6,
                       ),
                       const SizedBox(height: 20),
@@ -73,13 +74,16 @@ class _TransactionListState extends State<TransactionList> {
                             style: Theme.of(context).textTheme.headline6,
                           ),
                           subtitle: Text(
-                            DateFormat('d MMM y').format(tr.date),
+                            DateFormat(context.locale().dateFormatAbrevMonth)
+                                .format(tr.date),
                           ),
                           trailing: Padding(
                             padding: const EdgeInsets.all(6),
                             child: FittedBox(
                               child: Text(
-                                'R\$ ${tr.value.toStringAsFixed(2)}',
+                                context.locale().valueTransaction(
+                                      tr.value.toStringAsFixed(2),
+                                    ),
                               ),
                             ),
                           ),

@@ -6,6 +6,8 @@ import 'package:provider/provider.dart';
 import '../../components/modal_center.dart';
 import '../../core/usecases/locale_usecase.dart';
 import '../../core/usecases/transaction_usecase.dart';
+import '../../core/util/locale_intl.dart';
+import '../../models/transaction.dart';
 import 'widgets/transaction_category_chart.dart';
 import 'widgets/transaction_chart.dart';
 import 'widgets/transaction_form.dart';
@@ -22,6 +24,7 @@ class HomePageState extends State<HomePage> {
   late TransactionUsecase _transactionController;
   late LocaleUseCase _localeController;
   CarouselController buttonCarouselController = CarouselController();
+  late List<Transaction> transactions;
 
   @override
   void initState() {
@@ -85,7 +88,7 @@ class HomePageState extends State<HomePage> {
         width: double.maxFinite,
         child: ElevatedButton(
           onPressed: () => _openTransactionFormModal(context),
-          child: const Text('Adicionar'),
+          child: Text(context.locale().add),
         ),
       ),
       appBar: AppBar(
@@ -100,9 +103,7 @@ class HomePageState extends State<HomePage> {
             onPressed: () => _openTransactionFormModal(context),
           ),
         ],
-        title: Text(
-          context.locale().personalExpenses,
-        ),
+        title: Text(context.locale().personalExpenses),
       ),
       body: ValueListenableBuilder(
         valueListenable: _transactionController.transactionsListenable,
@@ -157,14 +158,16 @@ class HomePageState extends State<HomePage> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text(
-                          'Minhas Transações',
-                          style: TextStyle(
+                        Text(
+                          context.locale().myTransactions,
+                          style: const TextStyle(
                             fontSize: 20,
                           ),
                         ),
                         Text(
-                          '${_transactionController.transactions.length} transações',
+                          context
+                              .locale()
+                              .transactionsLength(transactions.length),
                           style: const TextStyle(
                             fontSize: 15,
                           ),
