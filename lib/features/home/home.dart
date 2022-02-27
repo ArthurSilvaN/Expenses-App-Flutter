@@ -157,9 +157,9 @@ class HomePageState extends State<HomePage> {
                             ElevatedButton(
                               onPressed: () =>
                                   buttonCarouselController.previousPage(
-                                      duration:
-                                          const Duration(milliseconds: 300),
-                                      curve: Curves.linear),
+                                duration: const Duration(milliseconds: 300),
+                                curve: Curves.linear,
+                              ),
                               child: const Text('←'),
                             ),
                             ElevatedButton(
