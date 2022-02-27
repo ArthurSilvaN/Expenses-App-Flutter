@@ -7,7 +7,8 @@ import '../../components/modal_center.dart';
 import '../../core/usecases/locale_usecase.dart';
 import '../../core/usecases/transaction_usecase.dart';
 import '../../core/util/locale_intl.dart';
-import '../../models/transaction.dart';
+import '../../entities/transaction.dart';
+
 import 'widgets/transaction_category_chart.dart';
 import 'widgets/transaction_chart.dart';
 import 'widgets/transaction_form.dart';
@@ -60,7 +61,7 @@ class HomePageState extends State<HomePage> {
           title: const Text('Languages'),
           children: [
             SizedBox(
-              height: MediaQuery.of(context).size.height * 0.1,
+              height: MediaQuery.of(context).size.height * 0.2,
               width: MediaQuery.of(context).size.height * 0.1,
               child: Center(
                 child: ListView.builder(

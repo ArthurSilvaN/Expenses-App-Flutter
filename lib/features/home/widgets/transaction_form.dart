@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 
 import '../../../core/usecases/transaction_usecase.dart';
 import '../../../core/util/locale_intl.dart';
-import '../../../models/transaction_categorys.dart';
+import '../../../entities/transaction_categorys.dart';
 
 class TransactionForm extends StatefulWidget {
   const TransactionForm({Key? key}) : super(key: key);

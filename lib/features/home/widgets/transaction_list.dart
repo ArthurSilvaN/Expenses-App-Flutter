@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 import '../../../components/modal.dart';
 import '../../../core/usecases/transaction_usecase.dart';
 import '../../../core/util/locale_intl.dart';
-import '../../../models/transaction.dart';
+import '../../../entities/transaction.dart';
 
 class TransactionList extends StatefulWidget {
   const TransactionList({Key? key}) : super(key: key);

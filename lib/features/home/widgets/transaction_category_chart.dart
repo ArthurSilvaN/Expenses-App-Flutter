@@ -1,10 +1,11 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 import '../../../core/usecases/transaction_usecase.dart';
 import '../../../core/util/locale_intl.dart';
-import '../../../models/category_registry.dart';
+import '../../../entities/category_registry.dart';
 
 class CategoryChart extends StatefulWidget {
   const CategoryChart({Key? key}) : super(key: key);
@@ -43,6 +44,9 @@ class CategoryChartState extends State<CategoryChart> {
                 dataLabelSettings: const DataLabelSettings(
                   isVisible: true,
                   useSeriesColor: true,
+                  textStyle: TextStyle(
+                    color: Colors.white,
+                  ),
                 ),
                 pointColorMapper: (data, _) => data.color,
                 sortingOrder: SortingOrder.ascending,
