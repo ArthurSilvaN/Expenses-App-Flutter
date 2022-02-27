@@ -32,6 +32,9 @@ class HomePageState extends State<HomePage> {
     _transactionController =
         Provider.of<TransactionUsecase>(context, listen: false);
     _localeController = Provider.of<LocaleUseCase>(context, listen: false);
+    Future.delayed(Duration.zero, () {
+      _localeController.setLocale(Localizations.localeOf(context));
+    });
     transactions = _transactionController.transactions;
   }
 
