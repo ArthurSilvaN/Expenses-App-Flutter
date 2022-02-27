@@ -52,7 +52,7 @@ class HomePageState extends State<HomePage> {
       context: context,
       builder: (context) {
         return SimpleDialog(
-          title: const Text('teste'),
+          title: const Text('Languages'),
           children: [
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.1,
@@ -63,14 +63,27 @@ class HomePageState extends State<HomePage> {
                   itemCount: _localeController.languagesLocale.length,
                   itemBuilder: (_, index) {
                     final language = _localeController.languagesLocale[index];
-                    return SimpleDialogItem(
-                      widget: Text(language.flag),
-                      color: language.color,
-                      text: language.languageName,
-                      onPressed: () {
-                        _localeController.setLocale(language.locale);
-                        Navigator.pop(context);
-                      },
+                    return Container(
+                      decoration: BoxDecoration(
+                        color: language.locale == _localeController.locale.value
+                            ? Theme.of(context)
+                                .colorScheme
+                                .primary
+                                .withOpacity(0.7)
+                            : null,
+                      ),
+                      child: SimpleDialogItem(
+                        widget: Text(
+                          language.flag,
+                          style: const TextStyle(fontSize: 24),
+                        ),
+                        color: language.color,
+                        text: language.languageName,
+                        onPressed: () {
+                          _localeController.setLocale(language.locale);
+                          Navigator.pop(context);
+                        },
+                      ),
                     );
                   },
                 ),
@@ -147,9 +160,9 @@ class HomePageState extends State<HomePage> {
                             ElevatedButton(
                               onPressed: () =>
                                   buttonCarouselController.nextPage(
-                                      duration:
-                                          const Duration(milliseconds: 300),
-                                      curve: Curves.linear),
+                                duration: const Duration(milliseconds: 300),
+                                curve: Curves.linear,
+                              ),
                               child: const Text('→'),
                             ),
                           ],
