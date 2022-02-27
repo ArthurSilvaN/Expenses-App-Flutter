@@ -9,6 +9,7 @@ import '../../core/usecases/transaction_usecase.dart';
 import '../../core/util/locale_intl.dart';
 import '../../entities/transaction.dart';
 
+import '../../services/database_connection.dart';
 import 'widgets/transaction_category_chart.dart';
 import 'widgets/transaction_chart.dart';
 import 'widgets/transaction_form.dart';
@@ -22,21 +23,34 @@ class HomePage extends StatefulWidget {
 }
 
 class HomePageState extends State<HomePage> {
-  late TransactionUsecase _transactionController;
-  late LocaleUseCase _localeController;
+  late final TransactionUsecase _transactionController =
+      Provider.of<TransactionUsecase>(context, listen: false);
+
+  late final LocaleUseCase _localeController =
+      Provider.of<LocaleUseCase>(context, listen: false);
+
   CarouselController buttonCarouselController = CarouselController();
-  late List<Transaction> transactions;
+
+  late List<Transaction> transactions = [];
+  late final DatabaseConneection conneection = DatabaseConneection();
 
   @override
   void initState() {
     super.initState();
-    _transactionController =
-        Provider.of<TransactionUsecase>(context, listen: false);
-    _localeController = Provider.of<LocaleUseCase>(context, listen: false);
-    Future.delayed(Duration.zero, () {
-      _localeController.setLocale(Localizations.localeOf(context));
-    });
-    transactions = _transactionController.transactions;
+
+    Future.delayed(
+      Duration.zero,
+      () {
+        _localeController.setLocale(Localizations.localeOf(context));
+      },
+    );
+
+    conneection.inializeDatabase().then(
+      (value) {
+        _transactionController.getTransactions();
+        transactions = _transactionController.transactions;
+      },
+    );
   }
 
   void _openTransactionFormModal(BuildContext context) {
