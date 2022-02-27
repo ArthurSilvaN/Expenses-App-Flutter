@@ -9,6 +9,7 @@ import '../../entities/transaction.dart';
 import '../../entities/transaction_categorys.dart';
 import '../../entities/transaction_registry.dart';
 import '../../generated/l10n.dart';
+import '../../services/database_connection.dart';
 import '../util/property_value_notifier.dart';
 
 class TransactionUsecase extends ChangeNotifier {
@@ -17,7 +18,13 @@ class TransactionUsecase extends ChangeNotifier {
   late PropertyValueNotifier<List<Transaction>?> transactionsListenable =
       PropertyValueNotifier(transactions);
 
-  List<Transaction> transactions = [];
+  late List<Transaction> transactions = [];
+  final DatabaseConneection conneection = DatabaseConneection();
+
+  Future<void> getTransactions() async {
+    transactions = await conneection.getTransactions();
+    transactionsListenable.notifyListeners();
+  }
 
   late final List<Category> categorysDefault = [
     Category(
@@ -109,6 +116,7 @@ class TransactionUsecase extends ChangeNotifier {
     );
 
     transactions.add(newTransaction);
+    conneection.insertTransaction(newTransaction);
 
     for (final categoryAdd in categorysRegistriesDefault) {
       {
