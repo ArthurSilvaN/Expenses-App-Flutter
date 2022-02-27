@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 
 import '../core/usecases/transaction_usecase.dart';
 import '../core/util/locale_intl.dart';
-import '../models/transaction.dart';
+import '../entities/transaction.dart';
 
 class ModalDeleteTransaction {
   ModalDeleteTransaction(this.transaction);

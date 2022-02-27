@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../models/languages.dart';
+import '../../entities/languages.dart';
 import '../util/property_value_notifier.dart';
 
 class LocaleUseCase extends ChangeNotifier {

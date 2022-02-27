@@ -4,11 +4,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+import '../../entities/category_registry.dart';
+import '../../entities/transaction.dart';
+import '../../entities/transaction_categorys.dart';
+import '../../entities/transaction_registry.dart';
 import '../../generated/l10n.dart';
-import '../../models/category_registry.dart';
-import '../../models/transaction.dart';
-import '../../models/transaction_categorys.dart';
-import '../../models/transaction_registry.dart';
 import '../util/property_value_notifier.dart';
 
 class TransactionUsecase extends ChangeNotifier {
@@ -57,9 +57,11 @@ class TransactionUsecase extends ChangeNotifier {
 
   List<Transaction> get recentTransactions {
     return transactions.where((tr) {
-      return tr.date.isAfter(DateTime.now().subtract(
-        const Duration(days: 7),
-      ));
+      return tr.date.isAfter(
+        DateTime.now().subtract(
+          const Duration(days: 7),
+        ),
+      );
     }).toList();
   }
 
@@ -120,7 +122,6 @@ class TransactionUsecase extends ChangeNotifier {
   }
 
   void deleteTransaction(Transaction tr) {
-
     for (final categoryAdd in categorysRegistriesDefault) {
       {
         if (categoryAdd.name == tr.category!.name) {
