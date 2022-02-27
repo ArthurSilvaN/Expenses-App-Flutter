@@ -40,9 +40,14 @@ class HomePageState extends State<HomePage> {
 
   void _openTransactionFormModal(BuildContext context) {
     showModalBottomSheet(
+      isScrollControlled: true,
       context: context,
       builder: (_) {
-        return const TransactionForm();
+        return SingleChildScrollView(
+          padding:
+              EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+          child: const TransactionForm(),
+        );
       },
     );
   }
