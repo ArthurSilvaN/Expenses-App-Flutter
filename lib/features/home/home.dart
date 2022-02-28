@@ -7,7 +7,6 @@ import '../../components/modal_center.dart';
 import '../../core/usecases/locale_usecase.dart';
 import '../../core/usecases/transaction_usecase.dart';
 import '../../core/util/locale_intl.dart';
-import '../../entities/transaction.dart';
 
 import '../../services/database_connection.dart';
 import 'widgets/transaction_category_chart.dart';
@@ -31,7 +30,7 @@ class HomePageState extends State<HomePage> {
 
   CarouselController buttonCarouselController = CarouselController();
 
-  late List<Transaction> transactions = [];
+  
   late final DatabaseConneection conneection = DatabaseConneection();
 
   @override
@@ -48,7 +47,7 @@ class HomePageState extends State<HomePage> {
     conneection.inializeDatabase().then(
       (value) {
         _transactionController.getTransactions();
-        transactions = _transactionController.transactions;
+        _transactionController.getCategorys();
       },
     );
   }
@@ -133,11 +132,6 @@ class HomePageState extends State<HomePage> {
             icon: const Icon(Icons.language),
             onPressed: () => _openLocaleModal(context),
           ),
-          const SizedBox(width: 25),
-          IconButton(
-            icon: const Icon(Icons.add),
-            onPressed: () => _openTransactionFormModal(context),
-          ),
         ],
         title: Text(context.locale().personalExpenses),
       ),
@@ -201,9 +195,9 @@ class HomePageState extends State<HomePage> {
                           ),
                         ),
                         Text(
-                          context
-                              .locale()
-                              .transactionsLength(transactions.length),
+                          context.locale().transactionsLength(
+                                _transactionController.transactions.length,
+                              ),
                           style: const TextStyle(
                             fontSize: 15,
                           ),

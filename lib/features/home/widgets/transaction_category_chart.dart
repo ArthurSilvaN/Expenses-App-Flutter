@@ -37,7 +37,7 @@ class CategoryChartState extends State<CategoryChart> {
             ),
             series: [
               RadialBarSeries<CategoryRegistry, String>(
-                dataSource: _transactionController.categorysRegistriesDefault
+                dataSource: _transactionController.categorys
                     .where((element) => element.value != 0)
                     .toList(),
                 opacity: 0.8,

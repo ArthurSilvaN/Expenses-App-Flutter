@@ -1,5 +1,6 @@
 import 'package:sqflite/sqflite.dart';
 
+import '../entities/category_registry.dart';
 import '../entities/transaction.dart' as transaction_entity;
 import '../models/transaction_model.dart';
 
@@ -9,6 +10,11 @@ const String columnTitle = 'title';
 const String columnValue = 'value';
 const String columnDate = 'date';
 const String columnCategory = 'category';
+
+const String tableCategory = 'category';
+const String columnNameCategory = 'name';
+const String columnColor = 'colorCategory';
+const String columnCategoryValue = 'valueCategory';
 
 class DatabaseConneection {
   factory DatabaseConneection() {
@@ -31,7 +37,7 @@ class DatabaseConneection {
     final dir = await getDatabasesPath();
     final path = '${dir}expenses.db';
 
-    return openDatabase(path, version: 1, onCreate: (db, version) {
+    return openDatabase(path, version: 3, onCreate: (db, version) {
       db.execute('''
         create table $tableExpenses (
           $columnId text not null,
@@ -39,6 +45,12 @@ class DatabaseConneection {
           $columnValue real not null,
           $columnDate text not null,
           $columnCategory text)
+        ''');
+      db.execute('''
+        create table $tableCategory (
+          $columnNameCategory text not null,
+          $columnCategoryValue real not null,
+          $columnColor text not null)
         ''');
     });
   }
@@ -84,6 +96,52 @@ class DatabaseConneection {
       tableExpenses,
       where: '$columnId = ?',
       whereArgs: [id],
+    );
+  }
+
+  Future<List<CategoryRegistry>> getCategorys() async {
+    final List<CategoryRegistry> listCategorys = [];
+    final db = await database;
+    final result = await db.query(tableCategory);
+    for (final category in result) {
+      final categoryRegistry = CategoryRegistry.fromMap(category);
+      listCategorys.add(
+        CategoryRegistry(
+          color: categoryRegistry.color,
+          name: categoryRegistry.name,
+          value: categoryRegistry.value,
+        ),
+      );
+    }
+    return listCategorys;
+  }
+
+  Future<void> insertCategory(
+    CategoryRegistry categoryRegistry,
+  ) async {
+    final db = await database;
+    List<CategoryRegistry?> categorysInDatabase = [];
+    categorysInDatabase = await getCategorys();
+    if (categorysInDatabase
+        .any((element) => element?.name == categoryRegistry.name)) {
+      updateCategory(categoryRegistry);
+    } else {
+      await db.insert(
+        tableCategory,
+        categoryRegistry.toMap(),
+      );
+    }
+  }
+
+  Future<void> updateCategory(
+    CategoryRegistry categoryRegistry,
+  ) async {
+    final db = await database;
+    await db.update(
+      tableCategory,
+      categoryRegistry.toMap(),
+      where: '$columnNameCategory = ?',
+      whereArgs: [categoryRegistry.name],
     );
   }
 }

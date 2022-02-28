@@ -19,6 +19,7 @@ class TransactionUsecase extends ChangeNotifier {
       PropertyValueNotifier(transactions);
 
   late List<Transaction> transactions = [];
+  late List<CategoryRegistry> categorys = [];
   final DatabaseConneection conneection = DatabaseConneection();
 
   Future<void> getTransactions() async {
@@ -26,21 +27,31 @@ class TransactionUsecase extends ChangeNotifier {
     transactionsListenable.notifyListeners();
   }
 
+  Future<void> getCategorys() async {
+    categorys = await conneection.getCategorys();
+    if (categorys.isEmpty) {
+      categorysRegistriesDefault
+          .toList()
+          .forEach((category) => conneection.insertCategory(category));
+    }
+    transactionsListenable.notifyListeners();
+  }
+
   late final List<Category> categorysDefault = [
     Category(
       color: Colors.red,
       name: S.current.debts,
-      icon: Icons.access_alarms,
+      icon: Icons.money_off,
     ),
     Category(
       color: Colors.green,
       name: S.current.investment,
-      icon: Icons.attach_money_rounded,
+      icon: Icons.savings,
     ),
     Category(
       color: Colors.blue,
       name: S.current.leisure,
-      icon: Icons.access_alarms,
+      icon: Icons.local_mall_outlined,
     ),
   ];
 
@@ -101,12 +112,12 @@ class TransactionUsecase extends ChangeNotifier {
     return transactionList;
   }
 
-  void addTransaction(
+  Future<void> addTransaction(
     String title,
     double value,
     DateTime date,
     Category? category,
-  ) {
+  ) async {
     final newTransaction = Transaction(
       id: Random().nextDouble().toString(),
       title: title,
@@ -115,31 +126,32 @@ class TransactionUsecase extends ChangeNotifier {
       category: category,
     );
 
-    transactions.add(newTransaction);
-    conneection.insertTransaction(newTransaction);
+    await conneection.insertTransaction(newTransaction);
+    await getCategorys();
 
-    for (final categoryAdd in categorysRegistriesDefault) {
-      {
-        if (categoryAdd.name == category!.name) {
-          categoryAdd.value += value;
-        }
+    transactions.add(newTransaction);
+
+    for (final categoryAdd in categorys) {
+      if (categoryAdd.name == category!.name) {
+        categoryAdd.value += value;
+        await conneection.updateCategory(categoryAdd);
       }
     }
 
     transactionsListenable.notifyListeners();
   }
 
-  void deleteTransaction(Transaction tr) {
-    for (final categoryAdd in categorysRegistriesDefault) {
-      {
-        if (categoryAdd.name == tr.category!.name) {
-          categoryAdd.value -= tr.value;
-        }
+  Future<void> deleteTransaction(Transaction tr) async {
+    for (final categoryAdd in categorys) {
+      if (categoryAdd.name == tr.category!.name) {
+        categoryAdd.value -= tr.value;
+        await conneection.updateCategory(categoryAdd);
       }
     }
 
     transactions.remove(tr);
+    conneection.deleteTransactionById(tr.id);
+
     transactionsListenable.notifyListeners();
-    return;
   }
 }

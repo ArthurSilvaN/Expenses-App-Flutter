@@ -44,7 +44,10 @@ class TransactionChartState extends State<TransactionChart> {
               series: [
                 ColumnSeries<TransactionRegistry, String>(
                   color: Theme.of(context).colorScheme.primary,
-                  dataSource: _transactionController.groupedTransactions,
+                  dataSource: _transactionController
+                      .groupedTransactions.reversed
+                      .toList(),
+                  sortFieldValueMapper: (tr, _) => tr.date,
                   xValueMapper: (tr, _) => tr.date,
                   yValueMapper: (tr, _) => tr.value,
                   gradient: LinearGradient(
