@@ -127,9 +127,9 @@ class TransactionUsecase extends ChangeNotifier {
     );
 
     await conneection.insertTransaction(newTransaction);
-    await getCategorys();
-
     transactions.add(newTransaction);
+
+    await getCategorys();
 
     for (final categoryAdd in categorys) {
       if (categoryAdd.name == category!.name) {
@@ -137,8 +137,8 @@ class TransactionUsecase extends ChangeNotifier {
         await conneection.updateCategory(categoryAdd);
       }
     }
-
-    transactionsListenable.notifyListeners();
+    
+    notifyListeners();
   }
 
   Future<void> deleteTransaction(Transaction tr) async {
