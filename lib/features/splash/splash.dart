@@ -1,6 +1,9 @@
+// ignore_for_file: depend_on_referenced_packages
+
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 
 import '../../core/usecases/locale_usecase.dart';
@@ -25,28 +28,32 @@ class SplashScreeState extends State<SplashScreen> {
   late final DatabaseConneection conneection = DatabaseConneection();
 
   Future<void> _initializeApp() async {
-    conneection.inializeDatabase().then(
+    await conneection.inializeDatabase().then(
       (value) {
         _transactionController.getTransactions();
         _transactionController.getCategorys();
       },
     );
-    _localeController.setLocale(Localizations.localeOf(context));
+    Future.delayed(Duration.zero, () {
+      _localeController.setLocale(Localizations.localeOf(context));
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedSplashScreen(
-      function: _initializeApp,
-      splash: Image.asset(
-        'assets/images/logo1.png',
-        width: 300,
-        height: 100,
-      ),
-      backgroundColor: Theme.of(context).colorScheme.primary,
+    return AnimatedSplashScreen.withScreenFunction(
+      screenFunction: () async {
+        await _initializeApp();
+        return const HomePage();
+      },
+      curve: Curves.linear,
+      pageTransitionType: PageTransitionType.fade,
       duration: 7000,
-      nextScreen: const HomePage(),
+      splashIconSize: MediaQuery.of(context).size.height,
+      animationDuration: const Duration(seconds: 3),
+      centered: false,
       splashTransition: SplashTransition.fadeTransition,
+      splash: 'assets/images/logo1.png',
     );
   }
 }

@@ -47,7 +47,7 @@ class MyApp extends StatelessWidget {
               ScrollConfiguration.of(context).copyWith(scrollbars: false),
           debugShowCheckedModeBanner: false,
           theme: appTheme,
-          title: 'Expenses App',
+          title: 'Financy App',
           home: const SplashScreen(),
         );
       },
