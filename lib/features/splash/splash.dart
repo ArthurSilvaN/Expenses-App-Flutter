@@ -53,7 +53,7 @@ class SplashScreeState extends State<SplashScreen> {
       animationDuration: const Duration(seconds: 3),
       centered: false,
       splashTransition: SplashTransition.fadeTransition,
-      splash: 'assets/images/logo1.png',
+      splash: 'assets/images/splash.png',
     );
   }
 }
