@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 
 import 'core/usecases/locale_usecase.dart';
 import 'core/usecases/transaction_usecase.dart';
-import 'features/home/home.dart';
+import 'features/splash/splash.dart';
 import 'generated/l10n.dart';
 import 'theme/style.dart';
 
@@ -48,7 +48,7 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           theme: appTheme,
           title: 'Expenses App',
-          home: const HomePage(),
+          home: const SplashScreen(),
         );
       },
     );

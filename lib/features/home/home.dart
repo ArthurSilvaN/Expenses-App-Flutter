@@ -8,7 +8,6 @@ import '../../core/usecases/locale_usecase.dart';
 import '../../core/usecases/transaction_usecase.dart';
 import '../../core/util/locale_intl.dart';
 
-import '../../services/database_connection.dart';
 import 'widgets/transaction_category_chart.dart';
 import 'widgets/transaction_chart.dart';
 import 'widgets/transaction_form.dart';
@@ -29,28 +28,6 @@ class HomePageState extends State<HomePage> {
       Provider.of<LocaleUseCase>(context, listen: false);
 
   CarouselController buttonCarouselController = CarouselController();
-
-  
-  late final DatabaseConneection conneection = DatabaseConneection();
-
-  @override
-  void initState() {
-    super.initState();
-
-    Future.delayed(
-      Duration.zero,
-      () {
-        _localeController.setLocale(Localizations.localeOf(context));
-      },
-    );
-
-    conneection.inializeDatabase().then(
-      (value) {
-        _transactionController.getTransactions();
-        _transactionController.getCategorys();
-      },
-    );
-  }
 
   void _openTransactionFormModal(BuildContext context) {
     showModalBottomSheet(
