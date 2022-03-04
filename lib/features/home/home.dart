@@ -8,6 +8,7 @@ import '../../core/usecases/locale_usecase.dart';
 import '../../core/usecases/transaction_usecase.dart';
 import '../../core/util/locale_intl.dart';
 
+import '../../services/auth_service.dart';
 import 'widgets/transaction_category_chart.dart';
 import 'widgets/transaction_chart.dart';
 import 'widgets/transaction_form.dart';
@@ -26,6 +27,9 @@ class HomePageState extends State<HomePage> {
 
   late final LocaleUseCase _localeController =
       Provider.of<LocaleUseCase>(context, listen: false);
+
+  late final AuthService _authService =
+      Provider.of<AuthService>(context, listen: false);
 
   CarouselController buttonCarouselController = CarouselController();
 
@@ -108,6 +112,10 @@ class HomePageState extends State<HomePage> {
           IconButton(
             icon: const Icon(Icons.language),
             onPressed: () => _openLocaleModal(context),
+          ),
+          IconButton(
+            icon: const Icon(Icons.logout),
+            onPressed: () => _authService.logout(),
           ),
         ],
         title: Text(context.locale().personalExpenses),
