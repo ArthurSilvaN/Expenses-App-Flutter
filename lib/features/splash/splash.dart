@@ -9,7 +9,7 @@ import 'package:provider/provider.dart';
 import '../../core/usecases/locale_usecase.dart';
 import '../../core/usecases/transaction_usecase.dart';
 import '../../services/database_connection.dart';
-import '../home/home.dart';
+import '../login/login.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -44,7 +44,7 @@ class SplashScreeState extends State<SplashScreen> {
     return AnimatedSplashScreen.withScreenFunction(
       screenFunction: () async {
         await _initializeApp();
-        return const HomePage();
+        return const LoginPage();
       },
       curve: Curves.linear,
       pageTransitionType: PageTransitionType.fade,
