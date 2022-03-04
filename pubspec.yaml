@@ -24,6 +24,11 @@ dependencies:
   sqflite: ^2.0.2
   flutter_animated_splash: ^0.0.10
   animated_splash_screen: ^1.2.0
+  firebase_auth: ^3.3.9
+  firebase_core: ^1.13.1
+  google_sign_in: ^5.2.4
+  flutter_signin_button: ^2.0.0
+  font_awesome_flutter: ^9.2.0
   
 
 dev_dependencies:
@@ -44,9 +49,11 @@ flutter:
 
   assets:
     - assets/images/logo.png
+    - assets/images/white_logo.png
     - assets/images/logo1.png
     - assets/images/splash.png
     - assets/images/bg_app.png
+    - assets/images/login_image.png
 
 flutter_intl:
   enabled: true
