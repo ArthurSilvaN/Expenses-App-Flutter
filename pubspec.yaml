@@ -29,6 +29,7 @@ dependencies:
   google_sign_in: ^5.2.4
   flutter_signin_button: ^2.0.0
   font_awesome_flutter: ^9.2.0
+  google_fonts: ^2.3.1
   
 
 dev_dependencies:
@@ -53,7 +54,6 @@ flutter:
     - assets/images/logo1.png
     - assets/images/splash.png
     - assets/images/bg_app.png
-    - assets/images/login_image.png
 
 flutter_intl:
   enabled: true
