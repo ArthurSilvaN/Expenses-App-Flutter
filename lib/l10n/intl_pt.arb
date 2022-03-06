@@ -14,7 +14,7 @@
     "newTransaction": "Nova Transação",
     "noTransactions": "Nenhuma Transação Cadastrada!",
     "valueTransaction": "R$ {value}",
-    "noDate": "Nenhuma data selecionada!!!!",
+    "noDate": "Nenhuma data selecionada!",
     "personalExpenses": "Despesas Pessoais",
     "price": "Valor (R$)",
     "selectedDate": "Data Selecionada: {selectedDate}",
