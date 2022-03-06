@@ -1,5 +1,7 @@
+import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
@@ -29,6 +31,51 @@ class _TransactionListState extends State<TransactionList> {
     ModalDeleteTransaction(tr).info(context);
   }
 
+  void _showSnackBar(String message, Color color) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+        backgroundColor: color,
+      ),
+    );
+  }
+
+  Widget _showDismissibleDeletePane(Transaction tr) {
+    return DismissiblePane(
+      onDismissed: () {
+        _showSnackBar('Transação Deletada', Colors.red);
+        _transactionController.deleteTransaction(tr);
+      },
+      confirmDismiss: () async {
+        final bool? ret = await showDialog<bool>(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: Text(context.locale().delete.toUpperCase()),
+              content: Text(
+                context.locale().deleteTransaction(
+                      tr.title,
+                      tr.value.toString(),
+                    ),
+              ),
+              actions: <Widget>[
+                TextButton(
+                  onPressed: () => Navigator.of(context).pop(false),
+                  child: Text(context.locale().cancel),
+                ),
+                TextButton(
+                  onPressed: () => Navigator.of(context).pop(true),
+                  child: Text(context.locale().delete),
+                ),
+              ],
+            );
+          },
+        );
+        return ret ?? false;
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -53,11 +100,10 @@ class _TransactionListState extends State<TransactionList> {
                   itemCount: _transactionController.transactions.length,
                   itemBuilder: (_, index) {
                     final tr = _transactionController.transactions[index];
-                    return InkWell(
-                      onLongPress: () =>
-                          _openDeleteTransactionModal(context, tr),
-                      child: Card(
-                        elevation: 7,
+                    return OpenContainer(
+                      closedElevation: 0,
+                      transitionDuration: const Duration(milliseconds: 1000),
+                      closedBuilder: (context, action) => Card(
                         margin: const EdgeInsets.symmetric(
                           vertical: 8,
                           horizontal: 5,
@@ -71,31 +117,50 @@ class _TransactionListState extends State<TransactionList> {
                               ),
                             ),
                           ),
-                          child: ListTile(
-                            visualDensity: VisualDensity.compact,
-                            leading: Icon(
-                              tr.category!.icon,
-                              size: 30,
-                            ),
-                            title: Text(
-                              tr.title,
-                              style: Theme.of(context).textTheme.headline6,
-                            ),
-                            subtitle: Text(
-                              DateFormat(context.locale().dateFormatAbrevMonth)
-                                  .format(tr.date),
-                            ),
-                            trailing: Padding(
-                              padding: const EdgeInsets.all(6),
-                              child: FittedBox(
-                                child: Text(
-                                  context.locale().valueTransaction(
-                                        tr.value.toStringAsFixed(2),
-                                      ),
+                          child: Slidable(
+                            key: Key(tr.id),
+                            startActionPane: ActionPane(
+                              motion: const DrawerMotion(),
+                              dismissible: _showDismissibleDeletePane(tr),
+                              children: [
+                                SlidableAction(
+                                  label: 'Delete',
+                                  foregroundColor: Colors.red,
+                                  icon: Icons.delete,
+                                  onPressed: (_) =>
+                                      _openDeleteTransactionModal(context, tr),
                                 ),
+                              ],
+                            ),
+                            child: ListTile(
+                              style: ListTileStyle.list,
+                              visualDensity: VisualDensity.compact,
+                              leading: Icon(
+                                tr.category!.icon,
+                                size: 30,
+                              ),
+                              title: Text(
+                                tr.title,
+                                style: Theme.of(context).textTheme.headline6,
+                              ),
+                              subtitle: Text(
+                                DateFormat(
+                                        context.locale().dateFormatAbrevMonth)
+                                    .format(tr.date),
+                              ),
+                              
+                              trailing: Padding(
+                                padding: const EdgeInsets.all(6),
+                                child: Text(context.locale().valueTransaction(
+                                    tr.value.toStringAsFixed(2))),
                               ),
                             ),
                           ),
+                        ),
+                      ),
+                      openBuilder: (context, action) => const Scaffold(
+                        body: Center(
+                          child: Text('new Page'),
                         ),
                       ),
                     );
