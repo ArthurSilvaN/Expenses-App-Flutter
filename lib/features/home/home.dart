@@ -100,13 +100,26 @@ class HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: Container(
-        height: 70,
-        padding: const EdgeInsets.all(16),
-        width: double.maxFinite,
-        child: ElevatedButton(
-          onPressed: () => _openTransactionFormModal(context),
-          child: Text(context.locale().add),
+      bottomNavigationBar: SizedBox(
+        height: 90,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            GestureDetector(
+              onTap: () => _openTransactionFormModal(context),
+              child: Container(
+                width: 56,
+                height: 56,
+                decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.primary,
+                  borderRadius: BorderRadius.circular(5),
+                ),
+                child: const Icon(
+                  Icons.add_box_outlined,
+                ),
+              ),
+            ),
+          ],
         ),
       ),
       appBar: AppBar(
@@ -122,13 +135,17 @@ class HomePageState extends State<HomePage> {
           IconButton(
             onPressed: null,
             icon: SizedBox(
-              child: Image.network(
-                _authService.user!.photoUrl.toString(),
-              ),
+              child: _authService.user != null
+                  ? Image.network(
+                      _authService.user!.photoUrl.toString(),
+                    )
+                  : const Icon(Icons.account_box),
             ),
           )
         ],
-        title: Text('Ola, ${_authService.user!.displayName}'),
+        title: _authService.user != null
+            ? Text('Ola, ${_authService.user!.displayName}')
+            : Text(context.locale().title),
       ),
       body: ValueListenableBuilder(
         valueListenable: _transactionController.transactionsListenable,
