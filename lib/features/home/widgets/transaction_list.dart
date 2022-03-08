@@ -120,12 +120,15 @@ class _TransactionListState extends State<TransactionList> {
                           child: Slidable(
                             key: Key(tr.id),
                             startActionPane: ActionPane(
+                              extentRatio: 0.2,
                               motion: const DrawerMotion(),
                               dismissible: _showDismissibleDeletePane(tr),
                               children: [
                                 SlidableAction(
+                                  flex: 3,
                                   label: 'Delete',
-                                  foregroundColor: Colors.red,
+                                  backgroundColor: tr.category!.color,
+                                  foregroundColor: Colors.white,
                                   icon: Icons.delete,
                                   onPressed: (_) =>
                                       _openDeleteTransactionModal(context, tr),
