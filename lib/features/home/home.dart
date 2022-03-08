@@ -31,6 +31,8 @@ class HomePageState extends State<HomePage> {
   late final AuthService _authService =
       Provider.of<AuthService>(context, listen: false);
 
+  late final size = MediaQuery.of(context).size;
+
   CarouselController buttonCarouselController = CarouselController();
 
   void _openTransactionFormModal(BuildContext context) {
@@ -117,86 +119,87 @@ class HomePageState extends State<HomePage> {
             icon: const Icon(Icons.logout),
             onPressed: () => _authService.logout(),
           ),
+          IconButton(
+            onPressed: null,
+            icon: SizedBox(
+              child: Image.network(
+                _authService.user!.photoUrl.toString(),
+              ),
+            ),
+          )
         ],
-        title: Text(context.locale().personalExpenses),
+        title: Text('Ola, ${_authService.user!.displayName}'),
       ),
       body: ValueListenableBuilder(
         valueListenable: _transactionController.transactionsListenable,
         builder: (_, __, ___) {
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 18.0),
-            child: SingleChildScrollView(
-              primary: true,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  if (_transactionController.transactions.isNotEmpty)
-                    Column(
-                      children: [
-                        CarouselSlider(
-                          items: const [
-                            Center(child: TransactionChart()),
-                            Center(child: CategoryChart()),
-                          ],
-                          options: CarouselOptions(
-                            height: 400,
-                            enlargeCenterPage: true,
-                            viewportFraction: 1,
-                          ),
-                          carouselController: buttonCarouselController,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                if (_transactionController.transactions.isNotEmpty)
+                  Column(
+                    children: [
+                      CarouselSlider(
+                        items: const [
+                          Center(child: TransactionChart()),
+                          Center(child: CategoryChart()),
+                        ],
+                        options: CarouselOptions(
+                          height: size.height * 0.4,
+                          viewportFraction: 1,
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            ElevatedButton(
-                              onPressed: () =>
-                                  buttonCarouselController.previousPage(
-                                duration: const Duration(milliseconds: 300),
-                                curve: Curves.linear,
-                              ),
-                              child: const Text('←'),
+                        carouselController: buttonCarouselController,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          IconButton(
+                            color: Theme.of(context).colorScheme.primary,
+                            onPressed: () =>
+                                buttonCarouselController.previousPage(
+                              duration: const Duration(milliseconds: 300),
                             ),
-                            ElevatedButton(
-                              onPressed: () =>
-                                  buttonCarouselController.nextPage(
-                                duration: const Duration(milliseconds: 300),
-                                curve: Curves.linear,
-                              ),
-                              child: const Text('→'),
+                            icon: const Icon(Icons.keyboard_arrow_left),
+                          ),
+                          IconButton(
+                            color: Theme.of(context).colorScheme.primary,
+                            onPressed: () => buttonCarouselController.nextPage(
+                                duration: const Duration(milliseconds: 300)),
+                            icon: const Icon(Icons.keyboard_arrow_right),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 20.0, bottom: 8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        context.locale().myTransactions,
+                        style: const TextStyle(
+                          fontSize: 20,
+                        ),
+                      ),
+                      Text(
+                        context.locale().transactionsLength(
+                              _transactionController.transactions.length,
                             ),
-                          ],
+                        style: const TextStyle(
+                          fontSize: 15,
                         ),
-                      ],
-                    ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 20.0, bottom: 8.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          context.locale().myTransactions,
-                          style: const TextStyle(
-                            fontSize: 20,
-                          ),
-                        ),
-                        Text(
-                          context.locale().transactionsLength(
-                                _transactionController.transactions.length,
-                              ),
-                          style: const TextStyle(
-                            fontSize: 15,
-                          ),
-                        ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                  Divider(
-                    color:
-                        Theme.of(context).colorScheme.primary.withOpacity(0.4),
-                  ),
-                  const TransactionList(),
-                ],
-              ),
+                ),
+                Divider(
+                  color: Theme.of(context).colorScheme.primary.withOpacity(0.4),
+                ),
+                const TransactionList(),
+              ],
             ),
           );
         },
