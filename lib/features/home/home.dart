@@ -100,7 +100,7 @@ class HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: SizedBox(
+      floatingActionButton: SizedBox(
         height: 90,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -116,36 +116,49 @@ class HomePageState extends State<HomePage> {
                 ),
                 child: const Icon(
                   Icons.add_box_outlined,
+                  color: Colors.white,
                 ),
               ),
             ),
           ],
         ),
       ),
-      appBar: AppBar(
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.language),
-            onPressed: () => _openLocaleModal(context),
-          ),
-          IconButton(
-            icon: const Icon(Icons.logout),
-            onPressed: () => _authService.logout(),
-          ),
-          IconButton(
-            onPressed: null,
-            icon: SizedBox(
-              child: _authService.user != null
-                  ? Image.network(
-                      _authService.user!.photoUrl.toString(),
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(size.height * 0.15),
+        child: Container(
+          height: 150,
+          padding: const EdgeInsets.symmetric(horizontal: 18.0),
+          child: Center(
+            child: ListTile(
+              title: Text.rich(
+                TextSpan(
+                  text: 'Olá, ',
+                  children: [
+                    TextSpan(
+                      text: '${_authService.user!.displayName}',
                     )
-                  : const Icon(Icons.account_box),
+                  ],
+                ),
+              ),
+              subtitle: const Text(
+                'Bem vindo ao seu app de finanças',
+              ),
+              trailing: Container(
+                height: 48,
+                width: 48,
+                decoration: BoxDecoration(
+                  color: Colors.black,
+                  borderRadius: BorderRadius.circular(5),
+                  image: DecorationImage(
+                    image: NetworkImage(
+                      _authService.user!.photoUrl.toString(),
+                    ),
+                  ),
+                ),
+              ),
             ),
-          )
-        ],
-        title: _authService.user != null
-            ? Text('Ola, ${_authService.user!.displayName}')
-            : Text(context.locale().title),
+          ),
+        ),
       ),
       body: ValueListenableBuilder(
         valueListenable: _transactionController.transactionsListenable,
@@ -153,7 +166,6 @@ class HomePageState extends State<HomePage> {
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 18.0),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 if (_transactionController.transactions.isNotEmpty)
                   Column(
