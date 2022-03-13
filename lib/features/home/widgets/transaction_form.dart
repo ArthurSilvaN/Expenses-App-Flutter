@@ -15,9 +15,10 @@ class TransactionForm extends StatefulWidget {
 }
 
 class _TransactionFormState extends State<TransactionForm> {
-  final _titleController = TextEditingController();
   late final _transactionController =
       Provider.of<TransactionUsecase>(context, listen: false);
+      
+  final _titleController = TextEditingController();
   final _valueController = TextEditingController();
   late DateTime _selectedDate = DateTime.now();
   late Category? _selectedCategory = _transactionController.categorysDefault[0];
@@ -46,14 +47,18 @@ class _TransactionFormState extends State<TransactionForm> {
       initialDate: DateTime.now(),
       firstDate: DateTime(2019),
       lastDate: DateTime.now(),
-    ).then((pickedDate) {
-      if (pickedDate == null) {
-        return;
-      }
-      setState(() {
-        _selectedDate = pickedDate;
-      });
-    });
+    ).then(
+      (pickedDate) {
+        if (pickedDate == null) {
+          return;
+        }
+        setState(
+          () {
+            _selectedDate = pickedDate;
+          },
+        );
+      },
+    );
   }
 
   @override
@@ -84,13 +89,12 @@ class _TransactionFormState extends State<TransactionForm> {
               ),
               SizedBox(
                 child: Row(
-                  children: <Widget>[
+                  children: [
                     Text(
                       _selectedDate == null
                           ? context.locale().noDate
                           : context.locale().selectedDate(
-                                DateFormat('dd/MM/y').format(_selectedDate),
-                              ),
+                              DateFormat('dd/MM/y').format(_selectedDate)),
                     ),
                     TextButton(
                       onPressed: _showDatePicker,
@@ -116,9 +120,11 @@ class _TransactionFormState extends State<TransactionForm> {
                     );
                   }).toList(),
                   onChanged: (Category? newValue) {
-                    setState(() {
-                      _selectedCategory = newValue;
-                    });
+                    setState(
+                      () {
+                        _selectedCategory = newValue;
+                      },
+                    );
                   },
                 ),
               ),
@@ -126,7 +132,7 @@ class _TransactionFormState extends State<TransactionForm> {
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
-                  children: <Widget>[
+                  children: [
                     ElevatedButton(
                       onPressed: () => setState(_submitForm),
                       child: Text(
