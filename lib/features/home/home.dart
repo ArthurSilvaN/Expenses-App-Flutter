@@ -3,12 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 
-import '../../components/modal_center.dart';
-import '../../core/usecases/locale_usecase.dart';
 import '../../core/usecases/transaction_usecase.dart';
 import '../../core/util/locale_intl.dart';
 
 import '../../services/auth_service.dart';
+import 'components/drawer.dart';
 import 'widgets/transaction_category_chart.dart';
 import 'widgets/transaction_chart.dart';
 import 'widgets/transaction_form.dart';
@@ -25,13 +24,12 @@ class HomePageState extends State<HomePage> {
   late final TransactionUsecase _transactionController =
       Provider.of<TransactionUsecase>(context, listen: false);
 
-  late final LocaleUseCase _localeController =
-      Provider.of<LocaleUseCase>(context, listen: false);
-
   late final AuthService _authService =
       Provider.of<AuthService>(context, listen: false);
 
   late final size = MediaQuery.of(context).size;
+
+  final globalKey = GlobalKey<ScaffoldState>();
 
   CarouselController buttonCarouselController = CarouselController();
 
@@ -49,57 +47,11 @@ class HomePageState extends State<HomePage> {
     );
   }
 
-  void _openLocaleModal(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return SimpleDialog(
-          title: const Text('Languages'),
-          children: [
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 0.2,
-              width: MediaQuery.of(context).size.height * 0.1,
-              child: Center(
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: _localeController.languagesLocale.length,
-                  itemBuilder: (_, index) {
-                    final language = _localeController.languagesLocale[index];
-                    return Container(
-                      decoration: BoxDecoration(
-                        color: language.locale == _localeController.locale.value
-                            ? Theme.of(context)
-                                .colorScheme
-                                .primary
-                                .withOpacity(0.7)
-                            : null,
-                      ),
-                      child: SimpleDialogItem(
-                        widget: Text(
-                          language.flag,
-                          style: const TextStyle(fontSize: 24),
-                        ),
-                        color: language.color,
-                        text: language.languageName,
-                        onPressed: () {
-                          _localeController.setLocale(language.locale);
-                          Navigator.pop(context);
-                        },
-                      ),
-                    );
-                  },
-                ),
-              ),
-            )
-          ],
-        );
-      },
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: globalKey,
+      endDrawer: const DrawerHome(),
       floatingActionButton: SizedBox(
         height: 90,
         child: Row(
@@ -143,15 +95,18 @@ class HomePageState extends State<HomePage> {
               subtitle: const Text(
                 'Bem vindo ao seu app de finanças',
               ),
-              trailing: Container(
-                height: 48,
-                width: 48,
-                decoration: BoxDecoration(
-                  color: Colors.black,
-                  borderRadius: BorderRadius.circular(5),
-                  image: DecorationImage(
-                    image: NetworkImage(
-                      _authService.user!.photoUrl.toString(),
+              trailing: GestureDetector(
+                onTap: () => globalKey.currentState!.openEndDrawer(),
+                child: Container(
+                  height: 48,
+                  width: 48,
+                  decoration: BoxDecoration(
+                    color: Colors.black,
+                    borderRadius: BorderRadius.circular(5),
+                    image: DecorationImage(
+                      image: NetworkImage(
+                        _authService.user!.photoUrl.toString(),
+                      ),
                     ),
                   ),
                 ),
