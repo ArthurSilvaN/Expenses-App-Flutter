@@ -9,6 +9,7 @@ import '../../../components/modal.dart';
 import '../../../core/usecases/transaction_usecase.dart';
 import '../../../core/util/locale_intl.dart';
 import '../../../entities/transaction.dart';
+import 'transaction_page.dart';
 
 class TransactionList extends StatefulWidget {
   const TransactionList({Key? key}) : super(key: key);
@@ -162,7 +163,7 @@ class _TransactionListState extends State<TransactionList> {
                       ),
                       openBuilder: (context, action) => const Scaffold(
                         body: Center(
-                          child: Text('new Page'),
+                          child: TransactionPage(),
                         ),
                       ),
                     );
