@@ -161,9 +161,9 @@ class _TransactionListState extends State<TransactionList> {
                           ),
                         ),
                       ),
-                      openBuilder: (context, action) => const Scaffold(
+                      openBuilder: (context, action) => Scaffold(
                         body: Center(
-                          child: TransactionPage(),
+                          child: TransactionPage(transaction: tr),
                         ),
                       ),
                     );
