@@ -30,13 +30,6 @@ class AuthService extends ChangeNotifier {
         idToken: googleAuth.idToken,
       );
 
-      _userFinancy = UserFinancy(
-        id: googleUser.id,
-        name: googleUser.displayName!,
-        email: googleUser.email,
-        photoURL: googleUser.photoUrl!,
-      );
-
       await FirebaseAuth.instance.signInWithCredential(credential);
     } catch (exeption) {
       log(exeption.toString());
@@ -44,7 +37,12 @@ class AuthService extends ChangeNotifier {
     notifyListeners();
   }
 
-  void setUser(AsyncSnapshot<User?> userResponse) {}
+  Future<void> setUser() async {
+    final googleUser = await googleSignIn.signInSilently();
+
+    _user = googleUser;
+    notifyListeners();
+  }
 
   Future<void> logout() async {
     await googleSignIn.disconnect();
