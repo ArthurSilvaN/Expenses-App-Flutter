@@ -55,7 +55,7 @@ class HomePageState extends State<HomePage> {
       floatingActionButton: SizedBox(
         height: 90,
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             GestureDetector(
               onTap: () => _openTransactionFormModal(context),
