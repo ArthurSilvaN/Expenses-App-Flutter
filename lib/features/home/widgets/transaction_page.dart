@@ -19,8 +19,16 @@ class TransactionPage extends StatefulWidget {
 }
 
 class _TransactionPageState extends State<TransactionPage> {
-  final _titleController = TextEditingController();
-  final _valueController = TextEditingController();
+  late TextEditingController _titleController;
+  late TextEditingController _valueController;
+
+  @override
+  void initState() {
+    super.initState();
+    _titleController = TextEditingController(text: widget.transaction.title);
+    _valueController =
+        TextEditingController(text: widget.transaction.value.toString());
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,13 +46,11 @@ class _TransactionPageState extends State<TransactionPage> {
               InputText(
                 controller: _titleController,
                 label: 'Titulo da Transação',
-                initialValue: widget.transaction.title,
                 icon: Icons.description_outlined,
               ),
               InputText(
                 controller: _valueController,
                 label: 'Valor',
-                initialValue: widget.transaction.value.toString(),
                 icon: FontAwesomeIcons.wallet,
               ),
             ],
@@ -56,7 +62,7 @@ class _TransactionPageState extends State<TransactionPage> {
         primaryOnPressed: () {
           Navigator.pop(context);
         },
-        secondaryLabel: 'Cadastrar',
+        secondaryLabel: 'Editar',
         secondaryOnPressed: () async {
           Navigator.pop(context);
         },
