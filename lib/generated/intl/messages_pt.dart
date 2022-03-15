@@ -38,18 +38,18 @@ class MessageLookup extends MessageLookupByLibrary {
         "dateFormatAbrevMonth": MessageLookupByLibrary.simpleMessage("d MMM y"),
         "dateFormatCompleted": MessageLookupByLibrary.simpleMessage("dd/MM/y"),
         "debts": MessageLookupByLibrary.simpleMessage("Dividas"),
-        "delete": MessageLookupByLibrary.simpleMessage("deletar"),
+        "delete": MessageLookupByLibrary.simpleMessage("Deletar"),
         "deleteTransaction": m0,
         "deletedTransaction":
             MessageLookupByLibrary.simpleMessage("Transação Deletada"),
-        "edit": MessageLookupByLibrary.simpleMessage("editar"),
+        "edit": MessageLookupByLibrary.simpleMessage("Editar"),
         "expensesWeek":
             MessageLookupByLibrary.simpleMessage("Gastos da semana"),
         "hi": MessageLookupByLibrary.simpleMessage("Olá, "),
         "investment": MessageLookupByLibrary.simpleMessage("Investimento"),
-        "languages": MessageLookupByLibrary.simpleMessage("linguagens"),
-        "leisure": MessageLookupByLibrary.simpleMessage("lazer"),
-        "logout": MessageLookupByLibrary.simpleMessage("sair"),
+        "languages": MessageLookupByLibrary.simpleMessage("Linguagens"),
+        "leisure": MessageLookupByLibrary.simpleMessage("Lazer"),
+        "logout": MessageLookupByLibrary.simpleMessage("Sair"),
         "myTransactions":
             MessageLookupByLibrary.simpleMessage("Minhas Transações"),
         "newTransaction":

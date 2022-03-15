@@ -60,10 +60,10 @@ class S {
     );
   }
 
-  /// `cancel`
+  /// `Cancel`
   String get cancel {
     return Intl.message(
-      'cancel',
+      'Cancel',
       name: 'cancel',
       desc: '',
       args: [],
@@ -120,10 +120,10 @@ class S {
     );
   }
 
-  /// `delete`
+  /// `Delete`
   String get delete {
     return Intl.message(
-      'delete',
+      'Delete',
       name: 'delete',
       desc: '',
       args: [],
@@ -140,10 +140,10 @@ class S {
     );
   }
 
-  /// `edit`
+  /// `Edit`
   String get edit {
     return Intl.message(
-      'edit',
+      'Edit',
       name: 'edit',
       desc: '',
       args: [],
@@ -200,10 +200,10 @@ class S {
     );
   }
 
-  /// `logout`
+  /// `Logout`
   String get logout {
     return Intl.message(
-      'logout',
+      'Logout',
       name: 'logout',
       desc: '',
       args: [],

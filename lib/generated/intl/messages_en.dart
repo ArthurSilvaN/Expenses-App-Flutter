@@ -32,22 +32,22 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "add": MessageLookupByLibrary.simpleMessage("Add"),
-        "cancel": MessageLookupByLibrary.simpleMessage("cancel"),
+        "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "categoryChart": MessageLookupByLibrary.simpleMessage("Category Chart"),
         "dateFormatAbrevMonth": MessageLookupByLibrary.simpleMessage("MMM d y"),
         "dateFormatCompleted": MessageLookupByLibrary.simpleMessage("MM/dd/y"),
         "debts": MessageLookupByLibrary.simpleMessage("Debts"),
-        "delete": MessageLookupByLibrary.simpleMessage("delete"),
+        "delete": MessageLookupByLibrary.simpleMessage("Delete"),
         "deleteTransaction": m0,
         "deletedTransaction":
             MessageLookupByLibrary.simpleMessage("Deleted Transaction"),
-        "edit": MessageLookupByLibrary.simpleMessage("edit"),
+        "edit": MessageLookupByLibrary.simpleMessage("Edit"),
         "expensesWeek": MessageLookupByLibrary.simpleMessage("Expenses Week"),
         "hi": MessageLookupByLibrary.simpleMessage("Hello, "),
         "investment": MessageLookupByLibrary.simpleMessage("Investment"),
         "languages": MessageLookupByLibrary.simpleMessage("languages"),
         "leisure": MessageLookupByLibrary.simpleMessage("Leisure"),
-        "logout": MessageLookupByLibrary.simpleMessage("logout"),
+        "logout": MessageLookupByLibrary.simpleMessage("Logout"),
         "myTransactions":
             MessageLookupByLibrary.simpleMessage("My Transactions"),
         "newTransaction":

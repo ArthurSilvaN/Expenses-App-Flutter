@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 
 import '../../../components/modal_center.dart';
 import '../../../core/usecases/locale_usecase.dart';
+import '../../../core/util/locale_intl.dart';
 import '../../../services/auth_service.dart';
 
 class DrawerHome extends StatelessWidget {
@@ -20,7 +21,7 @@ class DrawerHome extends StatelessWidget {
         context: context,
         builder: (context) {
           return SimpleDialog(
-            title: const Text('Languages'),
+            title: Text(context.locale().languages),
             children: [
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.2,
@@ -89,12 +90,12 @@ class DrawerHome extends StatelessWidget {
           ),
           ListTile(
             leading: const Icon(Icons.language),
-            title: const Text('Languages'),
+            title: Text(context.locale().languages),
             onTap: () => _openLocaleModal(context),
           ),
           ListTile(
             leading: const Icon(Icons.logout),
-            title: const Text('logout'),
+            title: Text(context.locale().logout),
             onTap: () => authService.logout(),
           ),
         ],
