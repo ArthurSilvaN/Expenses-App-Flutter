@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../../components/input_text.dart' show InputText;
 import '../../../components/label_buttons.dart';
+import '../../../core/util/locale_intl.dart';
 import '../../../entities/transaction.dart';
 
 class TransactionPage extends StatefulWidget {
@@ -45,12 +46,12 @@ class _TransactionPageState extends State<TransactionPage> {
             children: [
               InputText(
                 controller: _titleController,
-                label: 'Titulo da Transação',
+                label: context.locale().title,
                 icon: Icons.description_outlined,
               ),
               InputText(
                 controller: _valueController,
-                label: 'Valor',
+                label: context.locale().price,
                 icon: FontAwesomeIcons.wallet,
               ),
             ],
@@ -58,11 +59,11 @@ class _TransactionPageState extends State<TransactionPage> {
         ),
       ),
       bottomNavigationBar: SetLabelButtons(
-        primaryLabel: 'Cancelar',
+        primaryLabel: context.locale().cancel,
         primaryOnPressed: () {
           Navigator.pop(context);
         },
-        secondaryLabel: 'Editar',
+        secondaryLabel: context.locale().edit,
         secondaryOnPressed: () async {
           Navigator.pop(context);
         },

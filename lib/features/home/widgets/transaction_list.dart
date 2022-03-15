@@ -44,7 +44,7 @@ class _TransactionListState extends State<TransactionList> {
   Widget _showDismissibleDeletePane(Transaction tr) {
     return DismissiblePane(
       onDismissed: () {
-        _showSnackBar('Transação Deletada', Colors.red);
+        _showSnackBar(context.locale().deletedTransaction, Colors.red);
         _transactionController.deleteTransaction(tr);
       },
       confirmDismiss: () async {
@@ -127,7 +127,7 @@ class _TransactionListState extends State<TransactionList> {
                               children: [
                                 SlidableAction(
                                   flex: 3,
-                                  label: 'Delete',
+                                  label: context.locale().delete,
                                   backgroundColor: tr.category!.color,
                                   foregroundColor: Colors.white,
                                   icon: Icons.delete,

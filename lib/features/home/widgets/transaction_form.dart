@@ -94,7 +94,8 @@ class _TransactionFormState extends State<TransactionForm> {
                       _selectedDate == null
                           ? context.locale().noDate
                           : context.locale().selectedDate(
-                              DateFormat('dd/MM/y').format(_selectedDate)),
+                              DateFormat(context.locale().dateFormatCompleted)
+                                  .format(_selectedDate)),
                     ),
                     TextButton(
                       onPressed: _showDatePicker,

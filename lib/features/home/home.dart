@@ -84,7 +84,7 @@ class HomePageState extends State<HomePage> {
             child: ListTile(
               title: Text.rich(
                 TextSpan(
-                  text: 'Olá, ',
+                  text: context.locale().hi,
                   children: [
                     TextSpan(
                       text: '${_authService.user!.displayName}',
@@ -92,8 +92,8 @@ class HomePageState extends State<HomePage> {
                   ],
                 ),
               ),
-              subtitle: const Text(
-                'Bem vindo ao seu app de finanças',
+              subtitle: Text(
+                context.locale().welcome,
               ),
               trailing: GestureDetector(
                 onTap: () => globalKey.currentState!.openEndDrawer(),
