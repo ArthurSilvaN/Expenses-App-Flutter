@@ -38,9 +38,11 @@ class SplashScreeState extends State<SplashScreen> {
         _transactionController.getCategorys();
       },
     );
+
+    await _authService.setUser();
+
     Future.delayed(Duration.zero, () {
       _localeController.setLocale(Localizations.localeOf(context));
-      _authService.setUser();
     });
   }
 
