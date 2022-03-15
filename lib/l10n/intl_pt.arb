@@ -4,10 +4,14 @@
     "cancel": "cancelar",
     "categoryChart": "Gráfico de Categorias",
     "debts": "Dividas",
+    "deletedTransaction": "Transação Deletada",
     "dateFormatAbrevMonth": "d MMM y",
+    "dateFormatCompleted": "MM/dd/y",
     "delete": "deletar",
     "deleteTransaction": "Deletar a transação {title} no valor de R${value}?",
+    "edit": "editar",
     "expensesWeek": "Gastos da semana",
+    "hi": "Olá, ",
     "investment": "Investimento",
     "leisure": "Lazer",
     "myTransactions": "Minhas Transações",
@@ -21,5 +25,6 @@
     "transactionsLength":"{transactionsLength} transações",
     "selectDate": "Selecionar Data",
     "title": "Título",
-    "test": "teste"
+    "test": "teste",
+    "welcome": "Bem vindo ao seu app de finanças"
 }

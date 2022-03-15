@@ -4,9 +4,12 @@
     "cancel": "cancel",
     "categoryChart": "Category Chart",
     "debts": "Debts",
+    "deletedTransaction": "Deleted Transaction",
     "dateFormatAbrevMonth": "MMM d y",
+    "dateFormatCompleted": "dd/MM/y",
     "delete": "delete",
     "deleteTransaction": "Delete transaction {title} with the value off R${value}?",
+    "edit": "edit",
     "@deleteTransaction": {
         "placeholders": {
             "title" : {
@@ -18,6 +21,7 @@
         }
     },
     "expensesWeek": "Expenses Week",
+    "hi": "Hello, ",
     "investment": "Investment",
     "leisure": "Leisure",
     "myTransactions": "My Transactions",
@@ -52,6 +56,7 @@
     },
     "selectDate": "Select Date",
     "title": "Title",
-    "test": "teste"
+    "test": "teste",
+    "welcome": "Welcome to your finance app"
 }
 
