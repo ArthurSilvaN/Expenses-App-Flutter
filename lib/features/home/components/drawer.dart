@@ -68,21 +68,19 @@ class DrawerHome extends StatelessWidget {
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
-          Center(
-            child: UserAccountsDrawerHeader(
-              decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.primary,
-              ),
-              accountEmail: Text(authService.user!.email),
-              accountName: Text('${authService.user!.displayName}'),
-              currentAccountPicture: CircleAvatar(
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5),
-                    image: DecorationImage(
-                      image: NetworkImage(
-                        authService.user!.photoUrl.toString(),
-                      ),
+          UserAccountsDrawerHeader(
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.primary,
+            ),
+            accountEmail: Text(authService.user!.email),
+            accountName: Text('${authService.user!.displayName}'),
+            currentAccountPicture: CircleAvatar(
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5),
+                  image: DecorationImage(
+                    image: NetworkImage(
+                      authService.user!.photoUrl.toString(),
                     ),
                   ),
                 ),
