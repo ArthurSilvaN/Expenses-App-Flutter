@@ -35,7 +35,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "cancel": MessageLookupByLibrary.simpleMessage("cancel"),
         "categoryChart": MessageLookupByLibrary.simpleMessage("Category Chart"),
         "dateFormatAbrevMonth": MessageLookupByLibrary.simpleMessage("MMM d y"),
-        "dateFormatCompleted": MessageLookupByLibrary.simpleMessage("dd/MM/y"),
+        "dateFormatCompleted": MessageLookupByLibrary.simpleMessage("MM/dd/y"),
         "debts": MessageLookupByLibrary.simpleMessage("Debts"),
         "delete": MessageLookupByLibrary.simpleMessage("delete"),
         "deleteTransaction": m0,
@@ -45,7 +45,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "expensesWeek": MessageLookupByLibrary.simpleMessage("Expenses Week"),
         "hi": MessageLookupByLibrary.simpleMessage("Hello, "),
         "investment": MessageLookupByLibrary.simpleMessage("Investment"),
+        "languages": MessageLookupByLibrary.simpleMessage("languages"),
         "leisure": MessageLookupByLibrary.simpleMessage("Leisure"),
+        "logout": MessageLookupByLibrary.simpleMessage("logout"),
         "myTransactions":
             MessageLookupByLibrary.simpleMessage("My Transactions"),
         "newTransaction":

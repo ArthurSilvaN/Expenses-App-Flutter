@@ -110,10 +110,10 @@ class S {
     );
   }
 
-  /// `dd/MM/y`
+  /// `MM/dd/y`
   String get dateFormatCompleted {
     return Intl.message(
-      'dd/MM/y',
+      'MM/dd/y',
       name: 'dateFormatCompleted',
       desc: '',
       args: [],
@@ -180,11 +180,31 @@ class S {
     );
   }
 
+  /// `languages`
+  String get languages {
+    return Intl.message(
+      'languages',
+      name: 'languages',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Leisure`
   String get leisure {
     return Intl.message(
       'Leisure',
       name: 'leisure',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `logout`
+  String get logout {
+    return Intl.message(
+      'logout',
+      name: 'logout',
       desc: '',
       args: [],
     );
