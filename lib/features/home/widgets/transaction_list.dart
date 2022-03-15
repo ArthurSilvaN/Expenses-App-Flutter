@@ -121,7 +121,7 @@ class _TransactionListState extends State<TransactionList> {
                           child: Slidable(
                             key: Key(tr.id),
                             startActionPane: ActionPane(
-                              extentRatio: 0.2,
+                              extentRatio: 0.3,
                               motion: const DrawerMotion(),
                               dismissible: _showDismissibleDeletePane(tr),
                               children: [
