@@ -35,10 +35,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "cancel": MessageLookupByLibrary.simpleMessage("cancel"),
         "categoryChart": MessageLookupByLibrary.simpleMessage("Category Chart"),
         "dateFormatAbrevMonth": MessageLookupByLibrary.simpleMessage("MMM d y"),
+        "dateFormatCompleted": MessageLookupByLibrary.simpleMessage("dd/MM/y"),
         "debts": MessageLookupByLibrary.simpleMessage("Debts"),
         "delete": MessageLookupByLibrary.simpleMessage("delete"),
         "deleteTransaction": m0,
+        "deletedTransaction":
+            MessageLookupByLibrary.simpleMessage("Deleted Transaction"),
+        "edit": MessageLookupByLibrary.simpleMessage("edit"),
         "expensesWeek": MessageLookupByLibrary.simpleMessage("Expenses Week"),
+        "hi": MessageLookupByLibrary.simpleMessage("Hello, "),
         "investment": MessageLookupByLibrary.simpleMessage("Investment"),
         "leisure": MessageLookupByLibrary.simpleMessage("Leisure"),
         "myTransactions":
@@ -56,6 +61,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "test": MessageLookupByLibrary.simpleMessage("teste"),
         "title": MessageLookupByLibrary.simpleMessage("Title"),
         "transactionsLength": m2,
-        "valueTransaction": m3
+        "valueTransaction": m3,
+        "welcome":
+            MessageLookupByLibrary.simpleMessage("Welcome to your finance app")
       };
 }

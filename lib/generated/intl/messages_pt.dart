@@ -36,19 +36,24 @@ class MessageLookup extends MessageLookupByLibrary {
         "categoryChart":
             MessageLookupByLibrary.simpleMessage("Gráfico de Categorias"),
         "dateFormatAbrevMonth": MessageLookupByLibrary.simpleMessage("d MMM y"),
+        "dateFormatCompleted": MessageLookupByLibrary.simpleMessage("MM/dd/y"),
         "debts": MessageLookupByLibrary.simpleMessage("Dividas"),
         "delete": MessageLookupByLibrary.simpleMessage("deletar"),
         "deleteTransaction": m0,
+        "deletedTransaction":
+            MessageLookupByLibrary.simpleMessage("Transação Deletada"),
+        "edit": MessageLookupByLibrary.simpleMessage("editar"),
         "expensesWeek":
             MessageLookupByLibrary.simpleMessage("Gastos da semana"),
+        "hi": MessageLookupByLibrary.simpleMessage("Olá, "),
         "investment": MessageLookupByLibrary.simpleMessage("Investimento"),
         "leisure": MessageLookupByLibrary.simpleMessage("Lazer"),
         "myTransactions":
             MessageLookupByLibrary.simpleMessage("Minhas Transações"),
         "newTransaction":
             MessageLookupByLibrary.simpleMessage("Nova Transação"),
-        "noDate": MessageLookupByLibrary.simpleMessage(
-            "Nenhuma data selecionada!!!!"),
+        "noDate":
+            MessageLookupByLibrary.simpleMessage("Nenhuma data selecionada!"),
         "noTransactions": MessageLookupByLibrary.simpleMessage(
             "Nenhuma Transação Cadastrada!"),
         "personalExpenses":
@@ -59,6 +64,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "test": MessageLookupByLibrary.simpleMessage("teste"),
         "title": MessageLookupByLibrary.simpleMessage("Título"),
         "transactionsLength": m2,
-        "valueTransaction": m3
+        "valueTransaction": m3,
+        "welcome": MessageLookupByLibrary.simpleMessage(
+            "Bem vindo ao seu app de finanças")
       };
 }

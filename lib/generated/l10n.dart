@@ -90,11 +90,31 @@ class S {
     );
   }
 
+  /// `Deleted Transaction`
+  String get deletedTransaction {
+    return Intl.message(
+      'Deleted Transaction',
+      name: 'deletedTransaction',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `MMM d y`
   String get dateFormatAbrevMonth {
     return Intl.message(
       'MMM d y',
       name: 'dateFormatAbrevMonth',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `dd/MM/y`
+  String get dateFormatCompleted {
+    return Intl.message(
+      'dd/MM/y',
+      name: 'dateFormatCompleted',
       desc: '',
       args: [],
     );
@@ -120,11 +140,31 @@ class S {
     );
   }
 
+  /// `edit`
+  String get edit {
+    return Intl.message(
+      'edit',
+      name: 'edit',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Expenses Week`
   String get expensesWeek {
     return Intl.message(
       'Expenses Week',
       name: 'expensesWeek',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Hello, `
+  String get hi {
+    return Intl.message(
+      'Hello, ',
+      name: 'hi',
       desc: '',
       args: [],
     );
@@ -265,6 +305,16 @@ class S {
     return Intl.message(
       'teste',
       name: 'test',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Welcome to your finance app`
+  String get welcome {
+    return Intl.message(
+      'Welcome to your finance app',
+      name: 'welcome',
       desc: '',
       args: [],
     );
