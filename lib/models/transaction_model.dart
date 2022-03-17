@@ -9,8 +9,10 @@ class TransactionModel extends Transaction {
     required String title,
     required double value,
     required DateTime date,
+    required String userId,
     required CategoryModel? category,
   }) : super(
+          userId: userId,
           id: id,
           title: title,
           value: value,
@@ -20,6 +22,7 @@ class TransactionModel extends Transaction {
 
   factory TransactionModel.fromMap(Map<String, dynamic> map) =>
       TransactionModel(
+        userId: map['userId'] as String,
         id: map['id'] as String,
         title: map['title'] as String,
         value: map['value'] as double,
@@ -29,6 +32,7 @@ class TransactionModel extends Transaction {
 
   Map<String, dynamic> toMap() {
     return {
+      'userId': userId,
       'id': id,
       'title': title,
       'value': value,
