@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import '../../../core/usecases/transaction_usecase.dart';
 import '../../../core/util/locale_intl.dart';
 import '../../../entities/transaction_categorys.dart';
+import '../../../services/auth_service.dart';
 
 class TransactionForm extends StatefulWidget {
   const TransactionForm({Key? key}) : super(key: key);
@@ -22,6 +23,8 @@ class _TransactionFormState extends State<TransactionForm> {
   final _valueController = TextEditingController();
   late DateTime _selectedDate = DateTime.now();
   late Category? _selectedCategory = _transactionController.categorysDefault[0];
+  late final AuthService _authService =
+      Provider.of<AuthService>(context, listen: false);
 
   void _submitForm() {
     final title = _titleController.text;
@@ -32,10 +35,11 @@ class _TransactionFormState extends State<TransactionForm> {
     }
 
     _transactionController.addTransaction(
-      title,
-      value,
-      _selectedDate,
-      _selectedCategory,
+      userId: _authService.user!.id,
+      title: title,
+      value: value,
+      date: _selectedDate,
+      category: _selectedCategory,
     );
 
     Navigator.of(context).pop();
