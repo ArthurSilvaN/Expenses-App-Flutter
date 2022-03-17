@@ -5,6 +5,7 @@ import '../entities/transaction.dart' as transaction_entity;
 import '../models/transaction_model.dart';
 
 const String tableExpenses = 'expenses';
+const String columnUserId = 'userId';
 const String columnId = 'id';
 const String columnTitle = 'title';
 const String columnValue = 'value';
@@ -40,6 +41,7 @@ class DatabaseConneection {
     return openDatabase(path, version: 3, onCreate: (db, version) {
       db.execute('''
         create table $tableExpenses (
+          $columnUserId text not null,
           $columnId text not null,
           $columnTitle text not null,
           $columnValue real not null,
@@ -48,6 +50,8 @@ class DatabaseConneection {
         ''');
       db.execute('''
         create table $tableCategory (
+          $columnUserId text not null,
+          $columnId text not null,
           $columnNameCategory text not null,
           $columnCategoryValue real not null,
           $columnColor text not null)
@@ -55,14 +59,21 @@ class DatabaseConneection {
     });
   }
 
-  Future<List<transaction_entity.Transaction>> getTransactions() async {
+  Future<List<transaction_entity.Transaction>> getTransactions(
+    String userId,
+  ) async {
     final List<transaction_entity.Transaction> transactions = [];
     final db = await database;
-    final result = await db.query(tableExpenses);
+    final result = await db.query(
+      tableExpenses,
+      where: '$columnUserId = ?',
+      whereArgs: [userId],
+    );
     for (final transactionMap in result) {
       final transactionModel = TransactionModel.fromMap(transactionMap);
       transactions.add(
         transaction_entity.Transaction(
+          userId: transactionModel.id,
           id: transactionModel.id,
           title: transactionModel.title,
           value: transactionModel.value,
@@ -79,6 +90,7 @@ class DatabaseConneection {
     transaction_entity.Transaction transaction,
   ) async {
     final transactionModel = TransactionModel(
+      userId: transaction.userId,
       id: transaction.id,
       title: transaction.title,
       value: transaction.value,
@@ -99,17 +111,23 @@ class DatabaseConneection {
     );
   }
 
-  Future<List<CategoryRegistry>> getCategorys() async {
+  Future<List<CategoryRegistry>> getCategorys(String userId) async {
     final List<CategoryRegistry> listCategorys = [];
     final db = await database;
-    final result = await db.query(tableCategory);
+    final result = await db.query(
+      tableCategory,
+      where: '$columnUserId = ?',
+      whereArgs: [userId],
+    );
     for (final category in result) {
       final categoryRegistry = CategoryRegistry.fromMap(category);
       listCategorys.add(
         CategoryRegistry(
+          id: categoryRegistry.id,
           color: categoryRegistry.color,
           name: categoryRegistry.name,
           value: categoryRegistry.value,
+          userId: categoryRegistry.userId,
         ),
       );
     }
@@ -120,17 +138,10 @@ class DatabaseConneection {
     CategoryRegistry categoryRegistry,
   ) async {
     final db = await database;
-    List<CategoryRegistry?> categorysInDatabase = [];
-    categorysInDatabase = await getCategorys();
-    if (categorysInDatabase
-        .any((element) => element?.name == categoryRegistry.name)) {
-      updateCategory(categoryRegistry);
-    } else {
-      await db.insert(
-        tableCategory,
-        categoryRegistry.toMap(),
-      );
-    }
+    await db.insert(
+      tableCategory,
+      categoryRegistry.toMap(),
+    );
   }
 
   Future<void> updateCategory(
@@ -140,8 +151,8 @@ class DatabaseConneection {
     await db.update(
       tableCategory,
       categoryRegistry.toMap(),
-      where: '$columnNameCategory = ?',
-      whereArgs: [categoryRegistry.name],
+      where: '$columnId = ?',
+      whereArgs: [categoryRegistry.id],
     );
   }
 }
