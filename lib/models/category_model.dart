@@ -11,13 +11,16 @@ class CategoryModel extends Category {
     required String name,
     required IconData icon,
     required Color color,
+    required String id,
   }) : super(
+          id: id,
           name: name,
           icon: icon,
           color: color,
         );
 
   factory CategoryModel.fromMap(Map<String, dynamic> map) => CategoryModel(
+        id: map['id'] as String,
         name: map['name'] as String,
         icon: IconData(int.parse(map['icon'].toString())),
         color: Color(int.parse(map['color'].toString())),
@@ -26,6 +29,7 @@ class CategoryModel extends Category {
   factory CategoryModel.fromJson(String json) {
     final map = jsonDecode(json);
     return CategoryModel(
+      id: map['id'] as String,
       name: map['name'] as String,
       icon: IconData(
         int.parse(map['icon'].toString()),
@@ -37,6 +41,7 @@ class CategoryModel extends Category {
 
   Map<String, dynamic> toMap() {
     return {
+      'id': id,
       'name': name,
       'icon': icon.codePoint.toString(),
       'color': color.value.toString(),
