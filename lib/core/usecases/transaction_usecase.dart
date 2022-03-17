@@ -1,8 +1,7 @@
-import 'dart:math';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:uuid/uuid.dart';
 
 import '../../entities/category_registry.dart';
 import '../../entities/transaction.dart';
@@ -22,15 +21,20 @@ class TransactionUsecase extends ChangeNotifier {
   late List<CategoryRegistry> categorys = [];
   final DatabaseConneection conneection = DatabaseConneection();
 
-  Future<void> getTransactions() async {
-    transactions = await conneection.getTransactions();
+  Future<void> getDataUser(String userId) async {
+    await getTransactions(userId);
+    await getCategorys(userId);
+  }
+
+  Future<void> getTransactions(String userId) async {
+    transactions = await conneection.getTransactions(userId);
     transactionsListenable.notifyListeners();
   }
 
-  Future<void> getCategorys() async {
-    categorys = await conneection.getCategorys();
+  Future<void> getCategorys(String userId) async {
+    categorys = await conneection.getCategorys(userId);
     if (categorys.isEmpty) {
-      categorysRegistriesDefault
+      insertCategorysDefault(userId)
           .toList()
           .forEach((category) => conneection.insertCategory(category));
     }
@@ -39,39 +43,50 @@ class TransactionUsecase extends ChangeNotifier {
 
   late final List<Category> categorysDefault = [
     Category(
+      id: '0',
       color: Colors.red,
       name: S.current.debts,
       icon: Icons.money_off,
     ),
     Category(
+      id: '1',
       color: Colors.green,
       name: S.current.investment,
       icon: Icons.savings,
     ),
     Category(
+      id: '2',
       color: Colors.blue,
       name: S.current.leisure,
       icon: Icons.local_mall_outlined,
     ),
   ];
 
-  late final List<CategoryRegistry> categorysRegistriesDefault = [
-    CategoryRegistry(
-      color: Colors.red,
-      name: S.current.debts,
-      value: 0,
-    ),
-    CategoryRegistry(
-      color: Colors.green,
-      name: S.current.investment,
-      value: 0,
-    ),
-    CategoryRegistry(
-      color: Colors.blue,
-      name: S.current.leisure,
-      value: 0,
-    ),
-  ];
+  List<CategoryRegistry> insertCategorysDefault(String userId) {
+    return [
+      CategoryRegistry(
+        id: '0',
+        color: Colors.red,
+        name: S.current.debts,
+        value: 0,
+        userId: userId,
+      ),
+      CategoryRegistry(
+        id: '1',
+        color: Colors.green,
+        name: S.current.investment,
+        value: 0,
+        userId: userId,
+      ),
+      CategoryRegistry(
+        id: '2',
+        color: Colors.blue,
+        name: S.current.leisure,
+        value: 0,
+        userId: userId,
+      ),
+    ];
+  }
 
   List<Transaction> get recentTransactions {
     return transactions.where((tr) {
@@ -112,14 +127,16 @@ class TransactionUsecase extends ChangeNotifier {
     return transactionList;
   }
 
-  Future<void> addTransaction(
-    String title,
-    double value,
-    DateTime date,
-    Category? category,
-  ) async {
+  Future<void> addTransaction({
+    required String title,
+    required double value,
+    required DateTime date,
+    required Category? category,
+    required String userId,
+  }) async {
     final newTransaction = Transaction(
-      id: Random().nextDouble().toString(),
+      userId: userId,
+      id: const Uuid().v4(),
       title: title,
       value: value,
       date: date,
@@ -129,21 +146,21 @@ class TransactionUsecase extends ChangeNotifier {
     await conneection.insertTransaction(newTransaction);
     transactions.add(newTransaction);
 
-    await getCategorys();
+    await getCategorys(userId);
 
     for (final categoryAdd in categorys) {
-      if (categoryAdd.name == category!.name) {
+      if (categoryAdd.id == category!.id) {
         categoryAdd.value += value;
         await conneection.updateCategory(categoryAdd);
       }
     }
-    
+
     notifyListeners();
   }
 
   Future<void> deleteTransaction(Transaction tr) async {
     for (final categoryAdd in categorys) {
-      if (categoryAdd.name == tr.category!.name) {
+      if (categoryAdd.id == tr.category!.id) {
         categoryAdd.value -= tr.value;
         await conneection.updateCategory(categoryAdd);
       }
