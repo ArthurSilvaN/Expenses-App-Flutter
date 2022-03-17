@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
+import '../../../core/usecases/transaction_usecase.dart';
 import '../../../services/auth_service.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -29,6 +30,9 @@ class _SignUpPageState extends State<SignUpPage> {
   );
   late AuthService authProvider =
       Provider.of<AuthService>(context, listen: false);
+
+  late final TransactionUsecase _transactionController =
+      Provider.of<TransactionUsecase>(context, listen: false);
 
   late final size = MediaQuery.of(context).size;
 
@@ -86,7 +90,12 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
                 ),
               ),
-              onPressed: () => authProvider.googleLogin(),
+              onPressed: () async {
+                await authProvider.googleLogin();
+                if (authProvider.user != null) {
+                  _transactionController.getDataUser(authProvider.user!.id);
+                }
+              },
               child: Row(
                 children: [
                   const FaIcon(

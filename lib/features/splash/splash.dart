@@ -32,14 +32,14 @@ class SplashScreeState extends State<SplashScreen> {
       Provider.of<AuthService>(context, listen: false);
 
   Future<void> _initializeApp() async {
-    await conneection.inializeDatabase().then(
-      (value) {
-        _transactionController.getTransactions();
-        _transactionController.getCategorys();
-      },
-    );
-
     await _authService.setUser();
+
+    if (_authService.user != null)
+      await conneection.inializeDatabase().then(
+        (value) {
+          _transactionController.getDataUser(_authService.user!.id);
+        },
+      );
 
     Future.delayed(Duration.zero, () {
       _localeController.setLocale(Localizations.localeOf(context));
