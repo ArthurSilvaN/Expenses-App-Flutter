@@ -18,12 +18,11 @@ class TransactionUsecase extends ChangeNotifier {
       PropertyValueNotifier(transactions);
 
   late List<Transaction> transactions = [];
-  late List<CategoryRegistry> categorys = [];
   final DatabaseConneection conneection = DatabaseConneection();
 
   Future<void> getDataUser(String userId) async {
     await getTransactions(userId);
-    await getCategorys(userId);
+    getCategorysRegistrys();
   }
 
   Future<void> getTransactions(String userId) async {
@@ -31,62 +30,47 @@ class TransactionUsecase extends ChangeNotifier {
     transactionsListenable.notifyListeners();
   }
 
-  Future<void> getCategorys(String userId) async {
-    categorys = await conneection.getCategorys(userId);
-    if (categorys.isEmpty) {
-      insertCategorysDefault(userId)
-          .toList()
-          .forEach((category) => conneection.insertCategory(category));
-    }
-    transactionsListenable.notifyListeners();
-  }
-
-  late final List<Category> categorysDefault = [
+  late List<Category> categorysDefault = [
     Category(
-      id: '0',
+      id: 'debts',
       color: Colors.red,
       name: S.current.debts,
       icon: Icons.money_off,
     ),
     Category(
-      id: '1',
+      id: 'investment',
       color: Colors.green,
       name: S.current.investment,
       icon: Icons.savings,
     ),
     Category(
-      id: '2',
+      id: 'leisure',
       color: Colors.blue,
       name: S.current.leisure,
       icon: Icons.local_mall_outlined,
     ),
   ];
 
-  List<CategoryRegistry> insertCategorysDefault(String userId) {
-    return [
-      CategoryRegistry(
-        id: '0',
-        color: Colors.red,
-        name: S.current.debts,
-        value: 0,
-        userId: userId,
-      ),
-      CategoryRegistry(
-        id: '1',
-        color: Colors.green,
-        name: S.current.investment,
-        value: 0,
-        userId: userId,
-      ),
-      CategoryRegistry(
-        id: '2',
-        color: Colors.blue,
-        name: S.current.leisure,
-        value: 0,
-        userId: userId,
-      ),
-    ];
-  }
+  late final List<CategoryRegistry> categorysRegistriesDefault = [
+    CategoryRegistry(
+      id: 'debts',
+      color: Colors.red,
+      name: S.current.debts,
+      value: 0,
+    ),
+    CategoryRegistry(
+      id: 'investment',
+      color: Colors.green,
+      name: S.current.investment,
+      value: 0,
+    ),
+    CategoryRegistry(
+      id: 'leisure',
+      color: Colors.blue,
+      name: S.current.leisure,
+      value: 0,
+    ),
+  ];
 
   List<Transaction> get recentTransactions {
     return transactions.where((tr) {
@@ -96,6 +80,16 @@ class TransactionUsecase extends ChangeNotifier {
         ),
       );
     }).toList();
+  }
+
+  void getCategorysRegistrys() {
+    for (final transaction in transactions) {
+      for (final categoryAdd in categorysRegistriesDefault) {
+        if (categoryAdd.id == transaction.category!.id) {
+          categoryAdd.value += transaction.value;
+        }
+      }
+    }
   }
 
   List<TransactionRegistry> get groupedTransactions {
@@ -146,23 +140,20 @@ class TransactionUsecase extends ChangeNotifier {
     await conneection.insertTransaction(newTransaction);
     transactions.add(newTransaction);
 
-    await getCategorys(userId);
-
-    for (final categoryAdd in categorys) {
+    for (final categoryAdd in categorysRegistriesDefault) {
       if (categoryAdd.id == category!.id) {
         categoryAdd.value += value;
-        await conneection.updateCategory(categoryAdd);
       }
     }
 
+    transactionsListenable.notifyListeners();
     notifyListeners();
   }
 
   Future<void> deleteTransaction(Transaction tr) async {
-    for (final categoryAdd in categorys) {
+    for (final categoryAdd in categorysRegistriesDefault) {
       if (categoryAdd.id == tr.category!.id) {
         categoryAdd.value -= tr.value;
-        await conneection.updateCategory(categoryAdd);
       }
     }
 
@@ -170,5 +161,6 @@ class TransactionUsecase extends ChangeNotifier {
     conneection.deleteTransactionById(tr.id);
 
     transactionsListenable.notifyListeners();
+    notifyListeners();
   }
 }
