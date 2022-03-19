@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 
 import 'core/usecases/locale_usecase.dart';
 import 'core/usecases/transaction_usecase.dart';
+import 'features/home/home_controller.dart';
 import 'features/splash/splash.dart';
 import 'generated/l10n.dart';
 import 'services/auth_service.dart';
@@ -14,7 +15,6 @@ Future<void> main() async {
   Provider.debugCheckInvalidValueType = null;
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-
   runApp(
     MultiProvider(
       providers: [
@@ -26,6 +26,9 @@ Future<void> main() async {
         ),
         Provider(
           create: (context) => AuthService(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => HomeController(),
         ),
       ],
       child: const MyApp(),
