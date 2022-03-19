@@ -3,8 +3,8 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../charts/charts_page.dart';
-import '../transaction_list/transaction_list_page.dart';
+import '../transaction/transaction_charts/charts_page.dart';
+import '../transaction/transaction_list/transaction_list_page.dart';
 import 'components/app_bar.dart';
 import 'components/drawer.dart';
 import 'components/floating_button.dart';

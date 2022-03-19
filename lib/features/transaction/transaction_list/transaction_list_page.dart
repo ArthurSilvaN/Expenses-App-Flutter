@@ -2,8 +2,8 @@ import 'package:carousel_slider/carousel_controller.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
-import '../home/widgets/transaction_category_chart.dart';
-import '../home/widgets/transaction_chart.dart';
+import '../transaction_charts/widgets/transaction_category_chart.dart';
+import '../transaction_charts/widgets/transaction_chart.dart';
 
 class ChartsPage extends StatefulWidget {
   const ChartsPage({Key? key, required this.globalKey}) : super(key: key);

@@ -3,9 +3,9 @@ import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
-import '../../../core/usecases/transaction_usecase.dart';
-import '../../../core/util/locale_intl.dart';
-import '../../../entities/transaction_registry.dart';
+import '../../../../core/usecases/transaction_usecase.dart';
+import '../../../../core/util/locale_intl.dart';
+import '../../../../entities/transaction_registry.dart';
 
 class TransactionChart extends StatefulWidget {
   const TransactionChart({Key? key}) : super(key: key);

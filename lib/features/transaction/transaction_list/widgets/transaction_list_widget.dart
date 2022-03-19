@@ -5,11 +5,11 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
-import '../../../components/modal.dart';
-import '../../../core/usecases/transaction_usecase.dart';
-import '../../../core/util/locale_intl.dart';
-import '../../../entities/transaction.dart';
-import 'transaction_page.dart';
+import '../../../../components/modal.dart';
+import '../../../../core/usecases/transaction_usecase.dart';
+import '../../../../core/util/locale_intl.dart';
+import '../../../../entities/transaction.dart';
+import '../../transaction_info/transaction_page.dart';
 
 class TransactionList extends StatefulWidget {
   const TransactionList({Key? key}) : super(key: key);

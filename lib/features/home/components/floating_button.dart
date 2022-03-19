@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../widgets/transaction_form.dart';
+import '../../transaction/transaction_form.dart/transaction_form.dart';
 
 class FloatingButtonFinancy extends StatelessWidget {
   const FloatingButtonFinancy({Key? key, required this.homeContext})

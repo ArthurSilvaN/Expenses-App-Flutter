@@ -18,7 +18,7 @@ class TransactionForm extends StatefulWidget {
 class _TransactionFormState extends State<TransactionForm> {
   late final _transactionController =
       Provider.of<TransactionUsecase>(context, listen: false);
-      
+
   final _titleController = TextEditingController();
   final _valueController = TextEditingController();
   late DateTime _selectedDate = DateTime.now();
