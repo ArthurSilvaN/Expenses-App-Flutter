@@ -36,6 +36,9 @@ class SetLabelButtons extends StatelessWidget {
                       onPressed: primaryOnPressed,
                       child: Text(
                         primaryLabel,
+                        style: enablePrimaryColor
+                            ? Theme.of(context).textTheme.bodyText1
+                            : null,
                       ),
                     ),
                   ),
@@ -45,6 +48,9 @@ class SetLabelButtons extends StatelessWidget {
                     onPressed: secondaryOnPressed,
                     child: Text(
                       secondaryLabel,
+                      style: enableSecondaryColor
+                          ? Theme.of(context).textTheme.bodyText1
+                          : null,
                     ),
                   ),
                 ),
