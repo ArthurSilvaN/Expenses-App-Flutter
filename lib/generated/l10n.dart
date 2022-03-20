@@ -80,6 +80,16 @@ class S {
     );
   }
 
+  /// `Charts`
+  String get charts {
+    return Intl.message(
+      'Charts',
+      name: 'charts',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Debts`
   String get debts {
     return Intl.message(
@@ -280,26 +290,6 @@ class S {
     );
   }
 
-  /// `Selected Date: {selectedDate}`
-  String selectedDate(String selectedDate) {
-    return Intl.message(
-      'Selected Date: $selectedDate',
-      name: 'selectedDate',
-      desc: '',
-      args: [selectedDate],
-    );
-  }
-
-  /// `{transactionsLength} transactions`
-  String transactionsLength(int transactionsLength) {
-    return Intl.message(
-      '$transactionsLength transactions',
-      name: 'transactionsLength',
-      desc: '',
-      args: [transactionsLength],
-    );
-  }
-
   /// `Select Date`
   String get selectDate {
     return Intl.message(
@@ -307,6 +297,16 @@ class S {
       name: 'selectDate',
       desc: '',
       args: [],
+    );
+  }
+
+  /// `Selected Date: {selectedDate}`
+  String selectedDate(String selectedDate) {
+    return Intl.message(
+      'Selected Date: $selectedDate',
+      name: 'selectedDate',
+      desc: '',
+      args: [selectedDate],
     );
   }
 
@@ -325,6 +325,26 @@ class S {
     return Intl.message(
       'teste',
       name: 'test',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `{transactionsLength} transactions`
+  String transactionsLength(int transactionsLength) {
+    return Intl.message(
+      '$transactionsLength transactions',
+      name: 'transactionsLength',
+      desc: '',
+      args: [transactionsLength],
+    );
+  }
+
+  /// `Transaction List`
+  String get transactionList {
+    return Intl.message(
+      'Transaction List',
+      name: 'transactionList',
       desc: '',
       args: [],
     );

@@ -33,7 +33,7 @@ class HomePageState extends State<HomePage> {
       ),
       bottomNavigationBar: Consumer<HomeController>(
         builder: (context, value, child) => BottomNavigationBar(
-          items: HomeController.btmNavbarItems,
+          items: controller.btmNavbarItems,
           currentIndex: controller.currentPage,
           onTap: (index) => controller.setPage(index),
         ),

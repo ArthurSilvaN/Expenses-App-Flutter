@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
+import '../../generated/l10n.dart';
 import '../transaction/transaction_charts/transaction_chart_page.dart';
 import '../transaction/transaction_list/transaction_list.dart';
 
@@ -15,14 +16,14 @@ class HomeController extends ChangeNotifier {
     ChartsPage(globalKey: globalKey),
   ];
 
-  static const btmNavbarItems = <BottomNavigationBarItem>[
+  List<BottomNavigationBarItem> btmNavbarItems = [
     BottomNavigationBarItem(
-      icon: Icon(Icons.list_alt, size: 40),
-      label: 'Transaction List',
+      icon: const Icon(Icons.list_alt, size: 40),
+      label: S.current.transactionList,
     ),
     BottomNavigationBarItem(
-      icon: Icon(Icons.insert_chart_outlined_sharp, size: 40),
-      label: 'Charts',
+      icon: const Icon(Icons.insert_chart_outlined_sharp, size: 40),
+      label: S.current.charts,
     ),
   ];
 

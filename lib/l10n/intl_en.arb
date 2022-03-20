@@ -3,6 +3,7 @@
     "add": "Add",
     "cancel": "Cancel",
     "categoryChart": "Category Chart",
+    "charts": "Charts",
     "debts": "Debts",
     "deletedTransaction": "Deleted Transaction",
     "dateFormatAbrevMonth": "MMM d y",
@@ -40,6 +41,7 @@
     "noDate": "No Selected Date!",
     "personalExpenses": "Personal Expenses",
     "price": "Value $",
+    "selectDate": "Select Date",
     "selectedDate": "Selected Date: {selectedDate}",
     "@selectedDate": {
         "placeholders": {
@@ -48,6 +50,8 @@
             }
         }
     },
+    "title": "Title",
+    "test": "teste",
     "transactionsLength":"{transactionsLength} transactions",
     "@transactionsLength": {
         "placeholders": {
@@ -56,9 +60,7 @@
             }
         }
     },
-    "selectDate": "Select Date",
-    "title": "Title",
-    "test": "teste",
+    "transactionList": "Transaction List",
     "welcome": "Welcome to your finance app"
 }
 
