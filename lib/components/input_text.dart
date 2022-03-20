@@ -8,11 +8,13 @@ class InputText extends StatelessWidget {
     required this.icon,
     this.initialValue,
     this.controller,
+    this.keyboardType,
   }) : super(key: key);
 
   final String label;
   final IconData icon;
   final String? initialValue;
+  final TextInputType? keyboardType;
 
   final TextEditingController? controller;
 
@@ -24,23 +26,21 @@ class InputText extends StatelessWidget {
         child: Column(
           children: [
             TextFormField(
-              initialValue: initialValue,
               controller: controller,
+              keyboardType: keyboardType,
+              initialValue: initialValue,
               decoration: InputDecoration(
                 contentPadding: EdgeInsets.zero,
                 labelText: label,
                 icon: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 18),
-                      child: Icon(
-                        icon,
-                      ),
+                    Icon(
+                      icon,
+                      size: 30,
                     ),
                     const SizedBox(
                       width: 1,
-                      height: 48,
                     )
                   ],
                 ),
