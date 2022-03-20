@@ -1,8 +1,12 @@
+import 'package:animated_card/animated_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
+import '../../../components/input_text.dart';
+import '../../../components/label_buttons.dart';
 import '../../../core/usecases/transaction_usecase.dart';
 import '../../../core/util/locale_intl.dart';
 import '../../../entities/transaction_categorys.dart';
@@ -67,92 +71,143 @@ class _TransactionFormState extends State<TransactionForm> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: MediaQuery.of(context).size.height * 0.4,
-      child: Card(
-        elevation: 5,
-        child: Container(
-          padding: const EdgeInsets.all(8.0),
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        leading: const BackButton(color: Colors.black),
+      ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24),
           child: Column(
             children: [
-              TextField(
+              InputText(
                 controller: _titleController,
-                onSubmitted: (_) => setState(_submitForm),
-                decoration: InputDecoration(
-                  labelText: context.locale().title,
-                ),
+                label: context.locale().title,
+                icon: Icons.description_outlined,
               ),
-              TextField(
-                controller: _valueController,
+              InputText(
                 keyboardType:
                     const TextInputType.numberWithOptions(decimal: true),
-                onSubmitted: (_) => setState(_submitForm),
-                decoration: InputDecoration(
-                  labelText: context.locale().price,
-                ),
+                controller: _valueController,
+                label: context.locale().price,
+                icon: FontAwesomeIcons.wallet,
               ),
-              SizedBox(
-                child: Row(
-                  children: [
-                    Text(
-                      _selectedDate == null
-                          ? context.locale().noDate
-                          : context.locale().selectedDate(
-                              DateFormat(context.locale().dateFormatCompleted)
-                                  .format(_selectedDate)),
-                    ),
-                    TextButton(
-                      onPressed: _showDatePicker,
-                      child: Text(
-                        context.locale().selectDate,
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
+              Padding(
+                padding: const EdgeInsets.only(bottom: 16),
+                child: AnimatedCard(
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        child: InputDecorator(
+                          decoration: InputDecoration(
+                            contentPadding: EdgeInsets.zero,
+                            icon: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: const [
+                                FaIcon(
+                                  FontAwesomeIcons.calendar,
+                                  size: 30,
+                                ),
+                                SizedBox(
+                                  width: 6,
+                                ),
+                              ],
+                            ),
+                            border: InputBorder.none,
+                          ),
+                          child: Row(
+                            children: [
+                              Text(
+                                _selectedDate == null
+                                    ? context.locale().noDate
+                                    : context.locale().selectedDate(DateFormat(
+                                            context
+                                                .locale()
+                                                .dateFormatCompleted)
+                                        .format(_selectedDate)),
+                              ),
+                              TextButton(
+                                onPressed: _showDatePicker,
+                                child: Text(
+                                  context.locale().selectDate,
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
                         ),
                       ),
-                    )
-                  ],
-                ),
-              ),
-              Center(
-                child: DropdownButton(
-                  value: _selectedCategory,
-                  icon: Icon(_selectedCategory!.icon),
-                  items: _transactionController.categorysDefault
-                      .map<DropdownMenuItem<Category>>((value) {
-                    return DropdownMenuItem<Category>(
-                      value: value,
-                      child: Text(value.name),
-                    );
-                  }).toList(),
-                  onChanged: (Category? newValue) {
-                    setState(
-                      () {
-                        _selectedCategory = newValue;
-                      },
-                    );
-                  },
+                      const Divider(
+                        height: 1,
+                        thickness: 1,
+                      ),
+                    ],
+                  ),
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    ElevatedButton(
-                      onPressed: () => setState(_submitForm),
-                      child: Text(
-                        context.locale().newTransaction,
-                        style: TextStyle(
-                          color: Theme.of(context).textTheme.button?.color,
+                padding: const EdgeInsets.only(bottom: 16),
+                child: AnimatedCard(
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        width: double.maxFinite,
+                        child: DropdownButton(
+                          isExpanded: true,
+                          underline: const SizedBox(width: 0),
+                          value: _selectedCategory,
+                          items: _transactionController.categorysDefault
+                              .map<DropdownMenuItem<Category>>(
+                            (value) {
+                              return DropdownMenuItem<Category>(
+                                value: value,
+                                child: Row(
+                                  children: [
+                                    Icon(
+                                      value.icon,
+                                      size: 30,
+                                      color: Theme.of(context).iconTheme.color,
+                                    ),
+                                    const SizedBox(
+                                      width: 10,
+                                    ),
+                                    Text(value.name),
+                                  ],
+                                ),
+                              );
+                            },
+                          ).toList(),
+                          onChanged: (Category? newValue) {
+                            setState(
+                              () {
+                                _selectedCategory = newValue;
+                              },
+                            );
+                          },
                         ),
                       ),
-                    )
-                  ],
+                      const Divider(
+                        height: 1,
+                        thickness: 1,
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],
           ),
         ),
+      ),
+      bottomNavigationBar: SetLabelButtons(
+        primaryLabel: context.locale().cancel,
+        primaryOnPressed: () => Navigator.pop(context),
+        secondaryLabel: context.locale().newTransaction,
+        secondaryOnPressed: _submitForm,
+        enablePrimaryColor: true,
       ),
     );
   }
