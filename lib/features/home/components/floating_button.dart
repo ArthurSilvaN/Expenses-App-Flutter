@@ -1,7 +1,9 @@
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 
-import '../../transaction/transaction_form.dart/transaction_form.dart';
+import '../../transaction/transaction_form/transaction_form.dart';
+
+
 
 class FloatingButtonFinancy extends StatelessWidget {
   const FloatingButtonFinancy({Key? key, required this.homeContext})
@@ -12,7 +14,8 @@ class FloatingButtonFinancy extends StatelessWidget {
   @override
   Widget build(context) {
     return SizedBox(
-      height: 90,
+      height: MediaQuery.of(context).size.height * 0.075,
+      width: MediaQuery.of(context).size.height * 0.075,
       child: OpenContainer(
         closedElevation: 0,
         transitionDuration: const Duration(milliseconds: 1000),
