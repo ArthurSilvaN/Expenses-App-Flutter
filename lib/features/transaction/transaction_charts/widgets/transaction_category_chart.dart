@@ -31,7 +31,14 @@ class CategoryChartState extends State<CategoryChart> {
       builder: (_, __, ___) {
         return Center(
           child: SfCircularChart(
-            title: ChartTitle(text: context.locale().categoryChart),
+            title: ChartTitle(
+              text: context.locale().categoryChart,
+              textStyle: const TextStyle(
+                fontSize: 20,
+                fontStyle: FontStyle.normal,
+                fontWeight: FontWeight.w400,
+              ),
+            ),
             legend: Legend(
               isVisible: true,
             ),
@@ -46,6 +53,7 @@ class CategoryChartState extends State<CategoryChart> {
                   useSeriesColor: true,
                   textStyle: TextStyle(
                     color: Colors.white,
+                    fontSize: 15,
                   ),
                 ),
                 pointColorMapper: (data, _) => data.color,

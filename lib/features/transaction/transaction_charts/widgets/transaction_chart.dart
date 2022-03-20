@@ -40,6 +40,11 @@ class TransactionChartState extends State<TransactionChart> {
               ),
               title: ChartTitle(
                 text: context.locale().expensesWeek,
+                textStyle: const TextStyle(
+                  fontSize: 20,
+                  fontStyle: FontStyle.normal,
+                  fontWeight: FontWeight.w400,
+                ),
               ),
               series: [
                 ColumnSeries<TransactionRegistry, String>(
