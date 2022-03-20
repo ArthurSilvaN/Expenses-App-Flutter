@@ -41,7 +41,7 @@ class TransactionUsecase extends ChangeNotifier {
       id: 'investment',
       color: Colors.green,
       name: S.current.investment,
-      icon: Icons.savings,
+      icon: Icons.savings_outlined,
     ),
     Category(
       id: 'leisure',
