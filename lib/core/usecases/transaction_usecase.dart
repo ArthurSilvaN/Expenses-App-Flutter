@@ -150,6 +150,20 @@ class TransactionUsecase extends ChangeNotifier {
     notifyListeners();
   }
 
+  Future<void> updateTransaction(Transaction tr) async {
+    final oldTransaction =
+        transactions.firstWhere((element) => element.id == tr.id);
+
+    deleteTransaction(oldTransaction);
+    addTransaction(
+      title: tr.title,
+      value: tr.value,
+      date: tr.date,
+      category: tr.category,
+      userId: tr.userId,
+    );
+  }
+
   Future<void> deleteTransaction(Transaction tr) async {
     for (final categoryAdd in categorysRegistriesDefault) {
       if (categoryAdd.id == tr.category!.id) {
