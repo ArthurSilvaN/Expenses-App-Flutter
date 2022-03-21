@@ -154,8 +154,10 @@ class _TransactionListState extends State<TransactionList> {
                               ),
                               trailing: Padding(
                                 padding: const EdgeInsets.all(6),
-                                child: Text(context.locale().valueTransaction(
-                                    tr.value.toStringAsFixed(2))),
+                                child: Text(
+                                  NumberFormat.simpleCurrency()
+                                      .format(tr.value),
+                                ),
                               ),
                             ),
                           ),
