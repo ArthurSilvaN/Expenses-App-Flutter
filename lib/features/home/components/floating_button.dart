@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 
 import '../../transaction/transaction_form/transaction_form.dart';
 
-
-
 class FloatingButtonFinancy extends StatelessWidget {
   const FloatingButtonFinancy({Key? key, required this.homeContext})
       : super(key: key);

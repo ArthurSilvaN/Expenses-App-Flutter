@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 
-import '../../../components/input_text.dart' show InputText;
-import '../../../components/label_buttons.dart';
-import '../../../core/util/locale_intl.dart';
 import '../../../entities/transaction.dart';
 
 class TransactionPage extends StatefulWidget {
@@ -20,16 +18,7 @@ class TransactionPage extends StatefulWidget {
 }
 
 class _TransactionPageState extends State<TransactionPage> {
-  late TextEditingController _titleController;
-  late TextEditingController _valueController;
-
-  @override
-  void initState() {
-    super.initState();
-    _titleController = TextEditingController(text: widget.transaction.title);
-    _valueController =
-        TextEditingController(text: widget.transaction.value.toString());
-  }
+  late final transaction = widget.transaction;
 
   @override
   Widget build(BuildContext context) {
@@ -44,30 +33,38 @@ class _TransactionPageState extends State<TransactionPage> {
           padding: const EdgeInsets.symmetric(horizontal: 24),
           child: Column(
             children: [
-              InputText(
-                controller: _titleController,
-                label: context.locale().title,
-                icon: Icons.description_outlined,
+              Text(
+                transaction.title.toUpperCase(),
+                style: GoogleFonts.inter(fontSize: 30),
               ),
-              InputText(
-                controller: _valueController,
-                label: context.locale().price,
-                icon: FontAwesomeIcons.wallet,
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.05,
+              ),
+              Center(
+                child: Icon(
+                  transaction.category!.icon,
+                  color: transaction.category!.color,
+                  size: MediaQuery.of(context).size.height * 0.3,
+                ),
+              ),
+              Text(
+                transaction.category!.name,
+                style: GoogleFonts.prompt(fontSize: 30),
+              ),
+              Text(
+                DateFormat.yMMMMd().format(transaction.date),
+                style: GoogleFonts.inter(fontSize: 20),
+              ),
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.05,
+              ),
+              Text(
+                NumberFormat.simpleCurrency().format(transaction.value),
+                style: GoogleFonts.inter(fontSize: 30),
               ),
             ],
           ),
         ),
-      ),
-      bottomNavigationBar: SetLabelButtons(
-        primaryLabel: context.locale().cancel,
-        primaryOnPressed: () {
-          Navigator.pop(context);
-        },
-        secondaryLabel: context.locale().edit,
-        secondaryOnPressed: () async {
-          Navigator.pop(context);
-        },
-        enableSecondaryColor: true,
       ),
     );
   }
