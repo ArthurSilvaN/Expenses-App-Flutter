@@ -10,10 +10,10 @@ class Transaction {
     this.category,
   });
 
-  final String id;
-  final String title;
-  final double value;
-  final DateTime date;
-  final String userId;
+  late final String id;
+  late final String title;
+  late final double value;
+  late final DateTime date;
+  late final String userId;
   Category? category;
 }
