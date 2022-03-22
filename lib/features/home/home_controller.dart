@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../generated/l10n.dart';
 import '../transaction/transaction_charts/transaction_chart_page.dart';
-import '../transaction/transaction_list/transaction_list.dart';
+import '../transaction/transaction_list/transaction_list_page.dart';
 
 class HomeController extends ChangeNotifier {
   HomeController();
