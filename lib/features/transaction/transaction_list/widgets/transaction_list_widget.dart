@@ -5,7 +5,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../components/modal.dart';
+import '../../../../components/snackbar.dart';
 import '../../../../core/usecases/transaction_usecase.dart';
 import '../../../../core/util/locale_intl.dart';
 import '../../../../entities/transaction.dart';
@@ -28,23 +28,47 @@ class _TransactionListState extends State<TransactionList> {
         Provider.of<TransactionUsecase>(context, listen: false);
   }
 
-  void _openDeleteTransactionModal(BuildContext context, Transaction tr) {
-    ModalDeleteTransaction(tr).info(context);
-  }
-
-  void _showSnackBar(String message, Color color) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(message),
-        backgroundColor: color,
-      ),
+  void _openDeleteTransactionModal(Transaction tr) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text(context.locale().delete.toUpperCase()),
+          content: Text(
+            context.locale().deleteTransaction(
+                  tr.title,
+                  tr.value.toString(),
+                ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(false),
+              child: Text(context.locale().cancel),
+            ),
+            TextButton(
+              onPressed: () {
+                SnackBarFinancy(context: context).showSnackBar(
+                  message: context.locale().deletedTransaction,
+                  color: Colors.red,
+                );
+                _transactionController.deleteTransaction(tr);
+                Navigator.pop(context);
+              },
+              child: Text(context.locale().delete),
+            ),
+          ],
+        );
+      },
     );
   }
 
   Widget _showDismissibleDeletePane(Transaction tr) {
     return DismissiblePane(
       onDismissed: () {
-        _showSnackBar(context.locale().deletedTransaction, Colors.red);
+        SnackBarFinancy(context: context).showSnackBar(
+          message: context.locale().deletedTransaction,
+          color: Colors.red,
+        );
         _transactionController.deleteTransaction(tr);
       },
       confirmDismiss: () async {
@@ -132,7 +156,7 @@ class _TransactionListState extends State<TransactionList> {
                                   foregroundColor: Colors.white,
                                   icon: Icons.delete,
                                   onPressed: (_) =>
-                                      _openDeleteTransactionModal(context, tr),
+                                      _openDeleteTransactionModal(tr),
                                 ),
                               ],
                             ),
