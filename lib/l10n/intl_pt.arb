@@ -1,7 +1,7 @@
 {
     "@@locale": "pt",
     "add": "Adicionar",
-    "cancel": "cancelar",
+    "cancel": "Cancelar",
     "categoryChart": "Gráfico de Categorias",
     "charts": "Gráficos",
     "debts": "Dividas",
@@ -14,7 +14,7 @@
     "expensesWeek": "Gastos da semana",
     "hi": "Olá, ",
     "investment": "Investimento",
-    "languages": "Linguagens",
+    "languages": "Idioma",
     "leisure": "Lazer",
     "logout": "Sair",
     "myTransactions": "Minhas Transações",

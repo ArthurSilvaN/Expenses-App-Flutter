@@ -46,7 +46,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "expensesWeek": MessageLookupByLibrary.simpleMessage("Expenses Week"),
         "hi": MessageLookupByLibrary.simpleMessage("Hello, "),
         "investment": MessageLookupByLibrary.simpleMessage("Investment"),
-        "languages": MessageLookupByLibrary.simpleMessage("languages"),
+        "languages": MessageLookupByLibrary.simpleMessage("Languages"),
         "leisure": MessageLookupByLibrary.simpleMessage("Leisure"),
         "logout": MessageLookupByLibrary.simpleMessage("Logout"),
         "myTransactions":
