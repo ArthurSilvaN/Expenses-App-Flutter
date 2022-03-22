@@ -1,5 +1,6 @@
 import 'package:animated_card/animated_card.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class InputText extends StatelessWidget {
   const InputText({
@@ -29,7 +30,9 @@ class InputText extends StatelessWidget {
               controller: controller,
               keyboardType: keyboardType,
               initialValue: initialValue,
+              maxLength: keyboardType == null ? 40 : 9,
               decoration: InputDecoration(
+                counterText: '',
                 contentPadding: EdgeInsets.zero,
                 labelText: label,
                 icon: Row(
@@ -45,6 +48,7 @@ class InputText extends StatelessWidget {
                   ],
                 ),
                 border: InputBorder.none,
+                alignLabelWithHint: true,
               ),
             ),
             const Divider(
