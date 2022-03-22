@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 
 import '../../../components/input_text.dart';
 import '../../../components/label_buttons.dart';
+import '../../../components/snackbar.dart';
 import '../../../core/usecases/transaction_usecase.dart';
 import '../../../core/util/locale_intl.dart';
 import '../../../entities/transaction_categorys.dart';
@@ -35,6 +36,20 @@ class _TransactionFormState extends State<TransactionForm> {
     final value = double.tryParse(_valueController.text) ?? 0.0;
 
     if (title.isEmpty || value <= 0 || _selectedDate == null) {
+      title.isEmpty
+          ? SnackBarFinancy(context: context).showSnackBar(
+              message: 'Titulo não pode ser vazio',
+              color: Colors.red,
+            )
+          : value <= 0
+              ? SnackBarFinancy(context: context).showSnackBar(
+                  message: 'Valor não pode ser vazio ou negativo',
+                  color: Colors.red,
+                )
+              : SnackBarFinancy(context: context).showSnackBar(
+                  message: 'Erro Inesperado',
+                  color: Colors.red,
+                );
       return;
     }
 
@@ -44,6 +59,11 @@ class _TransactionFormState extends State<TransactionForm> {
       value: value,
       date: _selectedDate,
       category: _selectedCategory,
+    );
+
+    SnackBarFinancy(context: context).showSnackBar(
+      message: 'Transação Cadastrada',
+      color: Colors.green,
     );
 
     Navigator.of(context).pop();
