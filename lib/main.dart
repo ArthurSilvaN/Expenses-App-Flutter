@@ -18,7 +18,7 @@ Future<void> main() async {
   runApp(
     MultiProvider(
       providers: [
-        Provider(
+        ChangeNotifierProvider(
           create: (context) => TransactionUsecase(),
         ),
         Provider(
