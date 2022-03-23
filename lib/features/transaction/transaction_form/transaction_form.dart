@@ -139,21 +139,26 @@ class _TransactionFormState extends State<TransactionForm> {
                           ),
                           child: Row(
                             children: [
-                              Text(
-                                _selectedDate == null
-                                    ? context.locale().noDate
-                                    : context.locale().selectedDate(DateFormat(
-                                            context
-                                                .locale()
-                                                .dateFormatCompleted)
-                                        .format(_selectedDate)),
-                              ),
-                              TextButton(
-                                onPressed: _showDatePicker,
+                              Expanded(
                                 child: Text(
-                                  context.locale().selectDate,
-                                  style: const TextStyle(
-                                    fontWeight: FontWeight.bold,
+                                  _selectedDate == null
+                                      ? context.locale().noDate
+                                      : context.locale().selectedDate(
+                                            DateFormat(context
+                                                    .locale()
+                                                    .dateFormatCompleted)
+                                                .format(_selectedDate),
+                                          ),
+                                ),
+                              ),
+                              Expanded(
+                                child: TextButton(
+                                  onPressed: _showDatePicker,
+                                  child: Text(
+                                    context.locale().selectDate,
+                                    style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
                                 ),
                               )
