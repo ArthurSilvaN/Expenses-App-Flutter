@@ -1,3 +1,4 @@
+import 'package:day_night_switcher/day_night_switcher.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
@@ -6,6 +7,7 @@ import '../../../components/modal_center.dart';
 import '../../../core/usecases/locale_usecase.dart';
 import '../../../core/util/locale_intl.dart';
 import '../../../services/auth_service.dart';
+import '../home_controller.dart';
 
 class DrawerHome extends StatelessWidget {
   const DrawerHome({Key? key}) : super(key: key);
@@ -15,6 +17,9 @@ class DrawerHome extends StatelessWidget {
 
     late final localeController =
         Provider.of<LocaleUseCase>(context, listen: false);
+
+    late final homeController =
+        Provider.of<HomeController>(context, listen: false);
 
     void _openLocaleModal(BuildContext context) {
       showDialog(
@@ -97,6 +102,15 @@ class DrawerHome extends StatelessWidget {
             leading: const Icon(Icons.logout),
             title: Text(context.locale().logout),
             onTap: () => authService.logout(),
+          ),
+          const Divider(),
+          ListTile(
+            title: SizedBox(
+              child: DayNightSwitcher(
+                isDarkModeEnabled: homeController.isDarkModeEnabled,
+                onStateChanged: homeController.onStateChanged,
+              ),
+            ),
           ),
         ],
       ),

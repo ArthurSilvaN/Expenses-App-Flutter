@@ -1,7 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
-import '../../generated/l10n.dart';
 import '../transaction/transaction_charts/transaction_chart_page.dart';
 import '../transaction/transaction_list/transaction_list_page.dart';
 
@@ -10,6 +9,7 @@ class HomeController extends ChangeNotifier {
 
   CarouselController buttonCarouselController = CarouselController();
   final GlobalKey<ScaffoldState> globalKey = GlobalKey<ScaffoldState>();
+  bool isDarkModeEnabled = false;
 
   late final pages = [
     const TransactionListPage(),
@@ -17,13 +17,11 @@ class HomeController extends ChangeNotifier {
   ];
 
   List<BottomNavigationBarItem> btmNavbarItems = [
-    BottomNavigationBarItem(
-      icon: const Icon(Icons.list_alt, size: 40),
-      label: S.current.transactionList,
+    const BottomNavigationBarItem(
+      icon: Icon(Icons.list_alt, size: 40),
     ),
-    BottomNavigationBarItem(
-      icon: const Icon(Icons.insert_chart_outlined_sharp, size: 40),
-      label: S.current.charts,
+    const BottomNavigationBarItem(
+      icon: Icon(Icons.insert_chart_outlined_sharp, size: 40),
     ),
   ];
 
@@ -31,6 +29,11 @@ class HomeController extends ChangeNotifier {
 
   void setPage(int index) {
     currentPage = index;
+    notifyListeners();
+  }
+
+  void onStateChanged(bool isDarkModeEnabled) {
+    this.isDarkModeEnabled = isDarkModeEnabled;
     notifyListeners();
   }
 }
