@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:uuid/uuid.dart';
 
+import '../../../generated/l10n.dart';
 import '../../entities/category_registry.dart';
 import '../../entities/transaction.dart';
 import '../../entities/transaction_categorys.dart';
 import '../../entities/transaction_registry.dart';
-import '../../generated/l10n.dart';
 import '../../services/database_connection.dart';
 import '../util/property_value_notifier.dart';
 

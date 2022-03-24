@@ -19,9 +19,11 @@ class HomeController extends ChangeNotifier {
   List<BottomNavigationBarItem> btmNavbarItems = [
     const BottomNavigationBarItem(
       icon: Icon(Icons.list_alt, size: 40),
+      label: '',
     ),
     const BottomNavigationBarItem(
       icon: Icon(Icons.insert_chart_outlined_sharp, size: 40),
+      label: '',
     ),
   ];
 
