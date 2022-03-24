@@ -6,10 +6,10 @@ import 'package:flutter/widgets.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 
-import '../../core/usecases/locale_usecase.dart';
-import '../../core/usecases/transaction_usecase.dart';
 import '../../services/auth_service.dart';
 import '../../services/database_connection.dart';
+import '../../shared/providers/locale_usecase.dart';
+import '../../shared/providers/transaction_usecase.dart';
 import '../login/login.dart';
 
 class SplashScreen extends StatefulWidget {

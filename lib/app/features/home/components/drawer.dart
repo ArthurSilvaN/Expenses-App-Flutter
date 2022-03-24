@@ -4,9 +4,9 @@ import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 
 import '../../../components/modal_center.dart';
-import '../../../core/usecases/locale_usecase.dart';
 import '../../../core/util/locale_intl.dart';
 import '../../../services/auth_service.dart';
+import '../../../shared/providers/locale_usecase.dart';
 import '../home_controller.dart';
 
 class DrawerHome extends StatelessWidget {

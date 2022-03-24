@@ -3,14 +3,14 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 
 import '../generated/l10n.dart';
-import 'core/usecases/locale_usecase.dart';
-import 'core/usecases/transaction_usecase.dart';
 import 'features/home/home_controller.dart';
 import 'features/splash/splash.dart';
 import 'services/auth_service.dart';
+import 'shared/providers/locale_usecase.dart';
+import 'shared/providers/transaction_usecase.dart';
 import 'theme/style.dart';
 
-part 'providers/providers_list.dart';
+part 'shared/providers_list.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);

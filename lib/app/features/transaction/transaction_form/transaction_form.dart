@@ -8,10 +8,10 @@ import 'package:provider/provider.dart';
 import '../../../components/input_text.dart';
 import '../../../components/label_buttons.dart';
 import '../../../components/snackbar.dart';
-import '../../../core/usecases/transaction_usecase.dart';
 import '../../../core/util/locale_intl.dart';
 import '../../../entities/transaction_categorys.dart';
 import '../../../services/auth_service.dart';
+import '../../../shared/providers/transaction_usecase.dart';
 
 class TransactionForm extends StatefulWidget {
   const TransactionForm({Key? key}) : super(key: key);

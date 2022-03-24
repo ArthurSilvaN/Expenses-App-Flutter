@@ -6,9 +6,9 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../components/snackbar.dart';
-import '../../../../core/usecases/transaction_usecase.dart';
 import '../../../../core/util/locale_intl.dart';
 import '../../../../entities/transaction.dart';
+import '../../../../shared/providers/transaction_usecase.dart';
 import '../../transaction_info/transaction_page.dart';
 
 class TransactionList extends StatefulWidget {

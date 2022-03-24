@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../core/util/property_value_notifier.dart';
 import '../../entities/languages.dart';
-import '../util/property_value_notifier.dart';
 
 class LocaleUseCase extends ChangeNotifier {
   late PropertyValueNotifier<Locale?> locale =
