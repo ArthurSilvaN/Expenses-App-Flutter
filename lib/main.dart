@@ -15,25 +15,7 @@ Future<void> main() async {
   Provider.debugCheckInvalidValueType = null;
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(
-    MultiProvider(
-      providers: [
-        ChangeNotifierProvider(
-          create: (context) => TransactionUsecase(),
-        ),
-        Provider(
-          create: (context) => LocaleUseCase(),
-        ),
-        Provider(
-          create: (context) => AuthService(),
-        ),
-        ChangeNotifierProvider(
-          create: (context) => HomeController(),
-        ),
-      ],
-      child: const MyApp(),
-    ),
-  );
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -41,27 +23,45 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final locale = Provider.of<LocaleUseCase>(context, listen: false).locale;
-    return ValueListenableBuilder(
-      valueListenable: locale,
-      builder: (context, child, widget) {
-        return MaterialApp(
-          localizationsDelegates: const [
-            S.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-          ],
-          locale: locale.value,
-          supportedLocales: S.delegate.supportedLocales,
-          scrollBehavior:
-              ScrollConfiguration.of(context).copyWith(scrollbars: false),
-          debugShowCheckedModeBanner: false,
-          theme: appTheme,
-          title: 'Financy App',
-          home: const SplashScreen(),
-        );
-      },
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => TransactionUsecase(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => LocaleUseCase(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => AuthService(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => HomeController(),
+        ),
+      ],
+      child: Consumer2<HomeController, LocaleUseCase>(
+        builder: (context, homeController, localeUseCase, widget) {
+          return MaterialApp(
+            localizationsDelegates: const [
+              S.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            locale: localeUseCase.locale.value,
+            supportedLocales: S.delegate.supportedLocales,
+            scrollBehavior:
+                ScrollConfiguration.of(context).copyWith(scrollbars: false),
+            debugShowCheckedModeBanner: false,
+            theme: appTheme,
+            darkTheme: appDarkTheme,
+            themeMode: homeController.isDarkModeEnabled
+                ? ThemeMode.dark
+                : ThemeMode.light,
+            title: 'Financy App',
+            home: const SplashScreen(),
+          );
+        },
+      ),
     );
   }
 }
