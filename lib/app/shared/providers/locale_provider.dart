@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
+import '../../../generated/l10n.dart';
+import '../../core/util/property_value_notifier.dart';
 import '../../entities/languages.dart';
-import '../util/property_value_notifier.dart';
 
-class LocaleUseCase extends ChangeNotifier {
+class LocaleProvider extends ChangeNotifier {
   late PropertyValueNotifier<Locale?> locale =
       PropertyValueNotifier(const Locale('pt'));
 
@@ -16,6 +18,13 @@ class LocaleUseCase extends ChangeNotifier {
     locale.value = null;
     notifyListeners();
   }
+
+  Iterable<LocalizationsDelegate<dynamic>> localizationsDelegates = [
+    S.delegate,
+    GlobalMaterialLocalizations.delegate,
+    GlobalWidgetsLocalizations.delegate,
+    GlobalCupertinoLocalizations.delegate,
+  ];
 
   List<Languages> get languagesLocale {
     return [

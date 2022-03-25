@@ -4,8 +4,9 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-import '../../../core/usecases/transaction_usecase.dart';
-import '../../../services/auth_service.dart';
+import '../../../core/util/mediaquery_contex.dart';
+import '../../../shared/providers/auth_provider.dart';
+import '../../../shared/providers/transaction_provider.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({Key? key}) : super(key: key);
@@ -28,18 +29,17 @@ class _SignUpPageState extends State<SignUpPage> {
     fontWeight: FontWeight.w500,
     inherit: false,
   );
-  late AuthService authProvider =
-      Provider.of<AuthService>(context, listen: false);
+  late AuthProvider authProvider =
+      Provider.of<AuthProvider>(context, listen: false);
 
-  late final TransactionUsecase _transactionController =
-      Provider.of<TransactionUsecase>(context, listen: false);
-
-  late final size = MediaQuery.of(context).size;
+  late final TransactionProvider _transactionController =
+      Provider.of<TransactionProvider>(context, listen: false);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: size.width * 0.05),
+      padding:
+          EdgeInsets.symmetric(horizontal: context.sizeContext().width * 0.05),
       decoration: BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topRight,
@@ -77,8 +77,8 @@ class _SignUpPageState extends State<SignUpPage> {
           ),
           const SizedBox(height: 20),
           SizedBox(
-            width: size.width,
-            height: size.height * 0.07,
+            width: context.sizeContext().width,
+            height: context.sizeContext().height * 0.07,
             child: ElevatedButton(
               style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all(Colors.transparent),
@@ -133,7 +133,7 @@ class _SignUpPageState extends State<SignUpPage> {
               ),
             ),
           ),
-          SizedBox(height: size.height * 0.05),
+          SizedBox(height: context.sizeContext().height * 0.05),
         ],
       ),
     );

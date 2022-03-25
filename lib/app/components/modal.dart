@@ -2,9 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../core/usecases/transaction_usecase.dart';
 import '../core/util/locale_intl.dart';
+import '../core/util/mediaquery_contex.dart';
 import '../entities/transaction.dart';
+import '../shared/providers/transaction_provider.dart';
 
 class ModalDeleteTransaction {
   ModalDeleteTransaction(this.transaction);
@@ -16,7 +17,7 @@ class ModalDeleteTransaction {
       context: context,
       builder: (context) {
         return SizedBox(
-          height: MediaQuery.of(context).size.height * 0.2,
+          height: context.sizeContext().height * 0.2,
           child: Card(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -63,7 +64,7 @@ class ModalDeleteTransaction {
 
   Widget _confirm(BuildContext context, Transaction tr) {
     final transactionController =
-        Provider.of<TransactionUsecase>(context, listen: false);
+        Provider.of<TransactionProvider>(context, listen: false);
     return SizedBox(
       child: ElevatedButton(
         child: Text(

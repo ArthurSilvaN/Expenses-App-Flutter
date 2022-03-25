@@ -8,10 +8,10 @@ import 'package:provider/provider.dart';
 import '../../../components/input_text.dart';
 import '../../../components/label_buttons.dart';
 import '../../../components/snackbar.dart';
-import '../../../core/usecases/transaction_usecase.dart';
 import '../../../core/util/locale_intl.dart';
 import '../../../entities/transaction_categorys.dart';
-import '../../../services/auth_service.dart';
+import '../../../shared/providers/auth_provider.dart';
+import '../../../shared/providers/transaction_provider.dart';
 
 class TransactionForm extends StatefulWidget {
   const TransactionForm({Key? key}) : super(key: key);
@@ -22,14 +22,14 @@ class TransactionForm extends StatefulWidget {
 
 class _TransactionFormState extends State<TransactionForm> {
   late final _transactionController =
-      Provider.of<TransactionUsecase>(context, listen: false);
+      Provider.of<TransactionProvider>(context, listen: false);
 
   final _titleController = TextEditingController();
   final _valueController = TextEditingController();
   late DateTime _selectedDate = DateTime.now();
   late Category? _selectedCategory = _transactionController.categorysDefault[0];
-  late final AuthService _authService =
-      Provider.of<AuthService>(context, listen: false);
+  late final AuthProvider _authService =
+      Provider.of<AuthProvider>(context, listen: false);
 
   void _submitForm() {
     final title = _titleController.text;

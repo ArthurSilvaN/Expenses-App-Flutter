@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../core/usecases/transaction_usecase.dart';
 import '../../../../core/util/locale_intl.dart';
+import '../../../../core/util/mediaquery_contex.dart';
 import '../../../../entities/transaction.dart';
 import '../../../../entities/transaction_categorys.dart';
+import '../../../../shared/providers/transaction_provider.dart';
 
 class TransactionEdit extends StatefulWidget {
   const TransactionEdit({
@@ -32,7 +33,7 @@ class _TransactionEditState extends State<TransactionEdit> {
 
   late Transaction transactionOld = widget.transaction;
   late final _transactionController =
-      Provider.of<TransactionUsecase>(context, listen: false);
+      Provider.of<TransactionProvider>(context, listen: false);
 
   final _titleController = TextEditingController();
   final _valueController = TextEditingController();
@@ -75,7 +76,7 @@ class _TransactionEditState extends State<TransactionEdit> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: MediaQuery.of(context).size.height * 0.4,
+      height: context.sizeContext().height * 0.4,
       child: Card(
         elevation: 5,
         child: Container(

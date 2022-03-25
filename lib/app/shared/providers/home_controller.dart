@@ -1,11 +1,13 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
-import '../transaction/transaction_charts/transaction_chart_page.dart';
-import '../transaction/transaction_list/transaction_list_page.dart';
+import '../../features/transaction/transaction_charts/transaction_chart_page.dart';
+import '../../features/transaction/transaction_list/transaction_list_page.dart';
 
 class HomeController extends ChangeNotifier {
-  HomeController();
+  HomeController(this.context);
+
+  final BuildContext context;
 
   CarouselController buttonCarouselController = CarouselController();
   final GlobalKey<ScaffoldState> globalKey = GlobalKey<ScaffoldState>();
@@ -13,10 +15,10 @@ class HomeController extends ChangeNotifier {
 
   late final pages = [
     const TransactionListPage(),
-    ChartsPage(globalKey: globalKey),
+    const ChartsPage(),
   ];
 
-  List<BottomNavigationBarItem> btmNavbarItems = [
+  late List<BottomNavigationBarItem> btmNavbarItems = [
     const BottomNavigationBarItem(
       icon: Icon(Icons.list_alt, size: 40),
       label: '',
