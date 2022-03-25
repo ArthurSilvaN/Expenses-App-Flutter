@@ -4,5 +4,6 @@ final _providersList = [
   ChangeNotifierProvider(create: (context) => TransactionUsecase()),
   ChangeNotifierProvider(create: (context) => LocaleProvider()),
   ChangeNotifierProvider(create: (context) => AuthProvider()),
-  ChangeNotifierProvider(create: (context) => HomeController()),
+  ChangeNotifierProvider(create: (context) => HomeController(context)),
+  ChangeNotifierProvider(create: (context) => SplashController(context)),
 ].toList();

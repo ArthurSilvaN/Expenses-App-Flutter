@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 
 import '../generated/l10n.dart';
@@ -7,6 +6,7 @@ import 'features/splash/splash.dart';
 import 'shared/providers/auth_provider.dart';
 import 'shared/providers/home_controller.dart';
 import 'shared/providers/locale_provider.dart';
+import 'shared/providers/splash_controller.dart';
 import 'shared/providers/transaction_provider.dart';
 import 'theme/style.dart';
 
@@ -22,12 +22,7 @@ class MyApp extends StatelessWidget {
       child: Consumer2<HomeController, LocaleProvider>(
         builder: (context, homeController, localeProvider, widget) {
           return MaterialApp(
-            localizationsDelegates: const [
-              S.delegate,
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate,
-            ],
+            localizationsDelegates: localeProvider.localizationsDelegates,
             locale: localeProvider.locale.value,
             supportedLocales: S.delegate.supportedLocales,
             scrollBehavior:

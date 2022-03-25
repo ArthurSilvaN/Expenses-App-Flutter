@@ -13,13 +13,10 @@ class TransactionListPage extends StatefulWidget {
 }
 
 class _TransactionListPageState extends State<TransactionListPage> {
-  late final TransactionUsecase _transactionController =
-      Provider.of<TransactionUsecase>(context, listen: false);
-
   @override
   Widget build(BuildContext context) {
     return Consumer<TransactionUsecase>(
-      builder: (context, value, child) => Padding(
+      builder: (context, controller, child) => Padding(
         padding: const EdgeInsets.symmetric(horizontal: 18.0),
         child: Center(
           child: Column(
@@ -36,9 +33,9 @@ class _TransactionListPageState extends State<TransactionListPage> {
                       ),
                     ),
                     Text(
-                      context.locale().transactionsLength(
-                            _transactionController.transactions.length,
-                          ),
+                      context
+                          .locale()
+                          .transactionsLength(controller.transactions.length),
                       style: const TextStyle(
                         fontSize: 15,
                       ),
