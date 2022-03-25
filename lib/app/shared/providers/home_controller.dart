@@ -1,8 +1,8 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
-import '../transaction/transaction_charts/transaction_chart_page.dart';
-import '../transaction/transaction_list/transaction_list_page.dart';
+import '../../features/transaction/transaction_charts/transaction_chart_page.dart';
+import '../../features/transaction/transaction_list/transaction_list_page.dart';
 
 class HomeController extends ChangeNotifier {
   HomeController();

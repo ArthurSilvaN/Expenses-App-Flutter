@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import '../../../../core/util/locale_intl.dart';
 import '../../../../entities/transaction.dart';
 import '../../../../entities/transaction_categorys.dart';
-import '../../../../shared/providers/transaction_usecase.dart';
+import '../../../../shared/providers/transaction_provider.dart';
 
 class TransactionEdit extends StatefulWidget {
   const TransactionEdit({

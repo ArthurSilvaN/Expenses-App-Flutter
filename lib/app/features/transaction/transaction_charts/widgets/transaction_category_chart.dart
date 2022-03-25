@@ -5,7 +5,7 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 
 import '../../../../core/util/locale_intl.dart';
 import '../../../../entities/category_registry.dart';
-import '../../../../shared/providers/transaction_usecase.dart';
+import '../../../../shared/providers/transaction_provider.dart';
 
 class CategoryChart extends StatefulWidget {
   const CategoryChart({Key? key}) : super(key: key);

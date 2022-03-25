@@ -5,15 +5,15 @@ import 'package:provider/provider.dart';
 
 import '../../../components/modal_center.dart';
 import '../../../core/util/locale_intl.dart';
-import '../../../services/auth_service.dart';
-import '../../../shared/providers/locale_usecase.dart';
-import '../home_controller.dart';
+import '../../../shared/providers/auth_provider.dart';
+import '../../../shared/providers/home_controller.dart';
+import '../../../shared/providers/locale_provider.dart';
 
 class DrawerHome extends StatelessWidget {
   const DrawerHome({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    late final authService = Provider.of<AuthService>(context, listen: false);
+    late final authService = Provider.of<AuthProvider>(context, listen: false);
 
     late final localeController =
         Provider.of<LocaleUseCase>(context, listen: false);

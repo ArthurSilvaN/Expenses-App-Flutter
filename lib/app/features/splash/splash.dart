@@ -6,10 +6,10 @@ import 'package:flutter/widgets.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 
-import '../../services/auth_service.dart';
 import '../../services/database_connection.dart';
-import '../../shared/providers/locale_usecase.dart';
-import '../../shared/providers/transaction_usecase.dart';
+import '../../shared/providers/auth_provider.dart';
+import '../../shared/providers/locale_provider.dart';
+import '../../shared/providers/transaction_provider.dart';
 import '../login/login.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -28,8 +28,8 @@ class SplashScreeState extends State<SplashScreen> {
 
   late final DatabaseConneection conneection = DatabaseConneection();
 
-  late final AuthService _authService =
-      Provider.of<AuthService>(context, listen: false);
+  late final AuthProvider _authService =
+      Provider.of<AuthProvider>(context, listen: false);
 
   Future<void> _initializeApp() async {
     await _authService.setUser();

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../core/util/locale_intl.dart';
-import '../../../shared/providers/transaction_usecase.dart';
+import '../../../shared/providers/transaction_provider.dart';
 import 'widgets/transaction_list_widget.dart';
 
 class TransactionListPage extends StatefulWidget {

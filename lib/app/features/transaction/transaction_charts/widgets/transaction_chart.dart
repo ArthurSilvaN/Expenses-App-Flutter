@@ -5,7 +5,7 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 
 import '../../../../core/util/locale_intl.dart';
 import '../../../../entities/transaction_registry.dart';
-import '../../../../shared/providers/transaction_usecase.dart';
+import '../../../../shared/providers/transaction_provider.dart';
 
 class TransactionChart extends StatefulWidget {
   const TransactionChart({Key? key}) : super(key: key);

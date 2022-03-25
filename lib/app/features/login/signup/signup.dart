@@ -4,8 +4,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-import '../../../services/auth_service.dart';
-import '../../../shared/providers/transaction_usecase.dart';
+import '../../../shared/providers/auth_provider.dart';
+import '../../../shared/providers/transaction_provider.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({Key? key}) : super(key: key);
@@ -28,8 +28,8 @@ class _SignUpPageState extends State<SignUpPage> {
     fontWeight: FontWeight.w500,
     inherit: false,
   );
-  late AuthService authProvider =
-      Provider.of<AuthService>(context, listen: false);
+  late AuthProvider authProvider =
+      Provider.of<AuthProvider>(context, listen: false);
 
   late final TransactionUsecase _transactionController =
       Provider.of<TransactionUsecase>(context, listen: false);
