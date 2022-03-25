@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 import '../../../../core/util/locale_intl.dart';
+import '../../../../core/util/mediaquery_contex.dart';
 import '../../../../entities/transaction_registry.dart';
 import '../../../../shared/providers/transaction_provider.dart';
 
@@ -31,7 +32,7 @@ class TransactionChartState extends State<TransactionChart> {
       builder: (_, __, ___) {
         return Center(
           child: SizedBox(
-            width: MediaQuery.of(context).size.width * 0.8,
+            width: context.sizeContext().width * 0.8,
             child: SfCartesianChart(
               primaryXAxis: CategoryAxis(),
               primaryYAxis: NumericAxis(

@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 
 import '../../../components/modal_center.dart';
 import '../../../core/util/locale_intl.dart';
+import '../../../core/util/mediaquery_contex.dart';
 import '../../../shared/providers/auth_provider.dart';
 import '../../../shared/providers/home_controller.dart';
 import '../../../shared/providers/locale_provider.dart';
@@ -29,8 +30,8 @@ class DrawerHome extends StatelessWidget {
             title: Text(context.locale().languages),
             children: [
               SizedBox(
-                height: MediaQuery.of(context).size.height * 0.2,
-                width: MediaQuery.of(context).size.height * 0.1,
+                height: context.sizeContext().height * 0.2,
+                width: context.sizeContext().height * 0.1,
                 child: Center(
                   child: ListView.builder(
                     shrinkWrap: true,

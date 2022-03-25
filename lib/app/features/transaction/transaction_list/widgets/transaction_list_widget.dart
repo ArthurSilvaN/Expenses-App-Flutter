@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 
 import '../../../../components/snackbar.dart';
 import '../../../../core/util/locale_intl.dart';
+import '../../../../core/util/mediaquery_contex.dart';
 import '../../../../entities/transaction.dart';
 import '../../../../shared/providers/transaction_provider.dart';
 import '../../transaction_info/transaction_page.dart';
@@ -104,7 +105,7 @@ class _TransactionListState extends State<TransactionList> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: MediaQuery.of(context).size.height * 0.6,
+      height: context.sizeContext().height * 0.6,
       child: ValueListenableBuilder(
         valueListenable: _transactionController.transactionsListenable,
         builder: (_, __, ___) {

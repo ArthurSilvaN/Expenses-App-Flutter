@@ -6,6 +6,7 @@ import 'package:flutter/widgets.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 
+import '../../core/util/mediaquery_contex.dart';
 import '../../shared/providers/splash_controller.dart';
 import '../login/login.dart';
 
@@ -29,7 +30,7 @@ class SplashScreeState extends State<SplashScreen> {
           curve: Curves.linear,
           pageTransitionType: PageTransitionType.fade,
           duration: 5000,
-          splashIconSize: MediaQuery.of(context).size.height,
+          splashIconSize: context.sizeContext().height,
           animationDuration: const Duration(seconds: 3),
           centered: false,
           splashTransition: SplashTransition.fadeTransition,

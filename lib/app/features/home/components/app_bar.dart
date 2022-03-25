@@ -3,29 +3,20 @@ import 'package:provider/provider.dart';
 
 import '../../../core/util/locale_intl.dart';
 import '../../../shared/providers/auth_provider.dart';
+import '../../../shared/providers/home_controller.dart';
 
 class AppBarFinancy extends StatefulWidget {
-  const AppBarFinancy({
-    Key? key,
-    required this.globalKey,
-  }) : super(key: key);
-
-  final GlobalKey<ScaffoldState> globalKey;
+  const AppBarFinancy({Key? key}) : super(key: key);
 
   @override
   State<AppBarFinancy> createState() => _AppBarFinancyState();
 }
 
 class _AppBarFinancyState extends State<AppBarFinancy> {
-
-  late final size = MediaQuery.of(context).size;
-
-  late final GlobalKey<ScaffoldState> globalKey = widget.globalKey;
-
   @override
   Widget build(BuildContext context) {
-    return Consumer<AuthProvider>(
-      builder: (context, auth, child) => Container(
+    return Consumer2<AuthProvider, HomeController>(
+      builder: (context, auth, homeController, child) => Container(
         height: 150,
         padding: const EdgeInsets.symmetric(horizontal: 18.0),
         child: Center(
@@ -44,7 +35,8 @@ class _AppBarFinancyState extends State<AppBarFinancy> {
               context.locale().welcome,
             ),
             trailing: GestureDetector(
-              onTap: () => globalKey.currentState!.openEndDrawer(),
+              onTap: () =>
+                  homeController.globalKey.currentState!.openEndDrawer(),
               child: Container(
                 height: 48,
                 width: 48,

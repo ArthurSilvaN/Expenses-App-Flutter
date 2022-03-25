@@ -15,7 +15,7 @@ class HomeController extends ChangeNotifier {
 
   late final pages = [
     const TransactionListPage(),
-    ChartsPage(globalKey: globalKey),
+    const ChartsPage(),
   ];
 
   late List<BottomNavigationBarItem> btmNavbarItems = [

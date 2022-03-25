@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
+import '../../../core/util/mediaquery_contex.dart';
 import '../../../entities/transaction.dart';
 
 class TransactionPage extends StatefulWidget {
@@ -38,13 +39,13 @@ class _TransactionPageState extends State<TransactionPage> {
                 style: GoogleFonts.inter(fontSize: 30),
               ),
               SizedBox(
-                height: MediaQuery.of(context).size.height * 0.05,
+                height: context.sizeContext().height * 0.05,
               ),
               Center(
                 child: Icon(
                   transaction.category!.icon,
                   color: transaction.category!.color,
-                  size: MediaQuery.of(context).size.height * 0.3,
+                  size: context.sizeContext().height * 0.3,
                 ),
               ),
               Text(
@@ -56,7 +57,7 @@ class _TransactionPageState extends State<TransactionPage> {
                 style: GoogleFonts.inter(fontSize: 20),
               ),
               SizedBox(
-                height: MediaQuery.of(context).size.height * 0.05,
+                height: context.sizeContext().height * 0.05,
               ),
               Text(
                 NumberFormat.simpleCurrency().format(transaction.value),
