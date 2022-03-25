@@ -33,7 +33,7 @@ class _TransactionEditState extends State<TransactionEdit> {
 
   late Transaction transactionOld = widget.transaction;
   late final _transactionController =
-      Provider.of<TransactionUsecase>(context, listen: false);
+      Provider.of<TransactionProvider>(context, listen: false);
 
   final _titleController = TextEditingController();
   final _valueController = TextEditingController();

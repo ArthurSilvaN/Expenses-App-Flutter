@@ -24,7 +24,7 @@ class _TransactionListState extends State<TransactionList> {
   Widget build(BuildContext context) {
     return SizedBox(
       height: context.sizeContext().height * 0.6,
-      child: Consumer<TransactionUsecase>(
+      child: Consumer<TransactionProvider>(
         builder: (context, controller, child) => controller.transactions.isEmpty
             ? Center(
                 child: Column(

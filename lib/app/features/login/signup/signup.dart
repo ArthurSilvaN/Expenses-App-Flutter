@@ -32,8 +32,8 @@ class _SignUpPageState extends State<SignUpPage> {
   late AuthProvider authProvider =
       Provider.of<AuthProvider>(context, listen: false);
 
-  late final TransactionUsecase _transactionController =
-      Provider.of<TransactionUsecase>(context, listen: false);
+  late final TransactionProvider _transactionController =
+      Provider.of<TransactionProvider>(context, listen: false);
 
   @override
   Widget build(BuildContext context) {

@@ -9,13 +9,13 @@ import 'transaction_provider.dart';
 class SplashController extends ChangeNotifier {
   SplashController(this.context)
       : transactionController =
-            Provider.of<TransactionUsecase>(context, listen: false),
+            Provider.of<TransactionProvider>(context, listen: false),
         localeProvider = Provider.of<LocaleProvider>(context, listen: false),
         authService = Provider.of<AuthProvider>(context, listen: false);
 
   final BuildContext context;
   final LocaleProvider localeProvider;
-  final TransactionUsecase transactionController;
+  final TransactionProvider transactionController;
   final AuthProvider authService;
 
   late final DatabaseConneection conneection = DatabaseConneection();

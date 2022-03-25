@@ -18,7 +18,7 @@ class TransactionChart extends StatefulWidget {
 class TransactionChartState extends State<TransactionChart> {
   @override
   Widget build(BuildContext context) {
-    return Consumer<TransactionUsecase>(
+    return Consumer<TransactionProvider>(
       builder: (context, controller, child) => Center(
         child: SizedBox(
           width: context.sizeContext().width * 0.8,

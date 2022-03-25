@@ -17,7 +17,7 @@ class CategoryChart extends StatefulWidget {
 class CategoryChartState extends State<CategoryChart> {
   @override
   Widget build(BuildContext context) {
-    return Consumer<TransactionUsecase>(
+    return Consumer<TransactionProvider>(
       builder: (context, controller, child) => Center(
         child: SfCircularChart(
           title: ChartTitle(

@@ -64,7 +64,7 @@ class ModalDeleteTransaction {
 
   Widget _confirm(BuildContext context, Transaction tr) {
     final transactionController =
-        Provider.of<TransactionUsecase>(context, listen: false);
+        Provider.of<TransactionProvider>(context, listen: false);
     return SizedBox(
       child: ElevatedButton(
         child: Text(

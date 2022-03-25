@@ -10,7 +10,7 @@ void openDeleteTransactionModal(Transaction tr, BuildContext context) {
   showDialog(
     context: context,
     builder: (context) {
-      return Consumer<TransactionUsecase>(
+      return Consumer<TransactionProvider>(
         builder: (context, controller, child) => AlertDialog(
           title: Text(context.locale().delete.toUpperCase()),
           content: Text(

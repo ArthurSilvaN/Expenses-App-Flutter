@@ -8,7 +8,7 @@ import '../shared/providers/transaction_provider.dart';
 import 'snackbar.dart';
 
 Widget showDismissibleDeletePane(Transaction tr, BuildContext context) {
-  return Consumer<TransactionUsecase>(
+  return Consumer<TransactionProvider>(
     builder: (context, controller, child) => DismissiblePane(
       onDismissed: () {
         SnackBarFinancy(context: context).showSnackBar(

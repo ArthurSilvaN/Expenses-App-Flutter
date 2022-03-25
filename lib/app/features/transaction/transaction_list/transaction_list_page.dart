@@ -15,7 +15,7 @@ class TransactionListPage extends StatefulWidget {
 class _TransactionListPageState extends State<TransactionListPage> {
   @override
   Widget build(BuildContext context) {
-    return Consumer<TransactionUsecase>(
+    return Consumer<TransactionProvider>(
       builder: (context, controller, child) => Padding(
         padding: const EdgeInsets.symmetric(horizontal: 18.0),
         child: Center(

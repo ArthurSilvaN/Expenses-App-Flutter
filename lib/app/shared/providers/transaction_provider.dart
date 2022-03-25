@@ -10,8 +10,8 @@ import '../../entities/transaction_categorys.dart';
 import '../../entities/transaction_registry.dart';
 import '../../services/database_connection.dart';
 
-class TransactionUsecase extends ChangeNotifier {
-  TransactionUsecase();
+class TransactionProvider extends ChangeNotifier {
+  TransactionProvider();
 
   late List<Transaction> transactions = [];
   final DatabaseConneection conneection = DatabaseConneection();
