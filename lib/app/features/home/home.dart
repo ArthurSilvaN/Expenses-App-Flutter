@@ -22,7 +22,7 @@ class HomePageState extends State<HomePage> {
       builder: (context, controller, child) => Scaffold(
         key: controller.globalKey,
         endDrawer: const DrawerHome(),
-        floatingActionButton: FloatingButtonFinancy(homeContext: context),
+        floatingActionButton: const FloatingButtonFinancy(),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(context.sizeContext().height * 0.15),
