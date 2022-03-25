@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../core/util/property_value_notifier.dart';
 import '../../entities/languages.dart';
 
-class LocaleUseCase extends ChangeNotifier {
+class LocaleProvider extends ChangeNotifier {
   late PropertyValueNotifier<Locale?> locale =
       PropertyValueNotifier(const Locale('pt'));
 

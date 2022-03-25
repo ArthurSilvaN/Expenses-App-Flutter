@@ -16,7 +16,7 @@ class DrawerHome extends StatelessWidget {
     late final authService = Provider.of<AuthProvider>(context, listen: false);
 
     late final localeController =
-        Provider.of<LocaleUseCase>(context, listen: false);
+        Provider.of<LocaleProvider>(context, listen: false);
 
     late final homeController =
         Provider.of<HomeController>(context, listen: false);

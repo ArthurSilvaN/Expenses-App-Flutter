@@ -23,8 +23,8 @@ class SplashScreeState extends State<SplashScreen> {
   late final TransactionUsecase _transactionController =
       Provider.of<TransactionUsecase>(context, listen: false);
 
-  late final LocaleUseCase _localeController =
-      Provider.of<LocaleUseCase>(context, listen: false);
+  late final LocaleProvider _localeController =
+      Provider.of<LocaleProvider>(context, listen: false);
 
   late final DatabaseConneection conneection = DatabaseConneection();
 

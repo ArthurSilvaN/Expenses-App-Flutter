@@ -19,8 +19,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: _providersList,
-      child: Consumer2<HomeController, LocaleUseCase>(
-        builder: (context, homeController, localeUseCase, widget) {
+      child: Consumer2<HomeController, LocaleProvider>(
+        builder: (context, homeController, localeProvider, widget) {
           return MaterialApp(
             localizationsDelegates: const [
               S.delegate,
@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
               GlobalWidgetsLocalizations.delegate,
               GlobalCupertinoLocalizations.delegate,
             ],
-            locale: localeUseCase.locale.value,
+            locale: localeProvider.locale.value,
             supportedLocales: S.delegate.supportedLocales,
             scrollBehavior:
                 ScrollConfiguration.of(context).copyWith(scrollbars: false),
