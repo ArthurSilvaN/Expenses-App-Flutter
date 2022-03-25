@@ -15,58 +15,46 @@ class CategoryChart extends StatefulWidget {
 }
 
 class CategoryChartState extends State<CategoryChart> {
-  late TransactionUsecase _transactionController;
-
-  @override
-  void initState() {
-    super.initState();
-    _transactionController =
-        Provider.of<TransactionUsecase>(context, listen: false);
-  }
-
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder(
-      valueListenable: _transactionController.transactionsListenable,
-      builder: (_, __, ___) {
-        return Center(
-          child: SfCircularChart(
-            title: ChartTitle(
-              text: context.locale().categoryChart,
-              textStyle: const TextStyle(
-                fontSize: 20,
-                fontStyle: FontStyle.normal,
-                fontWeight: FontWeight.w400,
-              ),
+    return Consumer<TransactionUsecase>(
+      builder: (context, controller, child) => Center(
+        child: SfCircularChart(
+          title: ChartTitle(
+            text: context.locale().categoryChart,
+            textStyle: const TextStyle(
+              fontSize: 20,
+              fontStyle: FontStyle.normal,
+              fontWeight: FontWeight.w400,
             ),
-            legend: Legend(
-              isVisible: true,
-            ),
-            series: [
-              RadialBarSeries<CategoryRegistry, String>(
-                dataSource: _transactionController.categorysRegistriesDefault
-                    .where((element) => element.value != 0)
-                    .toList(),
-                opacity: 0.8,
-                dataLabelSettings: const DataLabelSettings(
-                  isVisible: true,
-                  useSeriesColor: true,
-                  textStyle: TextStyle(
-                    color: Colors.white,
-                    fontSize: 15,
-                  ),
-                ),
-                pointColorMapper: (data, _) => data.color,
-                sortingOrder: SortingOrder.ascending,
-                sortFieldValueMapper: (data, _) => data.name,
-                xValueMapper: (data, _) => data.name,
-                yValueMapper: (data, _) => data.value,
-                animationDuration: 1000,
-              ),
-            ],
           ),
-        );
-      },
+          legend: Legend(
+            isVisible: true,
+          ),
+          series: [
+            RadialBarSeries<CategoryRegistry, String>(
+              dataSource: controller.categorysRegistriesDefault
+                  .where((element) => element.value != 0)
+                  .toList(),
+              opacity: 0.8,
+              dataLabelSettings: const DataLabelSettings(
+                isVisible: true,
+                useSeriesColor: true,
+                textStyle: TextStyle(
+                  color: Colors.white,
+                  fontSize: 15,
+                ),
+              ),
+              pointColorMapper: (data, _) => data.color,
+              sortingOrder: SortingOrder.ascending,
+              sortFieldValueMapper: (data, _) => data.name,
+              xValueMapper: (data, _) => data.name,
+              yValueMapper: (data, _) => data.value,
+              animationDuration: 1000,
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

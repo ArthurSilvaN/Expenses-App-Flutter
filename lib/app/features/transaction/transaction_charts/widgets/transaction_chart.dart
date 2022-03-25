@@ -16,64 +16,50 @@ class TransactionChart extends StatefulWidget {
 }
 
 class TransactionChartState extends State<TransactionChart> {
-  late TransactionUsecase _transactionController;
-
-  @override
-  void initState() {
-    super.initState();
-    _transactionController =
-        Provider.of<TransactionUsecase>(context, listen: false);
-  }
-
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder(
-      valueListenable: _transactionController.transactionsListenable,
-      builder: (_, __, ___) {
-        return Center(
-          child: SizedBox(
-            width: context.sizeContext().width * 0.8,
-            child: SfCartesianChart(
-              primaryXAxis: CategoryAxis(),
-              primaryYAxis: NumericAxis(
-                majorGridLines: const MajorGridLines(width: 0),
-                minorTickLines: const MinorTickLines(width: 0),
-              ),
-              title: ChartTitle(
-                text: context.locale().expensesWeek,
-                textStyle: const TextStyle(
-                  fontSize: 20,
-                  fontStyle: FontStyle.normal,
-                  fontWeight: FontWeight.w400,
-                ),
-              ),
-              series: [
-                ColumnSeries<TransactionRegistry, String>(
-                  color: Theme.of(context).colorScheme.primary,
-                  dataSource: _transactionController
-                      .groupedTransactions.reversed
-                      .toList(),
-                  sortFieldValueMapper: (tr, _) => tr.date,
-                  xValueMapper: (tr, _) => tr.date,
-                  yValueMapper: (tr, _) => tr.value,
-                  gradient: LinearGradient(
-                    colors: [
-                      Theme.of(context).colorScheme.primary,
-                      Colors.deepOrange[600]!,
-                    ],
-                  ),
-                  markerSettings: const MarkerSettings(isVisible: true),
-                  dataLabelSettings: const DataLabelSettings(
-                    isVisible: true,
-                    showZeroValue: false,
-                  ),
-                  enableTooltip: true,
-                ),
-              ],
+    return Consumer<TransactionUsecase>(
+      builder: (context, controller, child) => Center(
+        child: SizedBox(
+          width: context.sizeContext().width * 0.8,
+          child: SfCartesianChart(
+            primaryXAxis: CategoryAxis(),
+            primaryYAxis: NumericAxis(
+              majorGridLines: const MajorGridLines(width: 0),
+              minorTickLines: const MinorTickLines(width: 0),
             ),
+            title: ChartTitle(
+              text: context.locale().expensesWeek,
+              textStyle: const TextStyle(
+                fontSize: 20,
+                fontStyle: FontStyle.normal,
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+            series: [
+              ColumnSeries<TransactionRegistry, String>(
+                color: Theme.of(context).colorScheme.primary,
+                dataSource: controller.groupedTransactions.reversed.toList(),
+                sortFieldValueMapper: (tr, _) => tr.date,
+                xValueMapper: (tr, _) => tr.date,
+                yValueMapper: (tr, _) => tr.value,
+                gradient: LinearGradient(
+                  colors: [
+                    Theme.of(context).colorScheme.primary,
+                    Colors.deepOrange[600]!,
+                  ],
+                ),
+                markerSettings: const MarkerSettings(isVisible: true),
+                dataLabelSettings: const DataLabelSettings(
+                  isVisible: true,
+                  showZeroValue: false,
+                ),
+                enableTooltip: true,
+              ),
+            ],
           ),
-        );
-      },
+        ),
+      ),
     );
   }
 }
