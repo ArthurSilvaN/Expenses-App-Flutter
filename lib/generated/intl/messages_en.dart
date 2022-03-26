@@ -43,6 +43,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "deletedTransaction":
             MessageLookupByLibrary.simpleMessage("Deleted Transaction"),
         "edit": MessageLookupByLibrary.simpleMessage("Edit"),
+        "emptyTitle":
+            MessageLookupByLibrary.simpleMessage("Title cannot be empty"),
+        "emptyValue": MessageLookupByLibrary.simpleMessage(
+            "Value cannot be empty or negative"),
+        "error": MessageLookupByLibrary.simpleMessage("Unexpected Error"),
         "expensesWeek": MessageLookupByLibrary.simpleMessage("Expenses Week"),
         "hi": MessageLookupByLibrary.simpleMessage("Hello, "),
         "investment": MessageLookupByLibrary.simpleMessage("Investment"),

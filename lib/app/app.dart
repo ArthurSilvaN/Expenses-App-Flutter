@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../generated/l10n.dart';
 import 'features/splash/splash.dart';
 import 'shared/providers/auth_provider.dart';
+import 'shared/providers/form_controller.dart';
 import 'shared/providers/home_controller.dart';
 import 'shared/providers/locale_provider.dart';
 import 'shared/providers/splash_controller.dart';

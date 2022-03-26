@@ -160,6 +160,36 @@ class S {
     );
   }
 
+  /// `Title cannot be empty`
+  String get emptyTitle {
+    return Intl.message(
+      'Title cannot be empty',
+      name: 'emptyTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Value cannot be empty or negative`
+  String get emptyValue {
+    return Intl.message(
+      'Value cannot be empty or negative',
+      name: 'emptyValue',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Unexpected Error`
+  String get error {
+    return Intl.message(
+      'Unexpected Error',
+      name: 'error',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Expenses Week`
   String get expensesWeek {
     return Intl.message(
