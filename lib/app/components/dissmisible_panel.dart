@@ -11,7 +11,7 @@ Widget showDismissibleDeletePane(Transaction tr, BuildContext context) {
   return Consumer<TransactionProvider>(
     builder: (context, controller, child) => DismissiblePane(
       onDismissed: () {
-        SnackBarFinancy(context: context).showSnackBar(
+        SnackBarFinancy(context).showSnackBar(
           message: context.locale().deletedTransaction,
           color: Colors.red,
         );

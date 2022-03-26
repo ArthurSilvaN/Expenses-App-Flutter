@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
+import '../../core/util/locale_intl.dart';
 import '../../features/transaction/transaction_charts/transaction_chart_page.dart';
 import '../../features/transaction/transaction_list/transaction_list_page.dart';
 
@@ -18,16 +19,18 @@ class HomeController extends ChangeNotifier {
     const ChartsPage(),
   ];
 
-  late List<BottomNavigationBarItem> btmNavbarItems = [
-    const BottomNavigationBarItem(
-      icon: Icon(Icons.list_alt, size: 40),
-      label: '',
-    ),
-    const BottomNavigationBarItem(
-      icon: Icon(Icons.insert_chart_outlined_sharp, size: 40),
-      label: '',
-    ),
-  ];
+  List<BottomNavigationBarItem> getBottomBarItems(BuildContext context) {
+    return [
+      BottomNavigationBarItem(
+        icon: const Icon(Icons.list_alt, size: 40),
+        label: context.locale().transactionList,
+      ),
+      BottomNavigationBarItem(
+        icon: const Icon(Icons.insert_chart_outlined_sharp, size: 40),
+        label: context.locale().charts,
+      ),
+    ];
+  }
 
   int currentPage = 0;
 

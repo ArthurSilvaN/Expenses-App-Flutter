@@ -26,7 +26,7 @@ void openDeleteTransactionModal(Transaction tr, BuildContext context) {
             ),
             TextButton(
               onPressed: () {
-                SnackBarFinancy(context: context).showSnackBar(
+                SnackBarFinancy(context).showSnackBar(
                   message: context.locale().deletedTransaction,
                   color: Colors.red,
                 );
