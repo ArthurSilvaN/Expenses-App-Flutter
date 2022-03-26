@@ -29,7 +29,7 @@ class HomePageState extends State<HomePage> {
           child: const AppBarFinancy(),
         ),
         bottomNavigationBar: BottomNavigationBar(
-          items: controller.btmNavbarItems,
+          items: controller.getBottomBarItems(context),
           currentIndex: controller.currentPage,
           onTap: (index) => controller.setPage(index),
         ),

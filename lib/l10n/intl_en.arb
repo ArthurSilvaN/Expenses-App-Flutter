@@ -11,6 +11,9 @@
     "delete": "Delete",
     "deleteTransaction": "Delete transaction {title} with the value off R${value}?",
     "edit": "Edit",
+    "emptyTitle": "Title cannot be empty",
+    "emptyValue": "Value cannot be empty or negative",
+    "error": "Unexpected Error",
     "@deleteTransaction": {
         "placeholders": {
             "title" : {

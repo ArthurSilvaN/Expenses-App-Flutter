@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../../components/date_picker.dart';
 import '../../components/snackbar.dart';
+import '../../core/util/locale_intl.dart';
 import '../../entities/transaction_categorys.dart';
 import 'auth_provider.dart';
 import 'transaction_provider.dart';
@@ -29,16 +30,16 @@ class FormController extends ChangeNotifier {
     if (title.isEmpty || value <= 0 || selectedDate == null) {
       title.isEmpty
           ? SnackBarFinancy(context).showSnackBar(
-              message: 'Titulo não pode ser vazio',
+              message: context.locale().emptyTitle,
               color: Colors.red,
             )
           : value <= 0
               ? SnackBarFinancy(context).showSnackBar(
-                  message: 'Valor não pode ser vazio ou negativo',
+                  message: context.locale().emptyValue,
                   color: Colors.red,
                 )
               : SnackBarFinancy(context).showSnackBar(
-                  message: 'Erro Inesperado',
+                  message: context.locale().error,
                   color: Colors.red,
                 );
 
