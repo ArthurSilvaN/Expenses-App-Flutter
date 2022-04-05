@@ -33,7 +33,7 @@ flutter run ou dart run
 <table align="center">
   <tr>
     <td align="center">
-      <a href="#">
+      <a href="https://github.com/ArthurSilvaN">
         <img src="https://avatars3.githubusercontent.com/u/39159676" width="200px;" alt="Foto do Arthur Nunes no GitHub"/><br>
         <sub>
           <b>Arthur Nunes</b>
